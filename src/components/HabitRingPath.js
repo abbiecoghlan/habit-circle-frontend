@@ -2,6 +2,11 @@
 import { useState } from 'react'
 
 
+// export default const HabitRingPath = props => {
+
+// }
+
+
 class Path extends React.Component {
     constructor(props) {
       super(props);
