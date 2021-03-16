@@ -2,6 +2,7 @@
 import './App.css';
 import React from 'react';
 import Circle from './components/Circle';
+import { LayeredCircle } from "./components/LayeredCircle"
 
 
 
@@ -15,7 +16,7 @@ function App() {
   return (
     <div style={styles}>
      <Circle></Circle>
-      
+      {/* <LayeredCircle></LayeredCircle> */}
     </div>
   );
 }
