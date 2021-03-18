@@ -2,7 +2,7 @@
 import './App.css';
 import React from 'react';
 import Circle from './components/Circle';
-import { LayeredCircle } from "./components/LayeredCircle"
+// import { LayeredCircle } from "./components/LayeredCircle"
 
 
 
