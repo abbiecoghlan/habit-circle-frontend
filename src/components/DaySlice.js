@@ -1,17 +1,40 @@
 import * as React from 'react';
 import * as d3 from "d3";
+import { useEffect, useState } from 'react'
 
 
 // const habitArray = [{habit: "Floss"}, {habit: "Floss"}]
 
 
 const DaySlice = props => {
-    let { pie } = props 
+    let { pie, habits } = props 
     // let outerRadius = 100 
     // let innerRadius = outerRadius * .7
    
+    useEffect(() => {
+        let habits
+        
+        }, [])
+    
 
-    let arc = d3
+    // const totalRadius = 0
+    
+
+
+    // const arcs = habits.map((habit, index) => {
+    //      d3
+    //     .arc()
+    //     .innerRadius(50)
+    //     .outerRadius(75)
+    //     })
+
+
+
+
+    
+    
+
+    const arc = d3
     .arc()
     .innerRadius(50)
     .outerRadius(75)
@@ -65,6 +88,10 @@ const DaySlice = props => {
     .outerRadius(50)
 
 
+    arcArray =[secretArc, arc, arc2, arc3, arc4, arc5, arc6, arc7]
+
+
+
     const ringOneClick = (e) => {
         e.target.setAttribute("fill", "#A8DADC")
         console.log(e.target.id)
@@ -78,25 +105,21 @@ const DaySlice = props => {
     const handleAnotherClick = (e) => {
         e.target.setAttribute("fill", "#e76f51")
         console.log(e.target.id)
-
     }
 
     const handleThirdClick = (e) => {
         e.target.setAttribute("fill", "#f4a261")
         console.log(e.target.id)
-
     }
 
     const handleForthClick = (e) => {
         e.target.setAttribute("fill", "#e9c46a")
         console.log(e.target.id)
-
     }
 
     const handleFifthClick = (e) => {
         e.target.setAttribute("fill", "#2a9d8f")
         console.log(e.target.id)
-
     }
 
     const handleSixthClick = (e) => {
@@ -133,6 +156,9 @@ const DaySlice = props => {
     // let interpolate = d3.interpolateRgb("#eaaf79", "#bc3358")
 
     const paths = pie.map((slice, index) => {
+
+        return habits.map((habit) => {
+           
         return <>
             <path className="secretPath" id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} onClick={(e)=> ringOneClick(e)}/>
             <path className="habbitOne" id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={arc(slice)} stroke={'black'} fill={"#FFFFFF"} onClick={(e)=> ringOneClick(e)}/>
@@ -143,6 +169,8 @@ const DaySlice = props => {
              <path className="habitSix" id={`day${index.toString()}habit6`} key={`day${index.toString()}habit6`} d={arc6(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleFifthClick(e)} />
              <path className= "habitSeven" id={`day${index.toString()}habit7`} key={`day${index.toString()}habit7`} d={arc7(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleSixthClick(e)} />
              </>
+
+        })
         })
 
 // THIS WONT WORK 
