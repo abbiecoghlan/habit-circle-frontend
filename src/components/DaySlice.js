@@ -3,24 +3,22 @@ import * as d3 from "d3";
 import { useEffect, useState } from 'react'
 
 
-// const habitArray = [{habit: "Floss"}, {habit: "Floss"}]
+
 
 
 const DaySlice = props => {
-    let { pie, habits } = props 
+    let { pie, progressArray, habits } = props 
     // let outerRadius = 100 
     // let innerRadius = outerRadius * .7
    
     useEffect(() => {
-        let habits
-        
+        console.table(habits)
         }, [])
     
 
+
     // const totalRadius = 0
     
-
-
     // const arcs = habits.map((habit, index) => {
     //      d3
     //     .arc()
@@ -29,10 +27,11 @@ const DaySlice = props => {
     //     })
 
 
-
-
-    
-    
+  
+    const secretArc = d3
+    .arc()
+    .innerRadius(25)
+    .outerRadius(50)
 
     const arc = d3
     .arc()
@@ -82,50 +81,150 @@ const DaySlice = props => {
     .padAngle(0)
     .cornerRadius(0);
 
-    const secretArc = d3
-    .arc()
-    .innerRadius(25)
-    .outerRadius(50)
+    
+    const arcArray =[secretArc, arc, arc2, arc3, arc4, arc5, arc6, arc7]
+
+    //add code to deal with diff number of habits 
+    const habitNames = habits.map(habit => habit.name.toUpperCase())
+    console.table(habitNames)
+
+    
+
+    const secretRingClick = (e) => {
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
+        console.log(`target id is: ${e.target.id}`)
+    }
 
 
-    arcArray =[secretArc, arc, arc2, arc3, arc4, arc5, arc6, arc7]
-
-
-
-    const ringOneClick = (e) => {
-        e.target.setAttribute("fill", "#A8DADC")
+    const habitRingOneClick = (e) => {
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#A8DADC")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }
         console.log(e.target.id)
     }
 
-    const ringTwoClick = (e) => {
-        e.target.setAttribute("fill", "#F18C8E")
+    const habitRingTwoClick = (e) => {
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#F18C8E")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }
         console.log(e.target.id)
     }
 
-    const handleAnotherClick = (e) => {
-        e.target.setAttribute("fill", "#e76f51")
+    const habitRingThreeClick = (e) => {
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#e76f51")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
         console.log(e.target.id)
     }
 
-    const handleThirdClick = (e) => {
-        e.target.setAttribute("fill", "#f4a261")
+    const habitRingFourClick = (e) => {
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#f4a261")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }
         console.log(e.target.id)
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
     }
 
-    const handleForthClick = (e) => {
-        e.target.setAttribute("fill", "#e9c46a")
+    const habitRingFiveClick = (e) => {
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#e9c46a")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }
         console.log(e.target.id)
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
     }
 
-    const handleFifthClick = (e) => {
-        e.target.setAttribute("fill", "#2a9d8f")
+    const HabitRingSixClick = (e) => {
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#2a9d8f")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }        
         console.log(e.target.id)
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
     }
 
-    const handleSixthClick = (e) => {
-        e.target.setAttribute("fill", "#264653")
+    const habitRingSevenClick = (e) => {
+        if (e.target.attributes.fill.value === "#FFFFFF") {
+            e.target.setAttribute("fill", "#264653")
+        }
+        else {
+            e.target.setAttribute("fill", "#FFFFFF")
+        }        
+
         console.log(e.target.id)
+        const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+        const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit id is: ${habit}`)
+        console.log(`day id is: ${day}`)
     }
+
+    // const captureAllClick = (e) => {
+
+    //     const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
+    //     const habit = parseInt(e.target.id.slice(-1))
+    //     console.log(`habit id is: ${habit}`)
+    //     console.log(`day id is: ${day}`)
+    //     debugger
+
+    // }
+
+
+//NEEDS TO BE MOVED TO A CHILD COMPONENT 
+    const setColors = () => {
+        const paths = document.querySelectorAll("path")
+        paths.forEach((path) => {
+            const day = parseInt(path.id.slice(3, path.id.length)) 
+            const habit = parseInt(path.id.slice(-1))
+            const color = path.data-color
+            if (day === 0 && habit >0)
+            path.setAttribute("fill", {color})
+        
+            
+        })
+    }
+
+
+
 
     // const handleseventhClick = (e) => {
     //     e.target.setAttribute("fill", "#C400FA")
@@ -134,90 +233,62 @@ const DaySlice = props => {
     
 
 
-    // This doesnt work :( 
     // let daysArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28, 29, 30, 31]
     
-
-    // const days = daysArray.map((day, index) => {
-    //     return  ( 
-    //     <text>
-    //     <textPath startOffset="9%" href="#habitSeven"> 
-    //     <tspan startOffset="" dy="-5" fill="navy" > {day}
-    //     </tspan>   
-    //     </textPath>
-    //      </text>
-    //      )
-    //  })
-
-    // let habits = [{name: "habitOne"}, {name: "habitTwo"}, {name: "habitThree"}, {name: "habitFour"}, {name: "habitFive"}, {name: "habitThree"}, ]
-    
-   
 
     // let interpolate = d3.interpolateRgb("#eaaf79", "#bc3358")
 
     const paths = pie.map((slice, index) => {
 
-        return habits.map((habit) => {
+        // habits.map((habit) => {
            
         return <>
-            <path className="secretPath" id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} onClick={(e)=> ringOneClick(e)}/>
-            <path className="habbitOne" id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={arc(slice)} stroke={'black'} fill={"#FFFFFF"} onClick={(e)=> ringOneClick(e)}/>
-            <path className="habbitTwo" id={`day${index.toString()}habit2`} key={`day${index.toString()}habit2`} d={arc2(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> ringTwoClick(e)}/>
-            <path className="habbitThree" id={`day${index.toString()}habit3`} key={`day${index.toString()}habit3`}  d={arc3(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleAnotherClick(e)} />     
-             <path className="habbitFour" id={`day${index.toString()}habit4`} key={`day${index.toString()}habit4`}   d={arc4(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleThirdClick(e)}  />       
-             <path className="habbitFive" id={`day${index.toString()}habit5`} key={`day${index.toString()}habit5`} d={arc5(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleForthClick(e)} />
-             <path className="habitSix" id={`day${index.toString()}habit6`} key={`day${index.toString()}habit6`} d={arc6(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleFifthClick(e)} />
-             <path className= "habitSeven" id={`day${index.toString()}habit7`} key={`day${index.toString()}habit7`} d={arc7(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleSixthClick(e)} />
+            <path className="secretPath" id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} data-color={"#FFFFFF"} onClick={(e)=> secretRingClick(e)}/>
+            <path className="habbitOne" id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={arc(slice)} stroke={'black'} fill={"#FFFFFF"} data-color={"#e76f51"} onClick={(e)=> habitRingOneClick(e)}/>
+            <path className="habbitTwo" id={`day${index.toString()}habit2`} key={`day${index.toString()}habit2`} d={arc2(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingTwoClick(e)}/>
+            <path className="habbitThree" id={`day${index.toString()}habit3`} key={`day${index.toString()}habit3`}  d={arc3(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingThreeClick(e)} />     
+             <path className="habbitFour" id={`day${index.toString()}habit4`} key={`day${index.toString()}habit4`}   d={arc4(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingFourClick(e)}  />       
+             <path className="habbitFive" id={`day${index.toString()}habit5`} key={`day${index.toString()}habit5`} d={arc5(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"}  onClick={(e)=> habitRingFiveClick(e)} />
+             <path className="habitSix" id={`day${index.toString()}habit6`} key={`day${index.toString()}habit6`} d={arc6(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> HabitRingSixClick(e)} />
+             <path className= "habitSeven" id={`day${index.toString()}habit7`} key={`day${index.toString()}habit7`} d={arc7(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingSevenClick(e)} />
              </>
 
+        // })
         })
-        })
 
-// THIS WONT WORK 
-        // const dayPaths = daysArray.map((day) => {
-
-    //     const ref = `day${day}habit7`
-
-    //     return  
-    //     <>
-    //     <text>
-    //     <textPath startOffset="9%" href={{ref}} > 
-    //     <tspan startOffset="" dy="-5" fill="#264653" > 1
-    //     </tspan>   
-    //     </textPath>
-    //     </text> 
-    //     </>
-    // })
-        
+        // const habitNames = habits.map((habit) => {
+        //     return habit.name
+        // })
 
 
+        // const floss = habits[0].name
 
 
-     
 
         return ( <>
-        
+
+
                 {paths}
                 <text>
-                    <textPath textLength="65" startOffset="02" href="#day0habit0"> FLOSS </textPath>
+                    <textPath textLength="65" startOffset="02" href="#day0habit0">  {habitNames[0]} </textPath>
                 </text>
                 <text>
-                    <textPath textLength="100" startOffset="03" href="#day0habit1"> VITAMINS </textPath>
+                    <textPath textLength="100" startOffset="03" href="#day0habit1"> {habitNames[1]} </textPath>
                 </text>
                 <text>
-                    <textPath textLength="120" startOffset="5%" side="right" x="40" href="#day0habit2"> 10,000 STEPS </textPath>
+                    <textPath textLength="120" startOffset="5%" side="right" x="40" href="#day0habit2"> {habitNames[2]} </textPath>
                 </text>
                 <text>
-                    <textPath textLength="110" startOffset="9%" side="right" x="40" href="#day0habit3"> DRINK WATER </textPath>
+                    <textPath textLength="110" startOffset="9%" side="right" x="40" href="#day0habit3"> {habitNames[3]} </textPath>
                 </text>
                 <text>
-                    <textPath textLength="110" startOffset="11%" side="right" x="40" href="#day0habit4"> STRETCH </textPath>
+                    <textPath textLength="110" startOffset="11%" side="right" x="40" href="#day0habit4"> {habitNames[4]} </textPath>
                 </text>
                 <text>
-                    <textPath textLength="110" startOffset="13%" side="right" x="40" href="#day0habit5"> MEDITATE </textPath>
+                    <textPath textLength="110" startOffset="13%" side="right" x="40" href="#day0habit5"> {habitNames[5]} </textPath>
                 </text>       
                 <text>
-                    <textPath fill="black" textLength="110" startOffset="15%" side="right" x="40" href="#day0habit6"> JOURNAL </textPath>
+                    <textPath fill="black" textLength="110" startOffset="15%" side="right" x="40" href="#day0habit6"> {habitNames[6]} </textPath>
                 </text>
     
 
@@ -413,65 +484,7 @@ const DaySlice = props => {
 
 }
 
-    //THIS WORKS AND RENDERS THE TRACKER 
-//     return pie.map((slice, index) => {
-//         let sliceColor = interpolate(index / (pie.length -1))
 
-
-//         let idNum = `${parseInt(index)}`
-
-//         return <>
-
-//             <path id="secretPath" key={index}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} onClick={(e)=> ringOneClick(e)}/>
-//                 <text>
-//                     <textPath textLength="65" startOffset="02" text-anchor="start" href="#secretPath"> FLOSS </textPath>
-//                 </text>
-
-//             <path id="habbitOne" data-day={idNum} key={index}  d={arc(slice)} stroke={'black'} fill={"#FFFFFF"} onClick={(e)=> ringOneClick(e)}/>
-//                 <text>
-//                     <textPath textLength="100" startOffset="02" href="#habbitOne"> VITAMINS </textPath>
-//                 </text>
-
-//              <path id="habbitTwo" data-day={idNum} key={index} d={arc2(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> ringTwoClick(e)}/>
-//                 <text>
-//                     <textPath textLength="110" startOffset="3%" side="right" x="40" href="#habbitTwo"> 10,000 STEPS </textPath>
-//                 </text>
-
-//              <path id="habbitThree" data-day={idNum} key={index}  d={arc3(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleAnotherClick(e)} />
-//              <text>
-//                     <textPath textLength="110" startOffset="8%" side="right" x="40" href="#habbitThree"> MEDITATE </textPath>
-//                 </text>
-        
-//              <path id="habbitFour" data-day={idNum} key={index}   d={arc4(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleThirdClick(e)}  />
-//              <text>
-//                     <textPath textLength="110" startOffset="8%" side="right" x="40" href="#habbitFour"> STRETCH </textPath>
-//                 </text>
-        
-//              <path id="habbitFive" data-day={idNum} key={index} d={arc5(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleForthClick(e)} />
-//              <text>
-//                     <textPath textLength="110" startOffset="10%" side="right" x="40" href="#habbitFive"> MEDITATE </textPath>
-//                 </text>
-
-
-//              <path id="habitSix" key={index} data-day={idNum} d={arc6(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleFifthClick(e)} />
-         
-         
-//              <text>
-//                     <textPath textLength="110" startOffset="12%" side="right" x="40" href="#habitSix"> DAILY HABITS </textPath>
-//                 </text>
-
-//              <path id= "habitSeven" key={index} data-day={idNum} d={arc7(slice)} stroke={'black'} fill={'#FFFFFF'} onClick={(e)=> handleSixthClick(e)} />
-
-//              <text>
-//                     <textPath startOffset="9%" href="#habitSeven"> 
-//                     <tspan startOffset="" dy="-5" fill="navy" > 
-//                     </tspan>   
-//                     </textPath>
-//             </text> 
-//              </>
-//     })
-
-// }
 
 
 
