@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ProgressProvider } from './context/progress'
+import { UserProvider } from './context/user';
+import { DateProvider } from './context/date';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DateProvider>
+      <UserProvider>
+        <ProgressProvider>
+          <App />
+        </ProgressProvider>
+      </UserProvider>
+    </DateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,19 +1,24 @@
 import * as React from 'react';
 import * as d3 from "d3";
-import { useEffect, useState } from 'react'
-
+import { useEffect, useState, useRef, useContext } from 'react'
+import { ProgressContext } from '../context/progress'
 
 
 
 
 const DaySlice = props => {
+
+    const learningHooks = useContext(ProgressContext)
+    console.log("i am", learningHooks)
+
     let { pie, progressArray, habits } = props 
     // let outerRadius = 100 
     // let innerRadius = outerRadius * .7
    
-    useEffect(() => {
-        console.table(habits)
-        }, [])
+    // useEffect(() => {
+    //     console.table(habits)
+    //     }, [])
+    
     
 
 
@@ -86,7 +91,7 @@ const DaySlice = props => {
 
     //add code to deal with diff number of habits 
     const habitNames = habits.map(habit => habit.name.toUpperCase())
-    console.table(habitNames)
+    // console.table(habitNames)
 
     
 
@@ -98,8 +103,14 @@ const DaySlice = props => {
         console.log(`target id is: ${e.target.id}`)
     }
 
+    // const habitOneRef = useRef()
+
 
     const habitRingOneClick = (e) => {
+        // const path = habitOneRef.current
+        // console.log("id of path:", path.id)
+
+
         const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
@@ -270,7 +281,7 @@ const DaySlice = props => {
 
                 {paths}
                 <text>
-                    <textPath textLength="65" startOffset="02" href="#day0habit0">  {habitNames[0]} </textPath>
+                    <textPath  textLength="65" startOffset="02" href="#day0habit0">  {habitNames[0]} </textPath>
                 </text>
                 <text>
                     <textPath textLength="100" startOffset="03" href="#day0habit1"> {habitNames[1]} </textPath>
@@ -288,7 +299,7 @@ const DaySlice = props => {
                     <textPath textLength="110" startOffset="13%" side="right" x="40" href="#day0habit5"> {habitNames[5]} </textPath>
                 </text>       
                 <text>
-                    <textPath fill="black" textLength="110" startOffset="15%" side="right" x="40" href="#day0habit6"> {habitNames[6]} </textPath>
+                    <textPath textLength="110" startOffset="15%" side="right" x="40" href="#day0habit6"> {habitNames[6]} </textPath>
                 </text>
     
 
