@@ -1,22 +1,45 @@
 // import logo from './logo.svg';
 import './App.css';
-import React from 'react';
-import Circle from './components/Circle';
-// import { LayeredCircle } from "./components/LayeredCircle"
+import React, { useContext } from 'react';
+import CircleContainer from './components/CircleContainer';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { UserContext } from './context/user'
 
 
 
+function App({ history }) {
 
-function App() {
+  const user = useContext(UserContext)
 
-  const styles = {
-    textAlign: "center"
-  };
+  // useEffect(() => {
+  //   if (!user) {
+  //     if (!token) {
+
+  //     }
+  //   }
+  // }, [])
+
+  // const styles = {
+  //   textAlign: "center"
+  // };
 
   return (
-    <div style={styles}>
-     <Circle></Circle>
-      {/* <LayeredCircle></LayeredCircle> */}
+
+    <div className="app">
+      <Switch>
+        <Route  exact path="/login" component={Login}/>
+        <Route  exact path="/tracker" component={CircleContainer} />
+        <Route  exact path="/signup" component={SignUp} />
+        {/* <Route  exact path="/habits/edit" component={EditHabitsForm} /> */}
+        <Route  path="*" render={() => {
+          return ( user ? <Redirect to='/tracker' /> : <Redirect to='/login' />)
+          }} />
+    </Switch>
+
+
+
     </div>
   );
 }

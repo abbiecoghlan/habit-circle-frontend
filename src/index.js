@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom'
 import './index.css';
+import 'semantic-ui-css/semantic.min.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ProgressProvider } from './context/progress'
@@ -12,7 +14,9 @@ ReactDOM.render(
     <DateProvider>
       <UserProvider>
         <ProgressProvider>
-          <App />
+          <BrowserRouter>
+            <App/>
+          </BrowserRouter>
         </ProgressProvider>
       </UserProvider>
     </DateProvider>

@@ -2,16 +2,23 @@ import * as React from 'react';
 import * as d3 from "d3";
 import { useEffect, useState, useRef, useContext } from 'react'
 import { ProgressContext } from '../context/progress'
-
+import HabitRingPath from './HabitRingPath'
+import { UserContext } from '../context/user'
+import { DateContext } from '../context/date'
+ 
 
 
 
 const DaySlice = props => {
+   
+    const { habits } = useContext(UserContext)
+    const [progressArray] = useContext(ProgressContext)
+    const { currentMonth } = useContext(DateContext)
 
-    const learningHooks = useContext(ProgressContext)
-    console.log("i am", learningHooks)
+    // const learningHooks = useContext(ProgressContext)
+    // console.log("i am", learningHooks)
 
-    let { pie, progressArray, habits } = props 
+    let { pie } = props 
     // let outerRadius = 100 
     // let innerRadius = outerRadius * .7
    
@@ -24,14 +31,12 @@ const DaySlice = props => {
 
     // const totalRadius = 0
     
-    // const arcs = habits.map((habit, index) => {
-    //      d3
-    //     .arc()
-    //     .innerRadius(50)
-    //     .outerRadius(75)
-    //     })
+    const habitArray = habits.map((habit) => habit.name)
 
+    const radiusStart = 50
+    const ringDistance = 34.7
 
+    
   
     const secretArc = d3
     .arc()
@@ -41,63 +46,156 @@ const DaySlice = props => {
     const arc = d3
     .arc()
     .innerRadius(50)
-    .outerRadius(75)
+    .outerRadius(radiusStart + ringDistance)
     
     const arc2 = d3
     .arc()
-    .innerRadius(75)
-    .outerRadius(100)
+    .innerRadius(radiusStart + (ringDistance))
+    .outerRadius(radiusStart + (ringDistance * 2))
     .padAngle(0)
     .cornerRadius(0);
 
 
     const arc3 = d3
     .arc()
-    .innerRadius(100)
-    .outerRadius(125)
+    .innerRadius(radiusStart + (ringDistance * 2))
+    .outerRadius(radiusStart + (ringDistance * 3))
     .padAngle(0)
     .cornerRadius(0);
 
     const arc4 = d3
     .arc()
-    .innerRadius(125)
-    .outerRadius(150)
+    .innerRadius(radiusStart + (ringDistance * 3))
+    .outerRadius(radiusStart + (ringDistance * 4))
     .padAngle(0)
     .cornerRadius(0);
 
     const arc5 = d3
     .arc()
-    .innerRadius(150)
-    .outerRadius(175)
+    .innerRadius(radiusStart + (ringDistance * 4))
+    .outerRadius(radiusStart + (ringDistance * 5))
     .padAngle(0)
     .cornerRadius(0);
 
     const arc6 = d3
     .arc()
-    .innerRadius(175)
-    .outerRadius(200)
+    .innerRadius(radiusStart + (ringDistance * 5))
+    .outerRadius(radiusStart + (ringDistance * 6))
     .padAngle(0)
     .cornerRadius(0);
 
     const arc7 = d3
     .arc()
-    .innerRadius(200)
-    .outerRadius(225)
+    .innerRadius(radiusStart + (ringDistance * 6))
+    .outerRadius(radiusStart + (ringDistance * 7))
     .padAngle(0)
     .cornerRadius(0);
 
     
     const arcArray =[secretArc, arc, arc2, arc3, arc4, arc5, arc6, arc7]
 
+
+
     //add code to deal with diff number of habits 
-    const habitNames = habits.map(habit => habit.name.toUpperCase())
+    const habitNames = habits.map(habit => {
+        return habit.name.toUpperCase()
+    })
     // console.table(habitNames)
 
+    useEffect(() => {
+
+     setColors()    
+    }, [currentMonth, progressArray])
+
+
+    // const findProgress = (day, )
+
+    const setColors = () => {
+        const paths = document.querySelectorAll("path")
+        paths.forEach((path) => {
+            const day = parseInt(path.id.slice(3, path.id.length)) 
+            const habitNum = parseInt(path.id.slice(-1))
+
+            const habitName = path.dataset.name.toUpperCase()
+            
+            const prog = progressArray.filter((progress) => {
+                return progress.day.day === day && progress.habit.name.toUpperCase() === habitName
+            })
+            if (prog[0]) {
+            if (prog[0].completed){ 
+                if (habitNum == 1){
+                    path.setAttribute("fill", "#A8DADC")
+                } else if (habitNum == 2) {
+                    path.setAttribute("fill", "#F18C8E")
+                } else if (habitNum == 3) {
+                    path.setAttribute("fill", "#e76f51")
+                } else if (habitNum == 4) {
+                    path.setAttribute("fill", "#f4a261")
+                } else if (habitNum == 5) {
+                    path.setAttribute("fill", "#e9c46a")
+                } else if (habitNum == 6) {
+                    path.setAttribute("fill", "#2a9d8f")
+                }
+                else if (habitNum == 7) {
+                    path.setAttribute("fill", "#264653")
+                } else {
+                    path.setAttribute("fill", "#FFFFFF")
+                }
     
+            }
+        } else {
+            path.setAttribute("fill", "#FFFFFF")
+        }
+        })
+    }
+
+
+    const findStatus = (dayNum, habitName, habitNum, e) => {
+        console.log(dayNum)
+        console.log(habitName)
+        const prog = progressArray.filter((progress) => {
+            return progress.day.day === dayNum && progress.habit.name.toUpperCase() === habitName
+        })
+
+        if (prog[0].completed){ 
+            if (habitNum == 1){
+                e.target.setAttribute("fill", "#e76f51")
+            } else if (habitNum == 2) {
+                e.target.setAttribute("fill", "#e76f51")
+            } else if (habitNum == 3) {
+                e.target.setAttribute("fill", "#e76f51")
+            } else if (habitNum == 4) {
+                e.target.setAttribute("fill", "#e76f51")
+            } else if (habitNum == 5) {
+                e.target.setAttribute("fill", "#e76f51")
+            } else if (habitNum == 6) {
+                e.target.setAttribute("fill", "#e76f51")
+            }
+            else if (habitNum == 7) {
+                e.target.setAttribute("fill", "#e76f51")
+            }
+
+        }
+
+    }
+
+    
+
+
+    // const setComletedStatus = (dayNum, habitName, e) => {
+    //     console.log(dayNum)
+    //     console.log(habitName)
+    //     const prog = progressArray.filter((progress) => {
+    //         return progress.day.day === dayNum && progress.habit.name.toUpperCase() === habitName
+    //     })
+    //     debugger
+    // }
+
 
     const secretRingClick = (e) => {
         const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
         const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit name is: NONE`)
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
         console.log(`target id is: ${e.target.id}`)
@@ -115,6 +213,7 @@ const DaySlice = props => {
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
+        console.log(`habit name is: ${e.target.dataset.name}`)
         if (e.target.attributes.fill.value === "#FFFFFF") {
             e.target.setAttribute("fill", "#A8DADC")
         }
@@ -122,6 +221,8 @@ const DaySlice = props => {
             e.target.setAttribute("fill", "#FFFFFF")
         }
         console.log(e.target.id)
+        const name = e.target.dataset.name.toUpperCase()
+        findStatus(day, name, habit, e)
     }
 
     const habitRingTwoClick = (e) => {
@@ -129,6 +230,7 @@ const DaySlice = props => {
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
+        console.log(`habit name is: ${e.target.dataset.name}`)
         if (e.target.attributes.fill.value === "#FFFFFF") {
             e.target.setAttribute("fill", "#F18C8E")
         }
@@ -147,6 +249,7 @@ const DaySlice = props => {
         }
         const day = parseInt(e.target.id.slice(3, e.target.id.length)) 
         const habit = parseInt(e.target.id.slice(-1))
+        console.log(`habit name is: ${e.target.dataset.name}`)
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
         console.log(e.target.id)
@@ -164,6 +267,7 @@ const DaySlice = props => {
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
+        console.log(`habit name is: ${e.target.dataset.name}`)
     }
 
     const habitRingFiveClick = (e) => {
@@ -178,6 +282,7 @@ const DaySlice = props => {
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
+        console.log(`habit name is: ${e.target.dataset.name}`)
     }
 
     const HabitRingSixClick = (e) => {
@@ -192,6 +297,7 @@ const DaySlice = props => {
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
+        console.log(`habit name is: ${e.target.dataset.name}`)
     }
 
     const habitRingSevenClick = (e) => {
@@ -207,6 +313,7 @@ const DaySlice = props => {
         const habit = parseInt(e.target.id.slice(-1))
         console.log(`habit id is: ${habit}`)
         console.log(`day id is: ${day}`)
+        console.log(`habit name is: ${e.target.dataset.name}`)
     }
 
     // const captureAllClick = (e) => {
@@ -221,18 +328,17 @@ const DaySlice = props => {
 
 
 //NEEDS TO BE MOVED TO A CHILD COMPONENT 
-    const setColors = () => {
-        const paths = document.querySelectorAll("path")
-        paths.forEach((path) => {
-            const day = parseInt(path.id.slice(3, path.id.length)) 
-            const habit = parseInt(path.id.slice(-1))
-            const color = path.data-color
-            if (day === 0 && habit >0)
-            path.setAttribute("fill", {color})
-        
-            
-        })
-    }
+    // const setColors = () => {
+    //     debugger
+    //     const paths = document.querySelectorAll("path")
+    //     paths.forEach((path) => {
+    //         const day = parseInt(path.id.slice(3, path.id.length)) 
+    //         const habit = parseInt(path.id.slice(-1))
+    //         const color = path.data-color
+    //         if (day === 0 && habit >0)
+    //         path.setAttribute("fill", {color})                    
+    //     })
+    // }
 
 
 
@@ -249,34 +355,39 @@ const DaySlice = props => {
 
     // let interpolate = d3.interpolateRgb("#eaaf79", "#bc3358")
 
-    const paths = pie.map((slice, index) => {
+//    const habitArray = habits.map((habit) => habit.name)
 
-        // habits.map((habit) => {
+//    const habitArray = habits.map((habit) => {
+//     return habit.name
+//     debugger 
+//  })
+
+
+
+    const paths = pie.map((slice, index) => {
+        
+        
            
         return <>
-            <path className="secretPath" id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} data-color={"#FFFFFF"} onClick={(e)=> secretRingClick(e)}/>
-            <path className="habbitOne" id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={arc(slice)} stroke={'black'} fill={"#FFFFFF"} data-color={"#e76f51"} onClick={(e)=> habitRingOneClick(e)}/>
-            <path className="habbitTwo" id={`day${index.toString()}habit2`} key={`day${index.toString()}habit2`} d={arc2(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingTwoClick(e)}/>
-            <path className="habbitThree" id={`day${index.toString()}habit3`} key={`day${index.toString()}habit3`}  d={arc3(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingThreeClick(e)} />     
-             <path className="habbitFour" id={`day${index.toString()}habit4`} key={`day${index.toString()}habit4`}   d={arc4(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingFourClick(e)}  />       
-             <path className="habbitFive" id={`day${index.toString()}habit5`} key={`day${index.toString()}habit5`} d={arc5(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"}  onClick={(e)=> habitRingFiveClick(e)} />
-             <path className="habitSix" id={`day${index.toString()}habit6`} key={`day${index.toString()}habit6`} d={arc6(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> HabitRingSixClick(e)} />
-             <path className= "habitSeven" id={`day${index.toString()}habit7`} key={`day${index.toString()}habit7`} d={arc7(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingSevenClick(e)} />
+            <path className="secretPath" data-name={"secret-path"} id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} data-color={"#FFFFFF"} onClick={(e)=> secretRingClick(e)} />
+            <path className="habbitOne" data-name={habitNames[0]} id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={arc(slice)} stroke={'black'} fill={"#FFFFFF"} data-color={"#e76f51"} onClick={(e)=> habitRingOneClick(e)}/>
+            <path className="habbitTwo" data-name={habitNames[1]} id={`day${index.toString()}habit2`} key={`day${index.toString()}habit2`} d={arc2(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingTwoClick(e)}/>
+            <path className="habbitThree" data-name={habitNames[2]} id={`day${index.toString()}habit3`} key={`day${index.toString()}habit3`}  d={arc3(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingThreeClick(e)} />     
+             <path className="habbitFour" data-name={habitNames[3]} id={`day${index.toString()}habit4`} key={`day${index.toString()}habit4`}   d={arc4(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingFourClick(e)}  />       
+             <path className="habbitFive" data-name={habitNames[4]} id={`day${index.toString()}habit5`} key={`day${index.toString()}habit5`} d={arc5(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"}  onClick={(e)=> habitRingFiveClick(e)} />
+             <path className="habitSix" data-name={habitNames[5]} id={`day${index.toString()}habit6`} key={`day${index.toString()}habit6`} d={arc6(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> HabitRingSixClick(e)} />
+             <path className= "habitSeven" data-name={habitNames[6]} id={`day${index.toString()}habit7`} key={`day${index.toString()}habit7`} d={arc7(slice)} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingSevenClick(e)} />
              </>
 
-        // })
         })
+        
 
-        // const habitNames = habits.map((habit) => {
-        //     return habit.name
-        // })
-
-
-        // const floss = habits[0].name
 
 
 
         return ( <>
+
+                {/* <HabitRingPath pie={pie}></HabitRingPath> */}
 
 
                 {paths}
@@ -492,6 +603,8 @@ const DaySlice = props => {
              </>
 )
 
+
+ 
 
 }
 
