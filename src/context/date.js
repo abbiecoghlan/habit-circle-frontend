@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer} from "react"
+import { createContext, useReducer} from "react"
 
 
 function reducer(state, action) {
@@ -7,13 +7,13 @@ function reducer(state, action) {
             return {
                 ...state,
                 currentMonth: state.currentMonth + 1,
-                daysOfMonth: new Date(state.currentYear, state.currentMonth + 2, 0).getDate()
+                daysOfMonth: new Date(state.currentYear, state.currentMonth + 1, 0).getDate()
             }
         case "decrement_month":
             return {
                 ...state,
                 currentMonth: state.currentMonth - 1,
-                daysOfMonth: new Date(state.currentYear, state.currentMonth, 0).getDate()
+                daysOfMonth: new Date(state.currentYear, state.currentMonth - 1, 0).getDate()
             }
         case "set_days_array":
             return {
@@ -32,18 +32,38 @@ const DateContext = createContext()
 // create the context provider component
 function DateProvider({ children }) {
 
+    const initialDaysArr = [10]
+    while (initialDaysArr.length <= new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()){
+        initialDaysArr.push(1)        
+        }
+     
+
+
     const [state, dispatch] = useReducer(reducer, {
         currentMonth: new Date().getMonth() + 1, 
         currentYear: new Date().getFullYear(),
         daysOfMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate(),
-        daysArray: [10] 
+        daysArray: initialDaysArr
     })
 
     const { currentMonth, currentYear, daysOfMonth, daysArray } = state
 
-    function incrementMonth() {
-        dispatch({ type: "increment_month" })
+    // function incrementMonth() {
+    //     dispatch({ type: "increment_month" })
+    // }
+
+    const incrementMonth = () => {
+        dispatch({ type: "increment_month"})
+        
+
+        // const array = [10]
+        //     while (array.length <= new Date(new Date().getFullYear(), new Date().getMonth() + 2, 0).getDate()){
+        //         array.push(1)        
+        //         }
+
+        // dispatch({ type: "set_days_array", array: array })
     }
+
 
     function decrementMonth() {
         dispatch({ type: "decrement_month" })
@@ -52,6 +72,12 @@ function DateProvider({ children }) {
     function setDaysArray(array) {
         dispatch({ type: "set_days_array", array })
     }
+
+
+    
+
+
+
 
     // const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1)    
     // const [currentYear, setCurrentYear] = useState(new Date().getFullYear())

@@ -1,5 +1,8 @@
 import { createContext, useState } from "react"
 
+
+
+
 // create the context object
 const ProgressContext = createContext()
 
@@ -9,12 +12,19 @@ function ProgressProvider({ children }) {
     const [progressArray, setProgressArray] = useState([])
     const value = [progressArray, setProgressArray]
 
+    
+
     return (
     <ProgressContext.Provider value={value}>
         {children}
     </ProgressContext.Provider>
     )
 }
+
+
+
+
+
 
 // export
 export { ProgressContext, ProgressProvider }

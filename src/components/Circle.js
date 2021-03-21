@@ -10,7 +10,7 @@ import { DateContext } from '../context/date';
 
  const Circle = () => {
     const [progressArray, setProgressArray] = useContext(ProgressContext)
-    const [currentUser, setCurrentUser] = useContext(UserContext)
+    const { habits } = useContext(UserContext)
 
 
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
@@ -27,7 +27,7 @@ import { DateContext } from '../context/date';
     // const [daysOfMonth, setDaysofMonth] = useState(new Date(currentYear, currentMonth, 0).getDate())
     // const [daysArray, setDaysArray] = useState([0])
 
-    const [habits, setHabits] = useState([])
+    // const [habits, setHabits] = useState([])
 
 
 
@@ -40,64 +40,31 @@ import { DateContext } from '../context/date';
             Accept: 'application/json'
         },
         body: JSON.stringify({
-            id: 2
+            id: 2, 
+            currentMonth: currentMonth
         })
         })
         .then(r => r.json())
         .then(data => {
             setProgressArray(data)
-            // console.table(data)
-            // console.log(currentMonth, currentYear, daysOfMonth)
-            const array = [10]
-            while (array.length <= daysOfMonth){
-                array.push(1)
-                setDaysArray([...array])        
-                }
-                // debugger
                 })
-                
-                
+                      
             
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify({
-                user: {
-                    username: "thatsabbie",
-                    password: "123456"
                     }
-            })
-            })
-            .then(r => r.json())
-            .then(data => {
-                setHabits(data.user.habits)
-                setCurrentUser(data.user)
-                // const user = data.user
-                // console.log(currentMonth, currentYear, daysOfMonth)
-                // const array = [10]
-                // while (array.length <= daysOfMonth){
-                //     array.push(1)
-                //     setDaysArray([...array])        
-                //     }
-                     }) 
-    
-    
-            
-                    }, [])
+                    , [currentMonth])
             
 
-
-useEffect(() => {
-    const array = [10]
-    while (array.length <= daysOfMonth){
-        array.push(1)
-        setDaysArray([...array])        
-        }
-}, [currentMonth])
                     
+
+    useEffect(() => {
+        const array = [10]
+        while (array.length <= daysOfMonth){
+            array.push(1)        
+            }
+            setDaysArray(array)
+
+        
+    }, [currentMonth])
 
 
 
@@ -107,25 +74,34 @@ useEffect(() => {
 
     // const testData = []
 
-    const height = 700
-    const width = 700
+    
+    const height = 800
+    const width = 800
+    
 
     let pie = d3.pie()(daysArray)
 
+    
+
+
+
+
     return (
         <>
-        <button onClick={() => decrementMonth()} > Back </button>
-        <button onClick={() => incrementMonth()}  >Forward</button>
+       
         <div>
-        <svg height={height} width={width}>
+        <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
             <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
-                <DaySlice habits={habits} progressArray={progressArray} pie={pie}/>
+                <DaySlice habits={habits}  pie={pie}/>
             </g>
-        </svg> 
+        </svg> <div style={{ textAlign: "center"}} >
+            <button  onClick={() => decrementMonth()} > Back </button>
+            <button onClick={() => incrementMonth()} > Forward</button> 
+        </div>
         </div>
         </>
     )
-
+    
 }
 
 export default Circle
