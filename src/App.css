@@ -36,3 +36,51 @@
     transform: rotate(360deg);
   }
 }
+
+/* [data-status="completed"] {
+  fill: purple
+} */
+
+[id$="1" ][data-status="completed"] {
+  fill: #A8DADC
+}
+[id$="2" ][data-status="completed"] {
+  fill: #F18C8E 
+}
+
+[id$="3" ][data-status="completed"] {
+  fill: #e76f51
+}
+
+[id$="4" ][data-status="completed"] {
+  fill: #f4a261
+}
+[id$="5" ][data-status="completed"] {
+  fill: #e9c46a
+}
+
+[id$="6" ][data-status="completed"] {
+  fill: #2a9d8f
+}
+
+
+[id$="7" ][data-status="completed"] {
+  fill: #264653
+}
+
+[data-status="incomplete"] {
+  fill: white 
+}
+
+[data-status="test"] {
+  fill: palegreen 
+}
+
+.center {
+  text-align: center
+} 
+
+html, body {
+  width: 100%;
+  height: 100vh;
+ }

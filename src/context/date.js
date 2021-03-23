@@ -48,22 +48,9 @@ function DateProvider({ children }) {
 
     const { currentMonth, currentYear, daysOfMonth, daysArray } = state
 
-    // function incrementMonth() {
-    //     dispatch({ type: "increment_month" })
-    // }
-
     const incrementMonth = () => {
         dispatch({ type: "increment_month"})
-        
-
-        // const array = [10]
-        //     while (array.length <= new Date(new Date().getFullYear(), new Date().getMonth() + 2, 0).getDate()){
-        //         array.push(1)        
-        //         }
-
-        // dispatch({ type: "set_days_array", array: array })
     }
-
 
     function decrementMonth() {
         dispatch({ type: "decrement_month" })
@@ -73,17 +60,6 @@ function DateProvider({ children }) {
         dispatch({ type: "set_days_array", array })
     }
 
-
-    
-
-
-
-
-    // const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1)    
-    // const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-    // const [daysOfMonth, setDaysofMonth] = useState(new Date(currentYear, currentMonth, 0).getDate())
-    // const [daysArray, setDaysArray] = useState([0])
-   
     const value = {
         currentMonth, 
         currentYear,

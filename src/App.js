@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { useContext } from 'react';
-import CircleContainer from './components/CircleContainer';
+import React, { useContext, useEffect } from 'react';
+import NavBar from './components/NavBar';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -9,28 +9,37 @@ import { UserContext } from './context/user'
 
 
 
+
 function App({ history }) {
 
-  const user = useContext(UserContext)
+  const { user, tokenLogin }= useContext(UserContext)
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) { 
+    if (!user) {
+          tokenLogin(token) 
+          console.log("you need to do a token login")   
+    } else {
+      debugger
+      console.log("you need to fetch the progress")
+      // if (progressArray.length < 1){
+        // code here to fetch progress array 
+        // fetchProgress(user.id, currentMonth)
+      // }
+    }
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     if (!token) {
+  }
+  }, [])
 
-  //     }
-  //   }
-  // }, [])
 
-  // const styles = {
-  //   textAlign: "center"
-  // };
 
   return (
 
     <div className="app">
       <Switch>
         <Route  exact path="/login" component={Login}/>
-        <Route  exact path="/tracker" component={CircleContainer} />
+        <Route  exact path="/tracker" component={NavBar} />
         <Route  exact path="/signup" component={SignUp} />
         {/* <Route  exact path="/habits/edit" component={EditHabitsForm} /> */}
         <Route  path="*" render={() => {

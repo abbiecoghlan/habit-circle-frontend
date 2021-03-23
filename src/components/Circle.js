@@ -5,98 +5,73 @@ import { useEffect, useState, useRef, useContext } from 'react'
 import { ProgressContext } from '../context/progress'
 import { UserContext } from '../context/user'
 import { DateContext } from '../context/date';
+import { Button, Icon } from 'semantic-ui-react';
+import { Segment, Dimmer, Loader } from 'semantic-ui-react';
 
 
 
  const Circle = () => {
-    const [progressArray, setProgressArray] = useContext(ProgressContext)
-    const { habits } = useContext(UserContext)
-
-
+    const { progressArray, fetchProgress, loaded } = useContext(ProgressContext)
+    const { habits, user } = useContext(UserContext)
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
-
-    // const testRef = useRef(0)
-
-    
-
-    // const [progressArray, setProgressArray] = useState([])
-    // const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1)
-
-    // const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1)    
-    // const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-    // const [daysOfMonth, setDaysofMonth] = useState(new Date(currentYear, currentMonth, 0).getDate())
-    // const [daysArray, setDaysArray] = useState([0])
-
-    // const [habits, setHabits] = useState([])
-
-
 
 
     useEffect(() => {
-        fetch('http://localhost:3000/user_info', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify({
-            id: 2, 
-            currentMonth: currentMonth
-        })
-        })
-        .then(r => r.json())
-        .then(data => {
-            setProgressArray(data)
-                })
-                      
-            
-                    }
-                    , [currentMonth])
-            
+        if (user){
+            if (progressArray.length == 0) {
+                fetchProgress(user.id, currentMonth)
+                }
+            }
+        }, [])
 
-                    
+    const handleForwardClick = () => {
+        incrementMonth()
+        fetchProgress(user.id, currentMonth + 1)
+       
+    }
 
+    const handleBackWardClick = () => {
+        decrementMonth()
+        fetchProgress(user.id, currentMonth - 1)
+       
+    }
+
+  
     useEffect(() => {
         const array = [10]
         while (array.length <= daysOfMonth){
             array.push(1)        
             }
-            setDaysArray(array)
-
-        
-    }, [currentMonth])
+            setDaysArray(array)        
+        }, [currentMonth])
 
 
-
-
-
-    // const data = [10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-    // const testData = []
 
     
-    const height = 800
+    const height = 750
     const width = 800
     
 
     let pie = d3.pie()(daysArray)
 
     
-
-
-
+    const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
+    
+    
+   
 
     return (
+
         <>
-       
         <div>
+        <div style={{ textAlign: "center"}} >
+        <h1 className="center" ><Icon name='angle left' onClick={()=> handleBackWardClick()}/>{monthName}       <Icon name='angle right' onClick={()=> handleForwardClick()}/></h1> 
         <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
             <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
                 <DaySlice habits={habits}  pie={pie}/>
             </g>
-        </svg> <div style={{ textAlign: "center"}} >
-            <button  onClick={() => decrementMonth()} > Back </button>
-            <button onClick={() => incrementMonth()} > Forward</button> 
+        </svg> 
+
         </div>
         </div>
         </>
