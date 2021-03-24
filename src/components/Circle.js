@@ -68,7 +68,7 @@ import { Segment, Dimmer, Loader } from 'semantic-ui-react';
         <h1 className="center" ><Icon name='angle left' onClick={()=> handleBackWardClick()}/>{monthName}       <Icon name='angle right' onClick={()=> handleForwardClick()}/></h1> 
         <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
             <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
-                <DaySlice habits={habits}  pie={pie}/>
+                <DaySlice pie={pie}/>
             </g>
         </svg> 
 

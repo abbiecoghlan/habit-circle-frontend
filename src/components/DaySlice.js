@@ -12,8 +12,8 @@ import { useHistory } from "react-router-dom";
 
 const DaySlice = ({ pie }) => {
    
-    const { habits, user } = useContext(UserContext)
-    const { progressArray, updateProgress, habitArray } = useContext(ProgressContext)
+    const { user } = useContext(UserContext)
+    const { progressArray, updateProgress, habitArray, loaded } = useContext(ProgressContext)
     const { currentMonth } = useContext(DateContext)
     const history = useHistory()
 
@@ -25,11 +25,14 @@ const DaySlice = ({ pie }) => {
     
         }, [user])
     
+    useEffect(() => {
+        if (!user) {
+            history.push("/login")
+            }
     
-    // get array of habit names
-    // const habitArray = habits.map((habit) => habit.name)
-
-    // const habitArray = habits.map((habit) => habit.name)
+        }, [user])
+    
+    
 
 
      
@@ -100,8 +103,8 @@ const DaySlice = ({ pie }) => {
     
     //add code to deal with diff number of habits 
    
-    const habitNames = habits.map(habit => {
-        return habit.name.toUpperCase()
+    const habitNames = !loaded ? null : habitArray.map(habitName => {
+        return habitName.toUpperCase()
     })
 
 
@@ -152,7 +155,7 @@ const DaySlice = ({ pie }) => {
 
 
 
-    const paths = pie.map((slice, index) => {
+    const paths = !loaded? null : pie.map((slice, index) => {
  
         return <>
             <path className="secretPath"  data-name={"secret-path"} id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} />

@@ -9,6 +9,7 @@ function reducer(state, action) {
         case "TOKEN_LOGIN":
             console.log("automatic login from token")
             return {
+                ...state,
                 user: { username: action.user.username, id: action.user.id },
                 habits: action.user.habits,
                 error: false
@@ -16,6 +17,7 @@ function reducer(state, action) {
         case "LOGIN_USER":
             console.log("LOGIN_USER")
             return {
+            ...state,
             user: {username: action.user.username, id: action.user.id},
             habits: action.user.habits,
             error: false
@@ -23,10 +25,16 @@ function reducer(state, action) {
         case "LOGOUT_USER":
             console.log("LOGOUT USER")
             return {
+                ...state,
                 habits: [],
                 user: false,
                 error: false
                 }
+        case "SIGN_UP_SUCCESS":
+            return {
+                ...state,
+                signUpSuccess: true
+            }
         // case "LOGIN_ERROR":
         //     return {
         //         habits: [],
@@ -49,10 +57,11 @@ function UserProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, {
         user: false,
         habits: [],
-        error: false
+        error: false,
+        signUpSuccess: false
     })
 
-    const { user, habits } = state
+    const { user, habits, signUpSuccess } = state
 
     const login = (userInfo) => {
         fetch('http://localhost:3000/login', {
@@ -103,7 +112,8 @@ function UserProvider({ children }) {
                         }
                          }) 
             }
-            const history = useHistory()
+        
+    const history = useHistory()
 
             const logout = () => {
                 
@@ -113,9 +123,36 @@ function UserProvider({ children }) {
                 dispatch({type:"LOGOUT_USER"})
             }
 
+        const signUp = (userInfo) => {
+           
+            fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify({user: {...userInfo}})
+            })
+            .then(r => r.json())
+            .then(data => {
+                 if (!data.user) {
+                    alert(data.message)
+                    // debugger
+                    // alert("Wrong username or password. Please check your credentials and try again.")
+                } else {
+                    debugger
+
+                    const user = data.user
+                    dispatch({type:"LOGIN_USER", user })
+                    localStorage.setItem("token", data.jwt)
+                    dispatch({type:"SIGN_UP_SUCCESS"})
+                    }
+                     })
+        }
 
 
-    const value = { user, habits, login, tokenLogin, logout} 
+
+    const value = { user, habits, signUp, signUpSuccess, login, tokenLogin, logout} 
 
     return (
     <UserContext.Provider value={value}>

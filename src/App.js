@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import HabitForm from './components/HabitForm';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { UserContext } from './context/user'
 
@@ -40,6 +41,8 @@ function App({ history }) {
       <Switch>
         <Route  exact path="/login" component={Login}/>
         <Route  exact path="/tracker" component={NavBar} />
+        <Route  exact path="/createhabits" component={HabitForm} />
+
         <Route  exact path="/signup" component={SignUp} />
         {/* <Route  exact path="/habits/edit" component={EditHabitsForm} /> */}
         <Route  path="*" render={() => {
