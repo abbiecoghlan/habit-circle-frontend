@@ -3,10 +3,11 @@ import { useHistory } from "react-router-dom"
 
 function reducer(state, action) {
     switch (action.type) {
-        case "FETCH_PROGRESS":
-            
+        case "FETCH_INITIAL_PROGRESS":
             return {
+                ...state,
                 progressArray: action.payload.progressArr,
+                currentMonthProgress: action.payload.progressArr,
                 habitArray: action.payload.habitArr, 
                 loaded: true
                 // habits: action.progressArr
@@ -14,6 +15,18 @@ function reducer(state, action) {
         case "UPDATE_PROGRESS":
             return { 
                 ...state,
+                currentMonthProgress: state.currentMonth.map(progress => {
+                    if (progress.id === action.progress.id){
+                       return action.progress
+                     } else { 
+                      return progress }
+                   }), 
+                allProgress: state.allProgress.map(progress => {
+                    if (progress.id === action.progress.id){
+                       return action.progress
+                     } else { 
+                      return progress }
+                   }), 
                 progressArray: state.progressArray.map(progress => {
                 if (progress.id === action.progress.id){
                    return action.progress
@@ -23,6 +36,8 @@ function reducer(state, action) {
             }
         case "LOGOUT":
             return { 
+                currentMonthProgress: [],
+                allProgress: [],
                 progressArray: [],
                 habitArray: [], 
                 loaded: false
@@ -40,6 +55,8 @@ const ProgressContext = createContext()
 function ProgressProvider({ children }) {
 
     const [state, dispatch] = useReducer(reducer, {
+        currentMonthProgress: [],
+        allProgress: [],
         progressArray: [],
         habitArray: [], 
         loaded: false
@@ -68,7 +85,7 @@ function ProgressProvider({ children }) {
                 return progress.habit.name
                })
             const nameArr = [...new Set(names)]
-            dispatch({type:"FETCH_PROGRESS", payload: {progressArr: progressArray, habitArr: nameArr}})
+            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {progressArr: progressArray, habitArr: nameArr}})
                 })        
             }
     
@@ -146,3 +163,38 @@ export { ProgressContext, ProgressProvider }
 //     </ProgressContext.Provider>
 //     )
 // }
+
+
+
+// HOW IT WAS BEFORE 
+
+// function reducer(state, action) {
+//     switch (action.type) {
+//         case "FETCH_INITIAL_PROGRESS":
+//             return {
+//                 progressArray: action.payload.progressArr,
+//                 habitArray: action.payload.habitArr, 
+//                 loaded: true
+//                 // habits: action.progressArr
+//             }
+//         case "UPDATE_PROGRESS":
+//             return { 
+//                 ...state,
+//                 progressArray: state.progressArray.map(progress => {
+//                 if (progress.id === action.progress.id){
+//                    return action.progress
+//                  } else { 
+//                   return progress }
+//                }) 
+//             }
+//         case "LOGOUT":
+//             return { 
+//                 progressArray: [],
+//                 habitArray: [], 
+//                 loaded: false
+//             }
+//         default:
+//             return state
+//     }
+// }
+
