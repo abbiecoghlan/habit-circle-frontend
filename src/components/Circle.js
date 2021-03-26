@@ -14,7 +14,7 @@ import NewMonthContainer from './NewMonthContainer';
 
 
  const Circle = () => {
-    const { activeMonthProgress, fetchProgress, loaded, setActiveMonth } = useContext(ProgressContext)
+    const { activeMonthProgress, allProgress, fetchProgress, loaded, setActiveMonth } = useContext(ProgressContext)
     const { habits, user } = useContext(UserContext)
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
 
@@ -43,6 +43,10 @@ import NewMonthContainer from './NewMonthContainer';
             array.push(1)        
             }
             setDaysArray(array)        
+
+            // console.log(allProgress.length)
+
+            // debugger
         }, [currentMonth])
 
 
