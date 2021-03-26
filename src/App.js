@@ -33,13 +33,8 @@ function App({ history }) {
         console.log("you need to fetch the progress")
 
         if (!loaded) {
-          fetchProgress(user.id, currentMonth)
-          // setActiveMonth(currentMonth)
-      
+          fetchProgress(user.id, currentMonth)      
         }
-        // if (loaded) {
-        //   setActiveMonth(currentMonth)
-        // }
       }
     }
   }, [user, loaded])

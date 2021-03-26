@@ -44,6 +44,20 @@ function reducer(state, action) {
                 }),
                 activeMonthHabits: action.payload.names
             }
+        case "CREATE_NEW_MONTH":
+            debugger
+            return {
+                ...state,
+                activeMonthProgress: action.payload.newProgress,
+                activeMonthHabits: action.payload.activeHabitNames,
+                allProgress: [...state.allProgress, ...action.payload.newProgress]
+    
+            }
+        // case "TOGGLE_LOADED":
+        //     return {
+        //         ...state,
+        //         loaded: false
+        //     }
 
         default:
             return state
@@ -149,8 +163,9 @@ function ProgressProvider({ children }) {
         dispatch({ type:"LOGOUT" })
     }
 
-    
+
     const createHabits = (array, id, month) => {
+        debugger
         fetch('http://localhost:3000/create_month', {
             method: 'POST',
             headers: {
@@ -159,16 +174,41 @@ function ProgressProvider({ children }) {
             },
             body: JSON.stringify({
               habits: array,
-              user_id: id
+              user_id: id,
+              month: month
             })
           })
             .then(r => r.json())
-            .then(data => {
-                console.table(data)
-                fetchProgress(id, month)
+            .then(progressArray => {
+                console.table(progressArray)
+                debugger 
+
+                const activeHabitNames =  progressArray.map(progress => {
+                    return progress.habit.name
+                   })
+                
+                   const nameArr = [...new Set(activeHabitNames)]
+                
+                const newHabits = progressArray.map(progress => {
+                    return progress.habit
+                   })
+                   
+                
+                dispatch({type:"CREATE_NEW_MONTH", payload: {newProgress: progressArray, activeHabitNames: nameArr}})
+                   
+                debugger
+
+
+
+
+                // fetchProgress(id, month)
             })
-            .then(setActiveMonth(month))
+            // .then(setActiveMonth(month))
     }
+
+    // const toggleLoaded = () => {
+    //     dispatch({type:"CREATE_MONTH_SUCCESS"})
+    // }
 
 
 
