@@ -11,7 +11,6 @@ function reducer(state, action) {
             return {
                 ...state,
                 user: { username: action.user.username, id: action.user.id },
-                habits: action.user.habits,
                 error: false
             }
         case "LOGIN_USER":
@@ -19,14 +18,12 @@ function reducer(state, action) {
             return {
             ...state,
             user: {username: action.user.username, id: action.user.id},
-            habits: action.user.habits,
             error: false
             }
         case "LOGOUT_USER":
             console.log("LOGOUT USER")
             return {
                 ...state,
-                habits: [],
                 user: false,
                 error: false
                 }
@@ -37,7 +34,6 @@ function reducer(state, action) {
             }
         // case "LOGIN_ERROR":
         //     return {
-        //         habits: [],
         //         user: false,
         //         error: action.error        
         //         }
@@ -56,12 +52,11 @@ function UserProvider({ children }) {
 
     const [state, dispatch] = useReducer(reducer, {
         user: false,
-        habits: [],
         error: false,
         signUpSuccess: false
     })
 
-    const { user, habits, signUpSuccess } = state
+    const { user, signUpSuccess } = state
 
     const login = (userInfo) => {
         fetch('http://localhost:3000/login', {
@@ -76,13 +71,10 @@ function UserProvider({ children }) {
             .then(data => {
                 if (!data.user) {
                     alert(data.message)
-                    // debugger
-                    // alert("Wrong username or password. Please check your credentials and try again.")
                 } else {
                     const user = data.user
                     dispatch({type:"LOGIN_USER", user })
                     localStorage.setItem("token", data.jwt)
-                    // localStorage.setItem("id", user.id)
                     }
                      }) 
         }
@@ -105,23 +97,19 @@ function UserProvider({ children }) {
                 
                     } else {
                         const user = data.user
-                        dispatch({type:"LOGIN_USER", user })
-                        localStorage.setItem("token", data.jwt)
-                        
-                        
+                        dispatch({type:"LOGIN_USER", user })                       
                         }
                          }) 
             }
         
     const history = useHistory()
 
-            const logout = () => {
-                
-                const token = localStorage.getItem("token")
-                window.localStorage.removeItem("token")
-                const deleted = localStorage.getItem("token")
-                dispatch({type:"LOGOUT_USER"})
-            }
+        const logout = () => {
+            const token = localStorage.getItem("token")
+            window.localStorage.removeItem("token")
+            const deleted = localStorage.getItem("token")
+            dispatch({type:"LOGOUT_USER"})
+        }
 
         const signUp = (userInfo) => {
            
@@ -137,11 +125,7 @@ function UserProvider({ children }) {
             .then(data => {
                  if (!data.user) {
                     alert(data.message)
-                    // debugger
-                    // alert("Wrong username or password. Please check your credentials and try again.")
                 } else {
-                    debugger
-
                     const user = data.user
                     dispatch({type:"LOGIN_USER", user })
                     localStorage.setItem("token", data.jwt)
@@ -152,7 +136,7 @@ function UserProvider({ children }) {
 
 
 
-    const value = { user, habits, signUp, signUpSuccess, login, tokenLogin, logout} 
+    const value = { user, signUp, signUpSuccess, login, tokenLogin, logout} 
 
     return (
     <UserContext.Provider value={value}>
