@@ -6,16 +6,16 @@ function reducer(state, action) {
         case "FETCH_INITIAL_PROGRESS":
             return {
                 ...state,
-                progressArray: action.payload.progressArr,
-                currentMonthProgress: action.payload.progressArr,
-                habitArray: action.payload.habitArr, 
+                activeMonthProgress: action.payload.activeProg,
+                activeMonthHabits: action.payload.activeHabitNames,
+                allProgress: action.payload.allProgress,
+                allHabits: action.payload.allHabits,
                 loaded: true
-                // habits: action.progressArr
             }
         case "UPDATE_PROGRESS":
             return { 
                 ...state,
-                currentMonthProgress: state.currentMonth.map(progress => {
+                activeMonthProgress: state.activeMonthProgress.map(progress => {
                     if (progress.id === action.progress.id){
                        return action.progress
                      } else { 
@@ -26,22 +26,25 @@ function reducer(state, action) {
                        return action.progress
                      } else { 
                       return progress }
-                   }), 
-                progressArray: state.progressArray.map(progress => {
-                if (progress.id === action.progress.id){
-                   return action.progress
-                 } else { 
-                  return progress }
-               }) 
+                   }) 
             }
         case "LOGOUT":
-            return { 
-                currentMonthProgress: [],
+            return {
                 allProgress: [],
-                progressArray: [],
-                habitArray: [], 
+                activeMonthProgress: [],
+                allHabits: [],
+                activeMonthHabits: [],
                 loaded: false
             }
+        case "SET_ACTIVE_MONTH":
+            return {
+                ...state,
+                activeMonthProgress: state.allProgress.filter(progress => {
+                    return (progress.day.month == action.payload.month)
+                }),
+                activeMonthHabits: action.payload.names
+            }
+
         default:
             return state
     }
@@ -55,14 +58,14 @@ const ProgressContext = createContext()
 function ProgressProvider({ children }) {
 
     const [state, dispatch] = useReducer(reducer, {
-        currentMonthProgress: [],
+        activeMonthProgress: [],
         allProgress: [],
-        progressArray: [],
-        habitArray: [], 
+        allHabits: [],
+        activeMonthHabits: [],
         loaded: false
     })
 
-    const { progressArray, habitArray, loaded } = state
+    const { loaded, activeMonthProgress, allProgress, allHabits, activeMonthHabits } = state
 
     const history = useHistory()
 
@@ -81,13 +84,28 @@ function ProgressProvider({ children }) {
         })
         .then(r => r.json())
         .then(progressArray => {
-            const names = progressArray.map(progress => {
+            
+            const activeProg = progressArray.filter(progress => {
+                return   (progress.day.month == month)
+                })
+            const activeHabitNames =  activeProg.map(progress => {
                 return progress.habit.name
                })
-            const nameArr = [...new Set(names)]
-            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {progressArr: progressArray, habitArr: nameArr}})
+
+            const allHabits = progressArray.map(progress => {
+                return progress.habit
+               })
+               
+            const nameArr = [...new Set(activeHabitNames)]
+            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {allProgress: progressArray, activeProg: activeProg, activeHabitNames: nameArr, allHabits: allHabits}})
                 })        
             }
+
+
+
+    // const fetchAllProgress = (userId) => {
+    //     console.log("time to fetch all the progress")
+    // }            
     
     const updateProgress = (progressId, status, e) => {
         fetch(`http://localhost:3000/progresses/${progressId}`, {
@@ -112,16 +130,50 @@ function ProgressProvider({ children }) {
                 alert("Error updating habit.")
                 history.push('/login')
 
-            }
-                )
+            })
     }
     
+    const setActiveMonth = (month) => {
+        const activeProg = state.allProgress.filter(progress => {        
+             return   (progress.day.month == month)
+            })
+        const activeHabitNames =  activeProg.map(progress => {
+            return progress.habit.name
+           })          
+        const nameArr = [...new Set(activeHabitNames)]
+        dispatch({ type:"SET_ACTIVE_MONTH", payload: {month: month, names: nameArr }})
+
+    }
     
     const resetProgress = () => {
         dispatch({ type:"LOGOUT" })
     }
 
-    const value = { progressArray, habitArray, loaded, resetProgress, fetchProgress, updateProgress }
+    
+    const createHabits = (array, id, month) => {
+        fetch('http://localhost:3000/create_month', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+              habits: array,
+              user_id: id
+            })
+          })
+            .then(r => r.json())
+            .then(data => {
+                console.table(data)
+                fetchProgress(id, month)
+            })
+            .then(setActiveMonth(month))
+    }
+
+
+
+
+    const value = { loaded, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, allHabits, activeMonthHabits, createHabits, setActiveMonth}
 
 
     return (
@@ -138,63 +190,3 @@ function ProgressProvider({ children }) {
 
 // export
 export { ProgressContext, ProgressProvider }
-
-
-
-
-
-
-
-
-// // create the context object
-// const ProgressContext = createContext()
-
-// // create the context provider component
-// function ProgressProvider({ children }) {
-
-//     const [progressArray, setProgressArray] = useState([])
-//     const value = [progressArray, setProgressArray]
-
-    
-
-//     return (
-//     <ProgressContext.Provider value={value}>
-//         {children}
-//     </ProgressContext.Provider>
-//     )
-// }
-
-
-
-// HOW IT WAS BEFORE 
-
-// function reducer(state, action) {
-//     switch (action.type) {
-//         case "FETCH_INITIAL_PROGRESS":
-//             return {
-//                 progressArray: action.payload.progressArr,
-//                 habitArray: action.payload.habitArr, 
-//                 loaded: true
-//                 // habits: action.progressArr
-//             }
-//         case "UPDATE_PROGRESS":
-//             return { 
-//                 ...state,
-//                 progressArray: state.progressArray.map(progress => {
-//                 if (progress.id === action.progress.id){
-//                    return action.progress
-//                  } else { 
-//                   return progress }
-//                }) 
-//             }
-//         case "LOGOUT":
-//             return { 
-//                 progressArray: [],
-//                 habitArray: [], 
-//                 loaded: false
-//             }
-//         default:
-//             return state
-//     }
-// }
-
