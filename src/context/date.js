@@ -20,6 +20,12 @@ function reducer(state, action) {
                 ...state,
                 daysArray: action.array
                 }
+        case "SET_MONTH":
+            return {
+                ...state,
+                currentMonth: new Date().getMonth() + 1,
+                daysOfMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
+            }
         default:
             return state
     }
@@ -60,6 +66,10 @@ function DateProvider({ children }) {
         dispatch({ type: "set_days_array", array })
     }
 
+    function setCurrentMonth() {
+        dispatch({ type: "SET_MONTH"})
+    }
+
     const value = {
         currentMonth, 
         currentYear,
@@ -67,7 +77,8 @@ function DateProvider({ children }) {
         daysArray, 
         incrementMonth,
         decrementMonth, 
-        setDaysArray
+        setDaysArray,
+        setCurrentMonth
     }
 
     return (
