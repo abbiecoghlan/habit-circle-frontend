@@ -13,6 +13,7 @@ import NewMonthContainer from './NewMonthContainer';
 
 
 
+
  const Circle = () => {
     const { activeMonthProgress, loaded, setActiveMonth } = useContext(ProgressContext)
     const { habits, user } = useContext(UserContext)
@@ -26,6 +27,7 @@ import NewMonthContainer from './NewMonthContainer';
         if (loaded) {
             setActiveMonth(currentMonth)
             }   
+      
         }, [currentMonth])
 
     const handleForwardClick = () => {
