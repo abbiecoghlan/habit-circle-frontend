@@ -55,7 +55,7 @@ const Login = ({history}) => {
          <Header as='h2'  style={{
           color:"#264653"
         }} textAlign='center'>
-            Log-in to your acccommit =ount
+            Log-in to your account
          </Header>
          <Form onSubmit={(e) => handleSubmit(e)} size='large'>
            <Segment inverted style={{
