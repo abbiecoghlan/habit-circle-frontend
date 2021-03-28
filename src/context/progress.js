@@ -9,7 +9,6 @@ function reducer(state, action) {
                 activeMonthProgress: action.payload.activeProg,
                 activeMonthHabits: action.payload.activeHabitNames,
                 allProgress: action.payload.allProgress,
-                allHabits: action.payload.allHabits,
                 loaded: true
             }
         case "UPDATE_PROGRESS":
@@ -32,7 +31,6 @@ function reducer(state, action) {
             return {
                 allProgress: [],
                 activeMonthProgress: [],
-                allHabits: [],
                 activeMonthHabits: [],
                 loaded: false
             }
@@ -74,12 +72,11 @@ function ProgressProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, {
         activeMonthProgress: [],
         allProgress: [],
-        allHabits: [],
         activeMonthHabits: [],
         loaded: false
     })
 
-    const { loaded, activeMonthProgress, allProgress, allHabits, activeMonthHabits } = state
+    const { loaded, activeMonthProgress, allProgress, activeMonthHabits } = state
 
     const history = useHistory()
 
@@ -102,16 +99,13 @@ function ProgressProvider({ children }) {
             const activeProg = progressArray.filter(progress => {
                 return   (progress.day.month == month)
                 })
+          
             const activeHabitNames =  activeProg.map(progress => {
                 return progress.habit.name
                })
-
-            const allHabits = progressArray.map(progress => {
-                return progress.habit
-               })
                
             const nameArr = [...new Set(activeHabitNames)]
-            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {allProgress: progressArray, activeProg: activeProg, activeHabitNames: nameArr, allHabits: allHabits}})
+            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {allProgress: progressArray, activeProg: activeProg, activeHabitNames: nameArr}})
                 })        
             }
 
@@ -213,7 +207,7 @@ function ProgressProvider({ children }) {
 
 
 
-    const value = { loaded, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, allHabits, activeMonthHabits, createHabits, setActiveMonth}
+    const value = { loaded, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, activeMonthHabits, createHabits, setActiveMonth}
 
 
     return (

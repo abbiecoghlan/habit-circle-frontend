@@ -9,6 +9,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { UserContext } from './context/user'
 import { ProgressContext } from './context/progress'
 import { DateContext } from './context/date'
+import CircleContainer from './components/CircleContainer';
 
 
 
@@ -45,14 +46,19 @@ function App({ history }) {
     <div className="app">
       <Switch>
         <Route  exact path="/login" component={Login}/>
-        <Route  exact path="/tracker" component={NavBar} />
-        <Route  exact path="/createhabits" component={HabitForm} />
-
         <Route  exact path="/signup" component={SignUp} />
-        {/* <Route  exact path="/habits/edit" component={EditHabitsForm} /> */}
+        {/* <Route  exact path="/createhabits" component={HabitForm} /> */}
+       
+        {/* <Route path="/tracker" component={NavBar} /> */}
+
+        
+        {/* <Route  path="*" render={() => {
+          return ( user ? <Redirect to={`/tracker/${user.username}`} /> : <Redirect to='/login' />)
+          }} /> */}
         <Route  path="*" render={() => {
-          return ( user ? <Redirect to='/tracker' /> : <Redirect to='/login' />)
+          return ( user ? <Route path="/tracker" component={NavBar} /> : <Redirect to='/login' />)
           }} />
+
     </Switch>
 
 
