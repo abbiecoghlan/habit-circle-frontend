@@ -48,14 +48,48 @@ function reducer(state, action) {
                 ...state,
                 activeMonthProgress: action.payload.newProgress,
                 activeMonthHabits: action.payload.activeHabitNames,
-                allProgress: [...state.allProgress, ...action.payload.newProgress]
+                allProgress: [...state.allProgress, ...action.payload.newProgress],
+                loaded: true
     
             }
-        // case "TOGGLE_LOADED":
-        //     return {
-        //         ...state,
-        //         loaded: false
-        //     }
+        case "UPDATE_HABIT":
+            return { 
+                ...state,
+                activeMonthProgress: state.activeMonthProgress.map(progress => {
+                    if (progress.habit.id === action.habit.id){
+                        progress.habit.name = action.habit.name
+                        return progress
+                        } else { 
+                        return progress }
+                    }), 
+                allProgress: state.allProgress.map(progress => {
+                    if (progress.habit.id === action.habit.id){
+                        progress.habit.name = action.habit.name
+                        return progress
+                        } else { 
+                        return progress }
+                    }),   
+                activeMonthHabits: state.activeMonthHabits.map((habitName) => {
+                    if (habitName == action.previousName) {
+                        return action.habit.name
+                    } else {
+                        return habitName
+                    }
+                })
+            }
+            case "ADD_HABIT_TO_MONTH":
+                return { 
+                    ...state,
+                    activeMonthProgress: [...state.activeMonthProgress, ...action.payload.newProgress], 
+                    allProgress: [...state.activeMonthProgress, ...action.payload.newProgress],   
+                    activeMonthHabits: [...state.activeMonthHabits, action.payload.newHabitName]
+                }
+            case "DELETE_HABIT":
+            return { 
+                ...state,
+                activeMonthProgress: state.activeMonthProgress.filter(progress => progress.habit.id !== action.id),
+                activeMonthHabits: state.activeMonthHabits.filter((habitName) => habitName !== action.previousName)
+            }
 
         default:
             return state
@@ -95,7 +129,7 @@ function ProgressProvider({ children }) {
         })
         .then(r => r.json())
         .then(progressArray => {
-            
+        
             const activeProg = progressArray.filter(progress => {
                 return   (progress.day.month == month)
                 })
@@ -136,7 +170,7 @@ function ProgressProvider({ children }) {
             .catch(() => {
                 e.target.dataset.status = "test"
                 alert("Error updating habit.")
-                history.push('/login')
+
 
             })
     }
@@ -159,7 +193,7 @@ function ProgressProvider({ children }) {
 
 
     const createHabits = (array, id, month) => {
-        debugger
+    
         fetch('http://localhost:3000/create_month', {
             method: 'POST',
             headers: {
@@ -175,7 +209,7 @@ function ProgressProvider({ children }) {
             .then(r => r.json())
             .then(progressArray => {
                 console.table(progressArray)
-                debugger 
+             
 
                 const activeHabitNames =  progressArray.map(progress => {
                     return progress.habit.name
@@ -190,24 +224,95 @@ function ProgressProvider({ children }) {
                 
                 dispatch({type:"CREATE_NEW_MONTH", payload: {newProgress: progressArray, activeHabitNames: nameArr}})
                    
-                debugger
-
-
-
-
                 // fetchProgress(id, month)
             })
             // .then(setActiveMonth(month))
     }
 
-    // const toggleLoaded = () => {
-    //     dispatch({type:"CREATE_MONTH_SUCCESS"})
-    // }
+    const editHabit = (habitId, name, previousName) => {
+        fetch(`http://localhost:3000/habits/${habitId}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+                name: name
+            })
+          })
+            .then(r => r.json())
+            .then(habit => 
+                {
+                console.log(habit)
+                dispatch({type:"UPDATE_HABIT", habit: habit, previousName: previousName})
+            })
+            .catch(() => {
+                alert("Error updating habit.")
+                history.push('/login')
+
+            })
+    }
+
+    const deleteHabit = (habit_id, name, user_id, currentMonth) => {
+        fetch(`http://localhost:3000/delete_by_habit`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+                habit_id: habit_id,
+                currentMonth: currentMonth,
+                user_id: user_id
+            })
+          })
+            .then(r => r.json())
+            .then(habit => 
+                {
+                console.log(habit)
+                
+                dispatch({type:"DELETE_HABIT", id: habit_id, previousName: name})
+            })
+            .catch(() => {
+                alert("Error updating habit.")
+            })
+        }
+
+
+        const addHabitToMonth = (array, id, month) => {
+    
+            fetch('http://localhost:3000/create_month', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    habits: array,
+                    user_id: id,
+                    month: month
+                })
+                })
+                .then(r => r.json())
+                .then(progressArray => {
+                    console.table(progressArray)
+                    const habitName =  progressArray.find(progress => progress.habit.name).habit.name
+                                     
+                   dispatch({type:"ADD_HABIT_TO_MONTH", payload: {newProgress: progressArray, newHabitName: habitName}})
+                        
+                    // fetchProgress(id, month)
+                })
+            }
 
 
 
+    
 
-    const value = { loaded, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, activeMonthHabits, createHabits, setActiveMonth}
+ 
+
+
+
+    const value = { loaded, addHabitToMonth, deleteHabit, editHabit, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, activeMonthHabits, createHabits, setActiveMonth}
 
 
     return (

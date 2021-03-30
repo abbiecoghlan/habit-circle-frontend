@@ -12,16 +12,17 @@ const LoadWheel = (props) => {
 
     return (
         <>
-        
-      <Segment>
+         <div class="ui center aligned middle aligned grid" style={{height: "100vh"}}>
+      {/* <Segment > */}
          <Dimmer active inverted inline="center">
            <Loader indeterminate size='massive'
 
            >Loading your habit data</Loader>
          </Dimmer> 
-         <Circle></Circle>
+         {/* <Circle></Circle> */}
          {/* <p>THIS IS A TEST</p> */}
-         </Segment>
+         {/* </Segment> */}
+         </div>
     
 
 

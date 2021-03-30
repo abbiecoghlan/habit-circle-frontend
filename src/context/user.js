@@ -7,17 +7,15 @@ import { useHistory } from "react-router-dom"
 function reducer(state, action) {
     switch (action.type) {
         case "TOKEN_LOGIN":
-            console.log("automatic login from token")
             return {
                 ...state,
-                user: { username: action.user.username, id: action.user.id },
+                user: { username: action.user.username, id: action.user.id, created: action.user.created },
                 error: false
             }
         case "LOGIN_USER":
-            console.log("LOGIN_USER")
             return {
             ...state,
-            user: {username: action.user.username, id: action.user.id},
+            user: {username: action.user.username, id: action.user.id, name: action.user.name, created: action.user.created},
             error: false
             }
         case "LOGOUT_USER":
@@ -75,6 +73,7 @@ function UserProvider({ children }) {
                     const user = data.user
                     dispatch({type:"LOGIN_USER", user })
                     localStorage.setItem("token", data.jwt)
+            
                     }
                      }) 
         }
