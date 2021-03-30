@@ -4,14 +4,25 @@ import {Redirect, useHistory} from "react-router-dom"
 import { UserContext } from '../context/user'
 import { ProgressContext } from '../context/progress'
 import { DateContext } from '../context/date'
+import LoadWheel from './LoadWheel';
 
 
 const HabitForm = (props) => {
 
-    const {user} = useContext(UserContext)
+    const {user, loaded} = useContext(UserContext)
     const {createHabits} = useContext(ProgressContext)
     const { currentMonth, currentYear } = useContext(DateContext)
     const history = useHistory()
+
+    // const [submitted, setSubmitted] = useState(false)
+
+    // useEffect(() => {
+    //     if (loaded){
+    //         history.push(`/tracker/${user.username}`)
+    //     }
+    
+    // }, [loaded])
+
 
     const [progressiveDisplay, setprogressiveDisplay] = useState({
         habit1: false,
@@ -73,12 +84,13 @@ const HabitForm = (props) => {
             habit6: "",
             habit7: ""
         })
-        history.push(`/tracker/${user.username}`)
+        history.push(`/tracker/${user.username}/month`)
         
     } 
     const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
 
-    return (
+    return ( 
+        // submitted ? <LoadWheel></LoadWheel> :
 
         <Grid  textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>

@@ -23,6 +23,13 @@ const NewMonthContainer = (props) => {
     const [checks, setChecks] = useState({})
     const [totalChecks, setTotalChecks] = useState({total: 0})
 
+        // useEffect(() => {
+    //     if (loaded){
+    //         history.push(`/tracker/${user.username}`)
+    //     }
+    
+    // }, [loaded])
+
 
 
     const handleSubmit = (array = []) => {
@@ -37,7 +44,7 @@ const NewMonthContainer = (props) => {
         })
         console.log("sorted habits are", sortedHabits)
         createHabits(sortedHabits, user.id, currentMonth)
-        history.push(`/tracker/${user.username}`)
+        history.push(`/tracker/${user.username}/month`)
 
     }
 
@@ -46,6 +53,7 @@ const NewMonthContainer = (props) => {
 
 return (
     <> 
+    {/* {allProgress.length === 0 ? <h1 style={{textAlign: "center"}}>hi</h1> : <h2 style={{textAlign: "center"}} >bye</h2>} */}
     {stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
 
     </>

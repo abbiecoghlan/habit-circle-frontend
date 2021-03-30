@@ -10,14 +10,16 @@ import { Segment, Dimmer, Loader } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import HabitForm from './HabitForm';
 import NewMonthContainer from './NewMonthContainer';
+import LoadWheel from './LoadWheel';
 
 
 
 
  const Circle = () => {
     const { activeMonthProgress, loaded, setActiveMonth } = useContext(ProgressContext)
-    const { habits, user } = useContext(UserContext)
+    const { habits, user, signUpSuccess } = useContext(UserContext)
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
+    const [month] = useState(new Date().getMonth() + 1)
 
 
     useEffect(() => {
@@ -60,15 +62,14 @@ import NewMonthContainer from './NewMonthContainer';
     const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
     
        
-   
+
     return (
         <>
-        {user && loaded && activeMonthProgress.length < 1? <>         <h1 className="center" ><Icon name='angle left' onClick={()=> handleBackWardClick()}/>{monthName}       <Icon name='angle right' onClick={()=> handleForwardClick()}/></h1>  <div><NewMonthContainer/></div>
-        </>
+    {user && loaded && activeMonthProgress.length < 1 ? !signUpSuccess && currentMonth !== month ? <>  <div><Redirect to={`/tracker/${user.username}/create`} /></div>
+        </> : <LoadWheel></LoadWheel>
         :        
         <div>
         <div style={{ textAlign: "center"}} >
-        <h1 className="center" ><Icon name='angle left' onClick={()=> handleBackWardClick()}/>{monthName}       <Icon name='angle right' onClick={()=> handleForwardClick()}/></h1> 
         <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
             <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
                 <DaySlice pie={pie}/>
@@ -79,6 +80,25 @@ import NewMonthContainer from './NewMonthContainer';
         </div>}
         </>
     )
+    
+
+    // return (
+    //     <>
+    // {user && loaded && activeMonthProgress.length < 1 ? !signUpSuccess ? <>  <div><Redirect to={`/tracker/${user.username}/create`} /></div>
+    //     </> : <LoadWheel></LoadWheel>
+    //     :        
+    //     <div>
+    //     <div style={{ textAlign: "center"}} >
+    //     <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
+    //         <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
+    //             <DaySlice pie={pie}/>
+    //         </g>
+    //     </svg> 
+
+    //     </div>
+    //     </div>}
+    //     </>
+    // )
     
 }
 

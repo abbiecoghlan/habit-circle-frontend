@@ -9,12 +9,14 @@ import {Redirect} from "react-router-dom"
 import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
 import { useHistory } from "react-router-dom"
+import ToggleMonthPanel from './ToggleMonthPanel'
+
 
 
 const CircleContainer = () => {
 
-    const { loaded, activeMonthHabits, activeMonthProgress, fetchProgress, setActiveMonth } = useContext(ProgressContext)
-    const { user } = useContext(UserContext)
+    const { loaded, activeMonthHabits, activeMonthProgress, allProgress, fetchProgress, setActiveMonth } = useContext(ProgressContext)
+    const { user, signUpSuccess } = useContext(UserContext)
     const { currentMonth } = useContext(DateContext)
      
     const history = useHistory()
@@ -23,11 +25,14 @@ const CircleContainer = () => {
         if (user && currentMonth && !loaded) {
             fetchProgress(user.id, currentMonth)
         }
+
         if (user && loaded && activeMonthProgress.length < 1) {
+
             history.push(`/tracker/${user.username}/create`)
         }
+        
 
-    }, [loaded])
+    }, [loaded, activeMonthProgress, currentMonth])
 
 
 
@@ -38,7 +43,7 @@ const CircleContainer = () => {
     <div class="ui center aligned middle aligned grid" style={{height: "100vh"}}>
     {/* {loaded && activeMonthHabits.length === 0 ? <Redirect to='/tracker/createhabits' /> : null} */}
     
-    {loaded ? <Circle></Circle> : <LoadWheel></LoadWheel>}
+    {loaded ? <><ToggleMonthPanel></ToggleMonthPanel><Circle></Circle></> : <LoadWheel></LoadWheel>}
     </div>
     </>
   );

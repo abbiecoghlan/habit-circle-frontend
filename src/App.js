@@ -19,7 +19,7 @@ function App({ history }) {
 
   const { user, tokenLogin }= useContext(UserContext)
   const { loaded, fetchProgress, activeMonthProgress, allProgress, allHabits, activeMonthHabits, setActiveMonth }= useContext(ProgressContext)
-  const { currentMonth } = useContext(DateContext)
+  const { currentMonth, setCurrentMonth } = useContext(DateContext)
 
 
 
@@ -29,16 +29,15 @@ function App({ history }) {
       if (token) { 
       if (!user) {
             tokenLogin(token) 
-            console.log("token login")   
       } else {
-        console.log("you need to fetch the progress")
 
         if (!loaded) {
           fetchProgress(user.id, currentMonth)      
         }
       }
     }
-  }, [user, loaded])
+   
+  }, [user, loaded, currentMonth])
 
 
 
@@ -47,14 +46,7 @@ function App({ history }) {
       <Switch>
         <Route  exact path="/login" component={Login}/>
         <Route  exact path="/signup" component={SignUp} />
-        {/* <Route  exact path="/createhabits" component={HabitForm} /> */}
-       
-        {/* <Route path="/tracker" component={NavBar} /> */}
 
-        
-        {/* <Route  path="*" render={() => {
-          return ( user ? <Redirect to={`/tracker/${user.username}`} /> : <Redirect to='/login' />)
-          }} /> */}
         <Route  path="*" render={() => {
           return ( user ? <Route path="/tracker" component={NavBar} /> : <Redirect to='/login' />)
           }} />
