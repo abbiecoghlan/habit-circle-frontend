@@ -43,7 +43,6 @@ function reducer(state, action) {
                 activeMonthHabits: action.payload.names
             }
         case "CREATE_NEW_MONTH":
-            debugger
             return {
                 ...state,
                 activeMonthProgress: action.payload.newProgress,
@@ -296,11 +295,9 @@ function ProgressProvider({ children }) {
                 .then(r => r.json())
                 .then(progressArray => {
                     console.table(progressArray)
-                    const habitName =  progressArray.find(progress => progress.habit.name).habit.name
-                                     
-                   dispatch({type:"ADD_HABIT_TO_MONTH", payload: {newProgress: progressArray, newHabitName: habitName}})
+                    const habitName =  progressArray.find(progress => progress.habit.name).habit.name             
+                    dispatch({type:"ADD_HABIT_TO_MONTH", payload: {newProgress: progressArray, newHabitName: habitName}})
                         
-                    // fetchProgress(id, month)
                 })
             }
 
@@ -321,7 +318,6 @@ function ProgressProvider({ children }) {
     </ProgressContext.Provider>
     )
 }
-
 
 
 

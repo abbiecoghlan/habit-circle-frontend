@@ -10,10 +10,11 @@ import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
 import { useHistory } from "react-router-dom"
 import ToggleMonthPanel from './ToggleMonthPanel'
+import Logo from "./Logo"
 
 
 
-const CircleContainer = () => {
+const HomeContainer = () => {
 
     const { loaded, activeMonthHabits, activeMonthProgress, allProgress, fetchProgress, setActiveMonth } = useContext(ProgressContext)
     const { user, signUpSuccess, setSignUpSuccess } = useContext(UserContext)
@@ -25,15 +26,9 @@ const CircleContainer = () => {
         if (user && currentMonth && !loaded) {
             fetchProgress(user.id, currentMonth)
         }
-
-        if (user && loaded && activeMonthProgress.length < 1 && !signUpSuccess ) {
+        if (loaded) {
           
-
             history.push(`/tracker/${user.username}/create`)
-        }
-
-        if (activeMonthProgress.length > 1 && signUpSuccess) {
-            setSignUpSuccess(false)
         }
         
 
@@ -45,13 +40,22 @@ const CircleContainer = () => {
   return (
       <>
 
-    <div class="ui center aligned middle aligned grid" style={{height: "100vh"}}>
+    <div style={{ display: "block", position: "relative"}}  class="ui center aligned middle aligned grid" >
     {/* {loaded && activeMonthHabits.length === 0 ? <Redirect to='/tracker/createhabits' /> : null} */}
+    <h1 style={{position: "relative", top:"0", left:"0" }} > HABIT CIRCLE </h1>
+    <h2> Welcome, {`${user.name}`}!</h2>
+
+    {loaded ? <> <div style={{ display: "block", position: "relative"}}  class="ui center aligned middle aligned grid" >
+            <Logo></Logo>
+        
+        </div></> : 
     
-    {loaded ? <><ToggleMonthPanel></ToggleMonthPanel><Circle></Circle></> : <><LoadWheel></LoadWheel><ToggleMonthPanel></ToggleMonthPanel><Circle></Circle></> }
+    <><Logo></Logo>  
+             
+           <Loader style={{height: "100vh"}}> inline="center" active size='massive'>Loading your habit data</Loader></>}
     </div>
     </>
   );
 }
 
-export default CircleContainer;
+export default HomeContainer;

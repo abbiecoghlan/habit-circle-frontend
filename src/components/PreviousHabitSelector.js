@@ -57,9 +57,7 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
             return  { [name]: false }          
                 })                
         setChecks(...checkArray)
-            }
-            // debugger
-                    
+            }                    
         }, [loaded])
 
 

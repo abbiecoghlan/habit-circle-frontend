@@ -10,9 +10,9 @@ import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
 
 
-const HabitCard = ({habit}) => {
+const HabitCard = ({habit, cardColor}) => {
 
-    // const { loaded, activeMonthHabits, fetchProgress, setActiveMonth } = useContext(ProgressContext)
+
     const { user } = useContext(UserContext)
     const { editHabit, deleteHabit } = useContext(ProgressContext)
     const { currentMonth } = useContext(DateContext)
@@ -32,7 +32,6 @@ const HabitCard = ({habit}) => {
     const handleDelete = (e) => {
         const confirm = window.confirm("Habits can only be deleted for the current month. Previous data for this habit will not be impacted. Are you sure you want to delete this habit?")
       if (confirm) {
-          debugger
         deleteHabit(habit.id, habit.name, user.id, currentMonth)
       }
     }
@@ -59,15 +58,12 @@ const HabitCard = ({habit}) => {
       <>
  
 
-<Card >
-
-        
-        
-        
+<Card inverted style={{ color: cardColor}}  >
+    
 
 
            <Card.Content extra>
-            <Card.Header style={{ color: "#264653", textAlign: "center", verticalAlign: 'top' }}> 
+            <Card.Header  style={{textAlign: "center", verticalAlign: 'top' }}> 
             
             {editMode ? <Form onSubmit={(e) => handleEdit(e)}> <Form.Input fluid style={{ color: "#264653", textAlign: "center", verticalAlign: 'top', padding: '5px' }}
                 action='Save'
@@ -77,7 +73,7 @@ const HabitCard = ({habit}) => {
                 value={form.name}
                 onChange={(e) => handleChange(e)}
                 maxLength="15"
-                /></Form> : <h3>{habit.name.toUpperCase()}</h3>}
+                /></Form> : <h3 style={{color: cardColor}} >{habit.name.toUpperCase()}</h3>}
             {/* {editMode ? {`edit ${habit.name}`} : {`${habit.name.toUpperCase()}`} } */}
 
                     

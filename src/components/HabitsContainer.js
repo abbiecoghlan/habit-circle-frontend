@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Circle from './Circle';
 import NavBar from './NavBar'
 import { useContext } from 'react'
@@ -10,12 +10,16 @@ import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
 import NewHabit from './NewHabit'
 import NewMonthHabitsForm from './NewMonthHabitsForm';
+import LoadWheel from './LoadWheel';
 
 const HabitsContainer = () => {
 
     const { loaded, activeMonthHabits, activeMonthProgress, fetchProgress, setActiveMonth } = useContext(ProgressContext)
     const {currentMonth, setCurrentMonth} = useContext(DateContext)
     const { user } = useContext(UserContext)
+
+
+    const colors = useState(["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
 
     const habits = activeMonthHabits.map((habitName) =>{
         const matching = activeMonthProgress.find((prog) => {
@@ -52,13 +56,14 @@ const HabitsContainer = () => {
 
     // }, [loaded])
 
-    const habitCards = habits.map((habit) => {
-
+    const habitCards = habits.reverse().map((habit, index) => {
+      
         return (
           <HabitCard
-            key = {habit.id}
-            habit = {habit}
-
+            key={habit.id}
+            habit={habit}
+            cardColor={colors[0][index]}
+ 
           /> 
         )
       })
@@ -66,25 +71,27 @@ const HabitsContainer = () => {
 
 
   return (
-      <>
+      loaded ?
 
-
-    <div class="ui center aligned middle aligned grid" >
-        <h1 style={{marginLeft: '150px', color: "#264653"}}>{`${user.name}'s habits`}</h1>
-    <Grid divided='vertically' textAlign='center'  >
-    <Grid.Row columns={1}>
-        <Grid.Column style={{ marginLeft: '150px', height: '100vh', paddingTop: '100px' }} >
+        <>
+    <div id="check1" class="ui center aligned middle aligned grid" >
+        {/* <h1 style={{marginLeft: '150px', color: "#264653"}}>{`${user.name}'s habits`}</h1> */}
+    <Grid id="check2"  divided='vertically' textAlign='center'  >
+    <Grid.Row id="check3" columns={1}>
+        <Grid.Column id="check4" style={{ marginLeft: '150px', height: '100vh', paddingTop: '100px' }} >
 
 
      <h2 style={{
             color:"#264653"
           }} >Update or delete habits</h2>
+
      <Card.Group itemsPerRow={3} >
 
      {habitCards}
 
         </Card.Group>
-        <Grid.Column style={{ textAlign: 'center', width: '50%', marginLeft: '25%', padding: "10px" }} > 
+        <Grid.Column id="check1" style={{ textAlign: 'center', width: '50%', marginLeft: '25%', padding: "10px" }} > 
+        
         <NewHabit ></NewHabit  >
     </Grid.Column>
 
@@ -96,41 +103,11 @@ const HabitsContainer = () => {
 
     
     </div>
-    </>
+    </> 
+    : <LoadWheel></LoadWheel>
   );
 }
 
 export default HabitsContainer;
 
 
-
-
-//with two columns
-
-// <>
-
-
-// <div class="ui center aligned middle aligned grid" >
-//     <h1>{`${user.name}'s habits`}</h1>
-// <Grid divided='vertically' textAlign='center' style={{ marginLeft: '150px', height: '100vh', paddingTop: '100px' }} >
-//   <Grid.Row columns={2}>
-//     <Grid.Column >
-
-// {/* {loaded && activeMonthHabits.length === 0 ? <Redirect to='/tracker/createhabits' /> : null} */}
-//  <h2 style={{
-//         color:"#264653"
-//       }} >Update or delete habits</h2>
-//  <Card.Group itemsPerRow={1} >
-
-//  {habitCards}
-
-//     </Card.Group>
-// </Grid.Column>
-// <Grid.Column>
-// <NewHabit></NewHabit>
-// </Grid.Column>
-// </Grid.Row>
-// </Grid>
-
-// </div>
-// </>
