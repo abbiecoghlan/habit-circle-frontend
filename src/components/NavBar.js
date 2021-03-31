@@ -12,18 +12,22 @@ import HabitForm from './HabitForm'
 import HabitsContainer from './HabitsContainer'
 import AnalysisContainer from './AnalysisContainer'
 import { useHistory } from "react-router-dom"
+import HomeContainer from './HomeContainer'
 
 
 
 const NavBar = (props) => {
 
-    const [darkMode, setDarkMode] = useState(false)
+    // const [darkMode, setDarkMode] = useState(false)
 
 
     const { resetProgress, setActiveMonth } = useContext(ProgressContext)
     const { logout, user, loaded} = useContext(UserContext)
     const { currentMonth, setCurrentMonth } = useContext(DateContext)
     
+    
+
+
     // useEffect(() => {
     //     if (loaded) {
     //         setActiveMonth(currentMonth)
@@ -75,12 +79,20 @@ const NavBar = (props) => {
             >   
             
           <Menu.Item>
-            HABITS
+            HABIT
+            CIRCLE
             <Menu.Menu>
-              <Menu.Item as={NavLink} exact to={`/tracker/${user.username}/month`} size='massive' onClick={handleClick}>
+              <Menu.Item as={NavLink} exact to={`/tracker/${user.username}/home`} size='massive' onClick={handleClick}>
               <Icon name='home' />             
                 Home     
               </Menu.Item>
+
+              <Menu.Item as={NavLink} exact to={`/tracker/${user.username}/month`} size='massive' onClick={handleClick}>
+              <Icon name='bullseye' />             
+                Tracker 
+                Home     
+              </Menu.Item>
+              
 
               <Menu.Item as={NavLink} to={`/tracker/${user.username}/habits`} onClick={handleClick}>
               <Icon name='edit' />
@@ -106,6 +118,7 @@ const NavBar = (props) => {
 
             <Switch>
                 <Route  exact path="/tracker/createhabits" component={HabitForm} />
+                <Route  exact path={`/tracker/${user.username}/home`} component={HomeContainer} />
                 <Route  exact path={`/tracker/${user.username}/month`} component={CircleContainer} />
                 <Route  exact path={`/tracker/${user.username}/create`} component={NewMonthContainer} />
                 <Route  exact path={`/tracker/${user.username}/habits`} component={HabitsContainer} />

@@ -9,7 +9,7 @@ import NavBar from './NavBar';
 
 
 const Login = ({history}) => {
-
+  
     const token = localStorage.getItem("token")
     const { user, login } = useContext(UserContext)
     const [form, setForm] = useState({username:"", password:""})
@@ -24,7 +24,7 @@ const Login = ({history}) => {
 
     useEffect(() => {
         if (user) {
-            history.push(`/tracker/${user.username}/month`)            
+            history.push(`/tracker/${user.username}/home`)            
         }
    }, [user])
 
@@ -48,7 +48,7 @@ const Login = ({history}) => {
    // use user.error from useContext usercontext to render error message if login fails
 
    return (<>
-        {token && user ? <Redirect to={`/tracker/${user.username}/month`} /> : token ? <NavBar></NavBar> :       
+        {token && user ? <Redirect to={`/tracker/${user.username}/home`} /> : token ? <NavBar></NavBar> :       
        <Grid  textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
        <Grid.Column style={{ maxWidth: 450 }}>
          <Header as='h2'  style={{

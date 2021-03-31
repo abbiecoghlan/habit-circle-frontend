@@ -6,15 +6,17 @@ import { ProgressContext } from '../context/progress'
 import { DateContext } from '../context/date'
 import NewMonthHabitsForm from './NewMonthHabitsForm.js'
 import PreviousHabitSelector from './PreviousHabitSelector'
+import LoadWheel from './LoadWheel';
 
 
 
 const NewMonthContainer = (props) => {
 
     const [stepTwo, setStepTwo] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
 
     const {user} = useContext(UserContext)
-    const { createHabits, loaded, activeMonthHabits, allHabits, allProgress } = useContext(ProgressContext)
+    const { createHabits, loaded, activeMonthHabits, activeMonthProgress, allProgress } = useContext(ProgressContext)
     const { currentMonth, currentYear } = useContext(DateContext)
     const history = useHistory()
 
@@ -23,12 +25,13 @@ const NewMonthContainer = (props) => {
     const [checks, setChecks] = useState({})
     const [totalChecks, setTotalChecks] = useState({total: 0})
 
-        // useEffect(() => {
-    //     if (loaded){
-    //         history.push(`/tracker/${user.username}`)
-    //     }
+        useEffect(() => {
+           
+        if (loaded && activeMonthProgress.length > 0){
+            history.push(`/tracker/${user.username}/month`)
+        }
     
-    // }, [loaded])
+    }, [loaded, activeMonthProgress])
 
 
 
@@ -44,6 +47,7 @@ const NewMonthContainer = (props) => {
         })
         console.log("sorted habits are", sortedHabits)
         createHabits(sortedHabits, user.id, currentMonth)
+        // setSubmitted(true)
         history.push(`/tracker/${user.username}/month`)
 
     }
@@ -54,7 +58,7 @@ const NewMonthContainer = (props) => {
 return (
     <> 
     {/* {allProgress.length === 0 ? <h1 style={{textAlign: "center"}}>hi</h1> : <h2 style={{textAlign: "center"}} >bye</h2>} */}
-    {stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
+    {submitted ? <LoadWheel></LoadWheel> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setSubmitted={setSubmitted} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
 
     </>
     )

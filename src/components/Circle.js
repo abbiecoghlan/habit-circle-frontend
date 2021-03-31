@@ -32,13 +32,7 @@ import LoadWheel from './LoadWheel';
       
         }, [currentMonth])
 
-    const handleForwardClick = () => {
-        incrementMonth()   
-        }
-
-    const handleBackWardClick = () => {
-        decrementMonth()      
-        }
+   
 
         
     useEffect(() => {
@@ -58,8 +52,9 @@ import LoadWheel from './LoadWheel';
 
     let pie = d3.pie()(daysArray)
 
+
     
-    const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
+    // const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
     
        
 
@@ -70,16 +65,22 @@ import LoadWheel from './LoadWheel';
         :        
         <div>
         <div style={{ textAlign: "center"}} >
-        <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
+        <svg id="circle" height={height} width={width} style={{ display: "block", margin: "auto" }}>
+       
             <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
+                
                 <DaySlice pie={pie}/>
+
             </g>
+
         </svg> 
 
         </div>
         </div>}
         </>
     )
+
+
     
 
     // return (
@@ -92,6 +93,7 @@ import LoadWheel from './LoadWheel';
     //     <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
     //         <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
     //             <DaySlice pie={pie}/>
+    
     //         </g>
     //     </svg> 
 

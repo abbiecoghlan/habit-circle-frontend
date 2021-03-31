@@ -21,7 +21,9 @@ import { Redirect } from 'react-router-dom';
             console.log("circle use effect")
             }
         if (loaded) {
+            
             setActiveMonth(currentMonth)
+            
             }  
 
       
@@ -54,30 +56,14 @@ import { Redirect } from 'react-router-dom';
 
    
     return (
-
-     
-
-    
-
-        <div style={{ textAlign: "center", display: "inline", width: '100%'}} >
-         {/* <h2>month: {month}</h2>
-        <h2>currentMonth: {currentMonth}</h2>
-        <h2>month name: {monthName}</h2>
-        <h2>created: {user.created}</h2> */}
-
-        {currentMonth === user.created - 2  ? null : <Icon size="big" style={{ display: "inline"}} name='angle left' onClick={()=> handleBackWardClick()}/>}
+        <div style={{textAlign: "center", display: "inline", width: '100%', marginTop:"15px"}} >
+        {currentMonth === user.created - 2  ? null : <Icon size="big" style={{ color:"#264653", display: "inline"}} name='angle left' onClick={()=> handleBackWardClick()}/>}
          
-         <h1 style={{ textAlign: "center", display: "inline", verticalAlign: 'middle'}} className="center" >   {monthName}   </h1>      
-         {currentMonth === month + 1 ? null : <Icon size="big" style={{ display: "inline", verticalAlign: 'middle'}}  name='angle right' onClick={()=> handleForwardClick()}/>}
-          
-
-
-
-
-
+         <h1 style={{color:"#264653", textAlign: "center", display: "inline", verticalAlign: 'middle'}} className="center" >   {monthName}   </h1>      
+         {currentMonth === month + 1 ? null : <Icon size="big" style={{ color:"#264653", display: "inline", verticalAlign: 'middle'}}  name='angle right' onClick={()=> handleForwardClick()}/>}
+        
         </div>
-    )
-    
+    )    
 }
 
 export default ToggleMonthPanel

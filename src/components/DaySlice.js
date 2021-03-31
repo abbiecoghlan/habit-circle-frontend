@@ -49,7 +49,7 @@ const DaySlice = ({ pie }) => {
 
     const secretArc = d3
     .arc()
-    .innerRadius(25)
+    .innerRadius(50)
     .outerRadius(50)
 
     const arc = d3
@@ -128,6 +128,9 @@ const DaySlice = ({ pie }) => {
             e.target.dataset.status = "completed" 
             updateProgress(id, true, e)
             }
+
+            
+            
     }
 
     
@@ -186,7 +189,7 @@ const DaySlice = ({ pie }) => {
  
         return <>
             <path className="secretPath"  data-name={"secret-path"} id={`day${index.toString()}habit0`} key={`day${index.toString()}habit0`}  d={secretArc(slice)} stroke={'white'} fill={"#FFFFFF"} />
-            <path className="habbitOne" data-day={index} data-status={habitNames[0] ? `${getStatus(index, habitNames[0])}` : null} data-name={habitNames[0]} id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={habitNames[0] ? arc(slice) : null} stroke={'black'} fill={"#FFFFFF"} data-color={"#e76f51"} onClick={(e)=> habitRingClick(e)}/>
+            <path className="habbitOne" data-day={index} data-status={habitNames[0] ? `${getStatus(index, habitNames[0])}` : null} data-name={habitNames[0]} id={`day${index.toString()}habit1`} key={`day${index.toString()}habit1`}  d={habitNames[0] ? arc(slice) : null} stroke={'black'} fill={"#FFFFFF"}  data-color={"#e76f51"} onClick={(e)=> habitRingClick(e)}/>
             <path className="habbitTwo" data-day={index} data-status={habitNames[1] ? `${getStatus(index, habitNames[1])}` : null} data-name={habitNames[1]} id={`day${index.toString()}habit2`} key={`day${index.toString()}habit2`} d={habitNames[1] ? arc2(slice) : null} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingClick(e)}/>
             <path className="habbitThree" data-day={index} data-status={habitNames[2] ? `${getStatus(index, habitNames[2])}` : null} data-name={habitNames[2]} id={`day${index.toString()}habit3`} key={`day${index.toString()}habit3`}  d={habitNames[2] ? arc3(slice) : null} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingClick(e)} />     
              <path className="habbitFour" data-day={index} data-status={habitNames[3] ? `${getStatus(index, habitNames[3])}` : null} data-name={habitNames[3]} id={`day${index.toString()}habit4`} key={`day${index.toString()}habit4`}   d={habitNames[3] ? arc4(slice) : null} stroke={'black'} fill={'#FFFFFF'} data-color={"#e76f51"} onClick={(e)=> habitRingClick(e)}  />       

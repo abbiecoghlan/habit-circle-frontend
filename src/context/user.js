@@ -28,7 +28,7 @@ function reducer(state, action) {
         case "SIGN_UP_SUCCESS":
             return {
                 ...state,
-                signUpSuccess: true
+                signUpSuccess: action.payload
             }
         // case "LOGIN_ERROR":
         //     return {
@@ -128,14 +128,18 @@ function UserProvider({ children }) {
                     const user = data.user
                     dispatch({type:"LOGIN_USER", user })
                     localStorage.setItem("token", data.jwt)
-                    dispatch({type:"SIGN_UP_SUCCESS"})
+                    dispatch({type:"SIGN_UP_SUCCESS", payload: true})
                     }
                      })
         }
 
+        const setSignUpSuccess = (bool) => {
+            dispatch({ type: "SIGN_UP_SUCCESS", payload: bool})
+        }
 
 
-    const value = { user, signUp, signUpSuccess, login, tokenLogin, logout} 
+
+    const value = { user, signUp, signUpSuccess, setSignUpSuccess, login, tokenLogin, logout} 
 
     return (
     <UserContext.Provider value={value}>

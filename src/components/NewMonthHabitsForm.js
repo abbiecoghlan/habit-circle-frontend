@@ -7,7 +7,7 @@ import { Button, Form, Segment, Grid, Header, Checkbox, Message, GridColumn } fr
 
 
 
-const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, handleSubmit, setSelectedHabits}) => {
+const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, handleSubmit, setSubmitted, setSelectedHabits}) => {
 
 
 
@@ -53,7 +53,8 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
 
     const handleCreateHabits = (e) => {
         e.preventDefault()
-        const habits = [form.newHabit1, form.newHabit2, form.newHabit3, form.newHabit4, form.newHabit5, form.newHabit6, form.newHabit7].filter((habit) => !!habit)        
+        const habits = [form.newHabit1, form.newHabit2, form.newHabit3, form.newHabit4, form.newHabit5, form.newHabit6, form.newHabit7].filter((habit) => !!habit)
+        setSubmitted(true)        
         handleSubmit(habits)
 
         }

@@ -7,12 +7,14 @@ import { DateContext } from '../context/date'
 
 
 
-const NewHabit = (props) => {
+const HabitAllTimeStatCards = (props) => {
 
     const {user} = useContext(UserContext)
     const {createHabits, activeMonthHabits, addHabitToMonth} = useContext(ProgressContext)
     const { currentMonth, currentYear } = useContext(DateContext)
     const history = useHistory()
+
+
 
 
     const [form, setForm] = useState({
@@ -59,46 +61,22 @@ const NewHabit = (props) => {
         <Header as='h2'  style={{
             color:"#264653"
           }} textAlign='center'>
-              Create new habits
+              All Time Habit Completion Rates
            </Header>
 
-         <Form style={{
-          color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center"
-        }}  onSubmit={(e) => handleSubmit(e)} size='large'>
+
            <Segment inverted style={{
           color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center"
         }}stacked>
-                {activeMonthHabits.length <7 ?  
-               <> <Form.Input fluid 
-                icon='bullseye' 
-                iconPosition='left' 
-                placeholder='New habit'                 
-                name="habit1"
-                value={form.habit1}
-                onChange={(e) => handleChange(e)}
-                maxLength="13"
-                />              <Button style={{ background: "#2a9d8f", color: "#FFFFFF", width: '50%', marginLeft: '25%', textAlign: "center" }}  fluid size='large'>
-                Add Habit
-              </Button></>: <h4>Maximum monthly habits reached! Delete a current habit if you'd like to create a new habit to track.</h4>}
+                       <> 
 
-                {/* {activeMonthHabits.length <6 ?  
-                <Form.Input fluid 
-                icon='bullseye' 
-                iconPosition='left' 
-                placeholder='New habit 2'                 
-                name="habit2"
-                value={form.habit1}
-                onChange={(e) => handleChange(e)}
-                maxLength="13"
-                /> : null} */}
+                       
+                </>
+            <h4>You've been tracking your habits since {new Date(currentYear, user.created - 3, 1).toLocaleString('default', { month: 'long' })}, 2021.</h4>
 
-
-
-
-
-
+              
            </Segment>
-         </Form>
+
 
       </>
     
@@ -112,4 +90,4 @@ const NewHabit = (props) => {
 
 
 
-export default NewHabit
+export default HabitAllTimeStatCards
