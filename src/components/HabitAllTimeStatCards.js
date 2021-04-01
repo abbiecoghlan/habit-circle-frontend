@@ -10,46 +10,20 @@ import { DateContext } from '../context/date'
 const HabitAllTimeStatCards = (props) => {
 
     const {user} = useContext(UserContext)
-    const {createHabits, activeMonthHabits, addHabitToMonth} = useContext(ProgressContext)
+    const { activeMonthHabits, addHabitToMonth} = useContext(ProgressContext)
     const { currentMonth, currentYear } = useContext(DateContext)
     const history = useHistory()
 
 
 
 
-    const [form, setForm] = useState({
-        habit1: "",
-    })
 
     
 
-    const handleChange = (e) => {
-        console.log(form)
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
+
 
 
  
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        const habit = [form.habit1]
-
-        addHabitToMonth(habit, user.id, currentMonth)
-
-        // {form.password_confirmation !== form.password_confirmation ? <p style={{ textAlign: "left" }} >Passwords do not match</p> : <p style={{ textAlign: "left" }} ></p>}
-        // createHabits({username: form.username, name: form.name, password: form.password})
-        setForm({
-            habit1: "",
-        })
-
-        // history.push(`/tracker/${user.username}`)
-        
-    } 
 
 
    

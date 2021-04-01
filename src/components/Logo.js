@@ -15,7 +15,7 @@ import LoadWheel from './LoadWheel';
 
 
  const Logo = () => {
-    const { activeMonthProgress, loaded, setActiveMonth } = useContext(ProgressContext)
+    const { submitted, activeMonthProgress, loaded, setActiveMonth } = useContext(ProgressContext)
     // const { habits, user, signUpSuccess } = useContext(UserContext)
     // const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
     // const [month] = useState(new Date().getMonth() + 1)
@@ -145,13 +145,13 @@ const paths = pie.map((slice, index) => {
         <>
 
 <div id="1" stretched class="ui center aligned middle aligned grid" >
-{!loaded ? <Header as='h4'  style={{
+{!loaded || !submitted ? <Header as='h4'  style={{
             color:"#264653", position: "absolute", marginTop: "55px", display: "inline", witdh:"100vw", padding:"10px"
           }} textAlign='center'>
              Loading habit data...
            </Header> : <></>}
         <div style={{ textAlign: "center", position:"relative"}} >
-      {!loaded?  <Loader  style={{float: "right"}}active size='massive'></Loader> : <></>}
+      {!loaded || !submitted? <Loader  style={{float: "right"}}active size='massive'></Loader> : <></>}
  
 
         <svg id="circle" height={height} width={width} style={{ display: "block", margin: "auto" }}>

@@ -23,12 +23,14 @@ const HabitCard = ({habit, cardColor}) => {
 
 
     const handleEdit = (e) => {
-        console.log(habit.id)
-        console.log(habit.name)
+        // console.log(habit.id)
+        // console.log(habit.name)
         editHabit(habit.id, form.name, habit.name)
         setEditMode(false)
     }
 
+
+    //ADD POP UP
     const handleDelete = (e) => {
         const confirm = window.confirm("Habits can only be deleted for the current month. Previous data for this habit will not be impacted. Are you sure you want to delete this habit?")
       if (confirm) {

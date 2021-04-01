@@ -84,7 +84,7 @@ const HabitForm = (props) => {
             habit6: "",
             habit7: ""
         })
-        history.push(`/tracker/${user.username}/month`)
+        history.push(`/tracker/${user.username}/home`)
         
     } 
     const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })

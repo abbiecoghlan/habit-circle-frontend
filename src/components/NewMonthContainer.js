@@ -14,10 +14,11 @@ import Logo from './Logo'
 const NewMonthContainer = (props) => {
 
     const [stepTwo, setStepTwo] = useState(false)
-    const [submitted, setSubmitted] = useState(false)
+    const [stepThree, setStepThree] = useState(false)
+
 
     const {user} = useContext(UserContext)
-    const { createHabits, loaded, activeMonthHabits, activeMonthProgress, allProgress } = useContext(ProgressContext)
+    const { submitted, createHabits, loaded, activeMonthHabits, activeMonthProgress, allProgress } = useContext(ProgressContext)
     const { currentMonth, currentYear } = useContext(DateContext)
     const history = useHistory()
 
@@ -28,15 +29,27 @@ const NewMonthContainer = (props) => {
 
         useEffect(() => {
            
+
         if (loaded && activeMonthProgress.length > 0){
             history.push(`/tracker/${user.username}/month`)
         }
+
+
+        console.log("from new month container")   
+        console.log("the progress length is: ", allProgress.length)
+        console.log("the active progress length is: ", activeMonthProgress.length)
+        console.log("the habit length is: ", activeMonthHabits.length)
+        console.log("the current month is: ", currentMonth)
+
     
-    }, [loaded, activeMonthProgress])
+    
+    }, [loaded, activeMonthProgress, submitted])
 
 
 
     const handleSubmit = (array = []) => {
+        
+        setStepThree(true)
         console.log("you want to submit")
         console.log(selectedHabits)
 
@@ -46,10 +59,11 @@ const NewMonthContainer = (props) => {
         const sortedHabits = habits.sort(function(a,b ){
             return a.length - b.length
         })
+        debugger
         console.log("sorted habits are", sortedHabits)
         createHabits(sortedHabits, user.id, currentMonth)
+        // history.push(`/tracker/${user.username}/month`)
         // setSubmitted(true)
-        history.push(`/tracker/${user.username}/month`)
 
     }
 
@@ -59,7 +73,7 @@ const NewMonthContainer = (props) => {
 return (
     <> 
     {/* {allProgress.length === 0 ? <h1 style={{textAlign: "center"}}>hi</h1> : <h2 style={{textAlign: "center"}} >bye</h2>} */}
-    {submitted ? <Logo></Logo> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setSubmitted={setSubmitted} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
+    {stepThree ? <Logo></Logo> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setStepThree={setStepThree} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} setStepThree={setStepThree} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
 
     </>
     )

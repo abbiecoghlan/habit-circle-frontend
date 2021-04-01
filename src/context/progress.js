@@ -12,6 +12,7 @@ function reducer(state, action) {
                 loaded: true
             }
         case "UPDATE_PROGRESS":
+            debugger
             return { 
                 ...state,
                 activeMonthProgress: state.activeMonthProgress.map(progress => {
@@ -32,7 +33,9 @@ function reducer(state, action) {
                 allProgress: [],
                 activeMonthProgress: [],
                 activeMonthHabits: [],
-                loaded: false
+                loaded: false,
+                submitted: false
+
             }
         case "SET_ACTIVE_MONTH":
             return {
@@ -43,15 +46,17 @@ function reducer(state, action) {
                 activeMonthHabits: action.payload.names
             }
         case "CREATE_NEW_MONTH":
+            debugger
             return {
                 ...state,
                 activeMonthProgress: action.payload.newProgress,
                 activeMonthHabits: action.payload.activeHabitNames,
                 allProgress: [...state.allProgress, ...action.payload.newProgress],
-                loaded: true
-    
+                loaded: true,   
+                submitted: true
             }
         case "UPDATE_HABIT":
+            debugger
             return { 
                 ...state,
                 activeMonthProgress: state.activeMonthProgress.map(progress => {
@@ -80,14 +85,26 @@ function reducer(state, action) {
                 return { 
                     ...state,
                     activeMonthProgress: [...state.activeMonthProgress, ...action.payload.newProgress], 
-                    allProgress: [...state.activeMonthProgress, ...action.payload.newProgress],   
+                    allProgress: [...state.allProgress, ...action.payload.newProgress],   
                     activeMonthHabits: [...state.activeMonthHabits, action.payload.newHabitName]
                 }
             case "DELETE_HABIT":
             return { 
                 ...state,
-                activeMonthProgress: state.activeMonthProgress.filter(progress => progress.habit.id !== action.id),
-                activeMonthHabits: state.activeMonthHabits.filter((habitName) => habitName !== action.previousName)
+                allProgress: state.allProgress.filter((progress) => { 
+                    if (progress.day.month == action.month){
+                        return progress.habit.id !== action.id
+                    } else {
+                        return progress
+                    }
+                }),
+                activeMonthHabits: state.activeMonthHabits.filter((habitName) => habitName !== action.name),
+                activeMonthProgress: state.activeMonthProgress.filter((habitName) => habitName !== action.previousName)
+            }
+        case "TOGGLE_SUBMITTED":
+            return { 
+                ...state,
+                submitted: true
             }
 
         default:
@@ -106,10 +123,11 @@ function ProgressProvider({ children }) {
         activeMonthProgress: [],
         allProgress: [],
         activeMonthHabits: [],
-        loaded: false
+        loaded: false,
+        submitted: false
     })
 
-    const { loaded, activeMonthProgress, allProgress, activeMonthHabits } = state
+    const { loaded, activeMonthProgress, allProgress, activeMonthHabits, submitted } = state
 
     const history = useHistory()
 
@@ -138,7 +156,13 @@ function ProgressProvider({ children }) {
                })
                
             const nameArr = [...new Set(activeHabitNames)]
-            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {allProgress: progressArray, activeProg: activeProg, activeHabitNames: nameArr}})
+
+            const sortedHabits = nameArr.sort(function(a,b ){
+                return a.length - b.length
+            })
+
+
+            dispatch({type:"FETCH_INITIAL_PROGRESS", payload: {allProgress: progressArray, activeProg: activeProg, activeHabitNames: sortedHabits}})
                 })        
             }
 
@@ -182,13 +206,20 @@ function ProgressProvider({ children }) {
             return progress.habit.name
            })          
         const nameArr = [...new Set(activeHabitNames)]
-        dispatch({ type:"SET_ACTIVE_MONTH", payload: {month: month, names: nameArr }})
+
+        const sortedHabits = nameArr.sort(function(a,b ){
+            return a.length - b.length
+        })
+
+
+        dispatch({ type:"SET_ACTIVE_MONTH", payload: {month: month, names: sortedHabits }})
 
     }
     
     const resetProgress = () => {
         dispatch({ type:"LOGOUT" })
     }
+
 
 
     const createHabits = (array, id, month) => {
@@ -207,7 +238,7 @@ function ProgressProvider({ children }) {
           })
             .then(r => r.json())
             .then(progressArray => {
-                console.table(progressArray)
+                console.table(progressArray[0])
              
 
                 const activeHabitNames =  progressArray.map(progress => {
@@ -215,13 +246,16 @@ function ProgressProvider({ children }) {
                    })
                 
                    const nameArr = [...new Set(activeHabitNames)]
+                   const sortedHabits = nameArr.sort(function(a,b ){
+                    return a.length - b.length
+                    })
                 
                 const newHabits = progressArray.map(progress => {
                     return progress.habit
                    })
                    
                 
-                dispatch({type:"CREATE_NEW_MONTH", payload: {newProgress: progressArray, activeHabitNames: nameArr}})
+                dispatch({type:"CREATE_NEW_MONTH", payload: {newProgress: progressArray, activeHabitNames: sortedHabits}})
                    
 
             })
@@ -247,7 +281,7 @@ function ProgressProvider({ children }) {
             })
             .catch(() => {
                 alert("Error updating habit.")
-                history.push('/login')
+            
 
             })
     }
@@ -270,7 +304,7 @@ function ProgressProvider({ children }) {
                 {
                 console.log(habit)
                 
-                dispatch({type:"DELETE_HABIT", id: habit_id, previousName: name})
+                dispatch({type:"DELETE_HABIT", id: habit_id, month: currentMonth, name: name})
             })
             .catch(() => {
                 alert("Error updating habit.")
@@ -302,14 +336,16 @@ function ProgressProvider({ children }) {
             }
 
 
-
+            // const setSubmitted = () => {
+            //     dispatch({ type:"TOGGLE_SUBMITTED" })
+            // }
     
 
  
 
 
 
-    const value = { loaded, addHabitToMonth, deleteHabit, editHabit, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, activeMonthHabits, createHabits, setActiveMonth}
+    const value = { loaded, submitted, addHabitToMonth, deleteHabit, editHabit, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, activeMonthHabits, createHabits, setActiveMonth}
 
 
     return (
