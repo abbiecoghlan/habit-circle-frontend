@@ -15,10 +15,10 @@ const TextPaths = props => {
 
         return ( <>
             <text>
-                    <textPath  textLength="65" startOffset="02" href="#day0habit0">  {habitNames[0]} </textPath>
+                    <textPath  textLength="65" startOffset="2%" href="#day0habit0">  {habitNames[0]} </textPath>
                 </text>
                 <text>
-                    <textPath textLength="100" startOffset="03" href="#day0habit1"> {habitNames[1]} </textPath>
+                    <textPath textLength="100" startOffset="04" href="#day0habit1"> {habitNames[1]} </textPath>
                 </text>
                 <text>
                     <textPath textLength="120" startOffset="5%" side="right" x="40" href="#day0habit2"> {habitNames[2]} </textPath>
@@ -232,11 +232,3 @@ const TextPaths = props => {
 
 
 export default TextPaths
-
-
-
-{/* <text>
-                    <textPath startOffset="9%" href={`#day${}11number`}> 
-                    <tspan startOffset="" dy="-5" fill="#264653" >  {}
-                    </tspan>   
-                    </textPath> */}

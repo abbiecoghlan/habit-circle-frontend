@@ -16,13 +16,6 @@ const Login = ({history}) => {
 
 
     useEffect(() => {
-      if (!user) {
-        console.log("no user logged in")
-      }
-    }, [])
-  
-
-    useEffect(() => {
         if (user) {
             history.push(`/tracker/${user.username}/home`)            
         }
@@ -47,23 +40,26 @@ const Login = ({history}) => {
 
    // use user.error from useContext usercontext to render error message if login fails
 
-   return (<>
-        {token && user ? <Redirect to={`/tracker/${user.username}/home`} /> : token ? <NavBar></NavBar> :       
+  return (
+    token && user ?
+    <Redirect to={`/tracker/${user.username}/home`} /> : 
+    token ? 
+    <NavBar></NavBar> :       
        <Grid  textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-       <Grid.Column style={{ maxWidth: 450 }}>
-         <Header as='h2'  style={{
-          color:"#264653"
-        }} textAlign='center'>
-            Log-in to your account
-         </Header>
-         <Form onSubmit={(e) => handleSubmit(e)} size='large'>
-           <Segment inverted style={{
-          color: "#A8DADC", background: "#264653"
-        }}stacked>
-             <Form.Input fluid icon='user' iconPosition='left' placeholder='Username'                 
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as='h2'  style={{color:"#264653"}} textAlign='center'>
+            HABIT CIRCLE
+          </Header>
+
+          <Form onSubmit={(e) => handleSubmit(e)} size='large'>
+
+            <Segment inverted style={{color: "#A8DADC", background: "#264653"}} stacked >
+
+              <Form.Input fluid icon='user' iconPosition='left' placeholder='Username'                 
                name="username"
                value={form.username}
                onChange={(e) => handleChange(e)}/>
+
              <Form.Input
                fluid
                icon='lock'
@@ -72,20 +68,18 @@ const Login = ({history}) => {
                type='password'
                name="password"
                value={form.password}
-               onChange={(e) => handleChange(e)}
-             />
+               onChange={(e) => handleChange(e)}/>
+             
              <Button style={{ background: "#2a9d8f", color: "#FFFFFF" }}  fluid size='large'>
                Login
              </Button>
+           
            </Segment>
+
          </Form>
-         <Message>
-             
-           New to us? <a href='./signup'>Sign Up</a>
-         </Message>
+         <Message> New to us? <a href='./signup'>Sign Up</a></Message>
        </Grid.Column>
-     </Grid>}
-</>
+     </Grid>
 
 
    )
@@ -94,44 +88,3 @@ const Login = ({history}) => {
 
 
 export default Login
-
-
-
-// {token ? <LoadWheel></LoadWheel> : null}
-// {user ? <Redirect to={`/tracker/${user.username}`} /> :       
-//  <Grid  textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-//  <Grid.Column style={{ maxWidth: 450 }}>
-//    <Header as='h2'  style={{
-//     color:"#264653"
-//   }} textAlign='center'>
-//       Log-in to your account
-//    </Header>
-//    <Form onSubmit={(e) => handleSubmit(e)} size='large'>
-//      <Segment inverted style={{
-//     color: "#A8DADC", background: "#264653"
-//   }}stacked>
-//        <Form.Input fluid icon='user' iconPosition='left' placeholder='Username'                 
-//          name="username"
-//          value={form.username}
-//          onChange={(e) => handleChange(e)}/>
-//        <Form.Input
-//          fluid
-//          icon='lock'
-//          iconPosition='left'
-//          placeholder='Password'
-//          type='password'
-//          name="password"
-//          value={form.password}
-//          onChange={(e) => handleChange(e)}
-//        />
-//        <Button style={{ background: "#2a9d8f", color: "#FFFFFF" }}  fluid size='large'>
-//          Login
-//        </Button>
-//      </Segment>
-//    </Form>
-//    <Message>
-       
-//      New to us? <a href='./signup'>Sign Up</a>
-//    </Message>
-//  </Grid.Column>
-// </Grid>}

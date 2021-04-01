@@ -145,13 +145,17 @@ const paths = pie.map((slice, index) => {
         <>
 
 <div id="1" stretched class="ui center aligned middle aligned grid" >
-      
+{!loaded ? <Header as='h4'  style={{
+            color:"#264653", position: "absolute", marginTop: "55px", display: "inline", witdh:"100vw", padding:"10px"
+          }} textAlign='center'>
+             Loading habit data...
+           </Header> : <></>}
         <div style={{ textAlign: "center", position:"relative"}} >
       {!loaded?  <Loader  style={{float: "right"}}active size='massive'></Loader> : <></>}
  
 
         <svg id="circle" height={height} width={width} style={{ display: "block", margin: "auto" }}>
-                  <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
+                  <g transform={`translate(${width / 2},${height / 2}) `}>
             {paths}
             
                 <text>
@@ -162,12 +166,6 @@ const paths = pie.map((slice, index) => {
             </g>
 
         </svg> 
-
-        {!loaded ? <Header as='h2'  style={{
-            color:"#264653"
-          }} textAlign='center'>
-             LOADING HABIT DATA
-           </Header> : <></>}
 
         </div>
         </div>

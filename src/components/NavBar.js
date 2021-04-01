@@ -24,6 +24,7 @@ const NavBar = (props) => {
     const { resetProgress, setActiveMonth } = useContext(ProgressContext)
     const { logout, user, loaded} = useContext(UserContext)
     const { currentMonth, setCurrentMonth } = useContext(DateContext)
+
     
     
 
@@ -89,8 +90,7 @@ const NavBar = (props) => {
 
               <Menu.Item as={NavLink} exact to={`/tracker/${user.username}/month`} size='massive' onClick={handleClick}>
               <Icon name='bullseye' />             
-                Tracker 
-                Home     
+                Tracker      
               </Menu.Item>
               
 

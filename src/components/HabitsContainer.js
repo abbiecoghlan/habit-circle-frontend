@@ -3,14 +3,15 @@ import Circle from './Circle';
 import NavBar from './NavBar'
 import { useContext } from 'react'
 import { ProgressContext } from '../context/progress'
-import { Segment, Dimmer, Loader, Card, Grid, GridRow, GridColumn } from 'semantic-ui-react';
+import { Card, Grid, GridRow, GridColumn } from 'semantic-ui-react';
 import HabitCard from './HabitCard';
-import {Redirect} from "react-router-dom"
+
 import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
 import NewHabit from './NewHabit'
 import NewMonthHabitsForm from './NewMonthHabitsForm';
 import LoadWheel from './LoadWheel';
+import Logo from './Logo'
 
 const HabitsContainer = () => {
 
@@ -36,25 +37,14 @@ const HabitsContainer = () => {
         console.table(activeMonthHabits)
         console.table(habits)
         console.log(currentMonth)
+        if (!loaded){
+          debugger
+        }
         
     }, [currentMonth])
 
 
 
-
-    // const habits = progressArray.filter(progress => {
-    //     return   (progress.day.month == month)
-    //     })
-
-    // const { user } = useContext(UserContext)
-    // const { currentMonth } = useContext(DateContext)
-     
-    // useEffect(() => {
-    //     if (user && currentMonth && !loaded) {
-    //         fetchProgress(user.id, currentMonth)
-    //     }
-
-    // }, [loaded])
 
     const habitCards = habits.reverse().map((habit, index) => {
       
@@ -104,7 +94,7 @@ const HabitsContainer = () => {
     
     </div>
     </> 
-    : <LoadWheel></LoadWheel>
+    : <Logo></Logo>
   );
 }
 

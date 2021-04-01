@@ -223,9 +223,9 @@ function ProgressProvider({ children }) {
                 
                 dispatch({type:"CREATE_NEW_MONTH", payload: {newProgress: progressArray, activeHabitNames: nameArr}})
                    
-                // fetchProgress(id, month)
+
             })
-            // .then(setActiveMonth(month))
+
     }
 
     const editHabit = (habitId, name, previousName) => {

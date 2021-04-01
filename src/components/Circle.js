@@ -11,26 +11,25 @@ import { Redirect } from 'react-router-dom';
 import HabitForm from './HabitForm';
 import NewMonthContainer from './NewMonthContainer';
 import LoadWheel from './LoadWheel';
+import Logo from './Logo'
 
 
 
 
  const Circle = () => {
-    const { activeMonthProgress, loaded, setActiveMonth } = useContext(ProgressContext)
+    const { activeMonthProgress, allProgress, loaded, setActiveMonth } = useContext(ProgressContext)
     const { habits, user, signUpSuccess } = useContext(UserContext)
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
     const [month] = useState(new Date().getMonth() + 1)
 
 
     useEffect(() => {
-        if (user){
-            console.log("circle use effect")
-            }
+      
         if (loaded) {
             setActiveMonth(currentMonth)
             }   
       
-        }, [currentMonth])
+        }, [allProgress, currentMonth])
 
    
 
@@ -46,7 +45,7 @@ import LoadWheel from './LoadWheel';
 
 
     
-    const height = 750
+    const height = 800
     const width = 800
     
 
@@ -61,7 +60,7 @@ import LoadWheel from './LoadWheel';
     return (
         <>
     {user && loaded && activeMonthProgress.length < 1 ? !signUpSuccess && currentMonth !== month ? <>  <div><Redirect to={`/tracker/${user.username}/create`} /></div>
-        </> : <LoadWheel></LoadWheel>
+        </> : <Logo></Logo>
         :        
         <div>
         <div style={{ textAlign: "center"}} >
