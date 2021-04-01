@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react'
-import { ProgressContext } from '../context/progress'
-import { Segment, Dimmer, Loader, Grid, Card, Header} from 'semantic-ui-react';
+import React, { useEffect, useState, useContext } from 'react';
+import { Segment, Grid, Card, Header} from 'semantic-ui-react';
 import LoadWheel from './LoadWheel';
-import {Redirect} from "react-router-dom"
+import { ProgressContext } from '../context/progress'
 import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
 import ToggleMonthPanel from './ToggleMonthPanel'
-import AnimatedCircle from './AnimatedCircle'
 import HabitMonthStatCard from './HabitMonthStatCard'
 import HabitAllTimeStatCards from './HabitAllTimeStatCards'
+import Logo from "./Logo"
 
 
 const AnalysisContainer = () => {
@@ -32,17 +30,15 @@ const AnalysisContainer = () => {
 
 
     useEffect(() => {
-
-      // if (user && currentMonth && !loaded) {
-      //     fetchProgress(user.id, currentMonth)
-      // }
-      
+    
 
       if (activeMonthProgress.length > 1 && signUpSuccess) {
           setSignUpSuccess(false)
       }
 
-      
+     if (!loaded){
+       debugger
+     } 
 
 
     }, [loaded, activeMonthProgress, currentMonth])
@@ -90,31 +86,6 @@ const AnalysisContainer = () => {
       return matching.habit
   })
 
-//   const days = activeMonthProgress.map((progress, index) =>{
-//     const matching = activeMonthProgress.find((prog) => {
-//         return prog.day.day == index + 1
-//     })
-//     return matching.day
-// })
-
-
-
-
-
-// const allDays = activeMonthProgress.length > 1 ? activeMonthProgress.map((progress, index) =>{ 
-//   const matching = activeMonthProgress.find((prog) => {
-//       return prog.day.day == index + 1
-//   })
-  
-//   return !!matching.day ? matching.day : matching
-// }) : ["didnt get it"]
-
-
-
-
-  // const = allProgress.map((progress) => {
-  //   progress.day
-    
   
 
 
@@ -153,12 +124,13 @@ const AnalysisContainer = () => {
       
       const nameArr = [...new Set(allHabitNames)]
 
-      const allHabits = allHabitNames.map((habitName) =>{
+      const allHabits = nameArr.map((habitName) =>{
       const matching = allProgress.find((prog) => {
           return prog.habit.name === habitName
       })
       return matching.habit
       })
+      
       setAllHabits(allHabits)
 
     }
@@ -171,31 +143,41 @@ const AnalysisContainer = () => {
 
 
 const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
-  debugger
 
-  const removeDuplicates = (array) => {
-    const flag = {}
-    const uniqueDays = []
-    array.forEach(progress => {
-        if (!flag[progress.day.id]){
-            flag[progress.day.id] = true
-            uniqueDays.push(progress.day)
-        }
-    })
-    debugger
-    return uniqueDays
-}
-    
+
+        const removeDuplicates = (array) => {
+          const flag = {}
+          const uniqueDays = []
+          array.forEach(progress => {
+              if (!flag[progress.day.id]){
+                  flag[progress.day.id] = true
+                  uniqueDays.push(progress.day)
+              }
+          })
+          
+          return uniqueDays
+      }
+      
   const days = removeDuplicates(allProgress)
 
-  const totalDays =  new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate() - new Date().getDate() + days.length
+  const totalDays = allProgress.filter((prog) => {
+    if (prog.habit.name === habit.name){
+      return prog.day.month !== new Date().getMonth() + 1 && prog.day.day <= new Date().getDate()
+    }
+  }).length
   
-  console.log(`the month is ${currentMonth} and the total days are ${totalDays}`)
+  
 
+  console.log(`the month is ${currentMonth} and the total days are ${totalDays}`)
+  
 
   const totalCompleted = allProgress.filter((prog) => {
-    return prog.completed === true && prog.habit.name === habit.name 
+    if (prog.habit.name === habit.name){
+    return prog.completed === true && prog.day.month !== new Date().getMonth() + 1 && prog.day.day <= new Date().getDate() 
+    }
   }).length
+
+  
 
   
 
@@ -242,9 +224,6 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
     <ToggleMonthPanel style={{textAlign: "center", marginLeft: "0px"}}></ToggleMonthPanel>
  
- {/* <h2 style={{
-        color:"#264653"
-      }} >Monthly habit completion rates</h2> */}
         <>
         <Header as='h2'  style={{
             color:"#264653"
@@ -261,8 +240,6 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
                        
                 </>
             <h4>In {new Date(currentYear, currentMonth- 1, 1).toLocaleString('default', { month: 'long' })}, you completed all {`${activeMonthHabits.length}`} of your tracked habits on {`${completedDays}`} of out {`${possibleDays}`} days.</h4>
-
-
               
            </Segment>
 
@@ -293,8 +270,7 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
 
 </div>
-</> : <LoadWheel></LoadWheel>
-
+</> : <Logo></Logo>
 
      
      

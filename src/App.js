@@ -32,7 +32,8 @@ function App({ history }) {
       } else {
 
         if (!loaded) {
-          fetchProgress(user.id, currentMonth)      
+          fetchProgress(user.id, currentMonth)  
+              
         }
       }
     }

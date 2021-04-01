@@ -43,9 +43,9 @@ const NewHabit = (props) => {
         // createHabits({username: form.username, name: form.name, password: form.password})
         setForm({
             habit1: "",
-        })
+          })
+          // history.push(`/tracker/${user.username}`)
 
-        // history.push(`/tracker/${user.username}`)
         
     } 
 

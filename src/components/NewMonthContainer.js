@@ -7,6 +7,7 @@ import { DateContext } from '../context/date'
 import NewMonthHabitsForm from './NewMonthHabitsForm.js'
 import PreviousHabitSelector from './PreviousHabitSelector'
 import LoadWheel from './LoadWheel';
+import Logo from './Logo'
 
 
 
@@ -58,7 +59,7 @@ const NewMonthContainer = (props) => {
 return (
     <> 
     {/* {allProgress.length === 0 ? <h1 style={{textAlign: "center"}}>hi</h1> : <h2 style={{textAlign: "center"}} >bye</h2>} */}
-    {submitted ? <LoadWheel></LoadWheel> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setSubmitted={setSubmitted} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
+    {submitted ? <Logo></Logo> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setSubmitted={setSubmitted} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
 
     </>
     )

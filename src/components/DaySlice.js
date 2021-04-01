@@ -40,7 +40,7 @@ const DaySlice = ({ pie }) => {
      
     const radiusStart = 50
 
-    const ringDistance = 242/activeMonthHabits.length
+    const ringDistance = 300/activeMonthHabits.length
    
 
     // create a for loop that iterates how every many times i need to 
