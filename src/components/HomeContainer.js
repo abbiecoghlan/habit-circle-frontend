@@ -16,18 +16,30 @@ import Logo from "./Logo"
 
 const HomeContainer = () => {
 
-    const { loaded, activeMonthProgress, allProgress, fetchProgress, setActiveMonth } = useContext(ProgressContext)
+    const { loaded, submitted, activeMonthProgress, allProgress, fetchProgress, setActiveMonth, activeMonthHabits } = useContext(ProgressContext)
     const { user, signUpSuccess, setSignUpSuccess } = useContext(UserContext)
     const { currentMonth } = useContext(DateContext)
      
     const history = useHistory()
 
-    // useEffect(() => {
-    //     if (loaded) {
-    //         history.push(`/tracker/${user.username}/month`)
-    //     }
+    useEffect(() => {
+     
+        if (loaded && !submitted) {
+            history.push(`/tracker/${user.username}/month`)
+        }
+
         
-    // }, [loaded])
+    }, [loaded])
+
+    useEffect(() => {
+        console.log("from home container")   
+        console.log("the progress length is: ", allProgress.length)
+        console.log("the active progress length is: ", activeMonthProgress.length)
+        console.log("the habit length is: ", activeMonthHabits.length)
+        console.log("the current month is: ", currentMonth)
+
+
+    }, [loaded, currentMonth, activeMonthProgress, allProgress, activeMonthHabits])
 
 
 

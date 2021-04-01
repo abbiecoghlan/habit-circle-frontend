@@ -6,7 +6,7 @@ import { DateContext } from '../context/date'
 import { format } from 'd3';
 
 
-const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, setStepTwo, handleSubmit, setSelectedHabits}) => {
+const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, setStepTwo, setStepThree, handleSubmit, setSelectedHabits}) => {
 
 
     const { createHabits, loaded, activeMonthHabits, allHabits, allProgress } = useContext(ProgressContext)
@@ -123,12 +123,13 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
         const selected = [checkForm.habit1, checkForm.habit2, checkForm.habit3, checkForm.habit4, checkForm.habit5, checkForm.habit6, checkForm.habit7].filter((habit) => !!habit)
         setSelectedHabits(selected)
         setStepTwo(true)
-
     }
-
+    
+    //need to debug
     const handleSkipStepTwo = (e) => {
         const selected = [checkForm.habit1, checkForm.habit2, checkForm.habit3, checkForm.habit4, checkForm.habit5, checkForm.habit6, checkForm.habit7].filter((habit) => !!habit)
         setSelectedHabits(selected)
+        setStepThree(true)
         handleSubmit()
     } 
 
