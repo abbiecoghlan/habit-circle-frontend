@@ -50,20 +50,11 @@ const HabitCard = ({habit, cardColor}) => {
 
 
 
-
-
-
-
-
-
   return (
       <>
  
 
 <Card inverted style={{ color: cardColor}}  >
-    
-
-
            <Card.Content extra>
             <Card.Header  style={{textAlign: "center", verticalAlign: 'top' }}> 
             
@@ -78,10 +69,7 @@ const HabitCard = ({habit, cardColor}) => {
                 /></Form> : <h3 style={{color: cardColor}} >{habit.name.toUpperCase()}</h3>}
             {/* {editMode ? {`edit ${habit.name}`} : {`${habit.name.toUpperCase()}`} } */}
 
-                    
-
-
-          
+                              
         {/* <Card.Content style={{ color: "#264653", textAlign: "left", verticalAlign: 'top' }} >
             <Form.Input 
 
@@ -117,73 +105,3 @@ const HabitCard = ({habit, cardColor}) => {
 }
 
 export default HabitCard;
-
-
-
-
-
-
-
-
-
-// <Card inverted color={'violet'}>
-// <Card.Content>
-
-// <Card.Header>{habit.name}          <Button floated='right' onClick={(e) => handleEdit(e)} basic color='violet'>
-//     Edit Habit Name
-//     </Button>
-//     <Button floated='right' onClick={(e) => handleDelete(e)} basic color='violet'>
-//     Delete Habit
-//     </Button>
-   
-
-// </Card.Header>
-
-
-// <Card.Description floated='left'>
-
-// <strong floated='left'> {habit.name} </strong>        <Button floated='right' onClick={(e) => handleEdit(e)} basic color='violet'>
-//     Edit Habit Name
-//     </Button>
-//     <Button floated='right' onClick={(e) => handleDelete(e)} basic color='violet'>
-//     Delete Habit
-//     </Button>
-//  {/* <strong>a note</strong> */}
-
-//  {/* <Button floated='right' onClick={(e) => handleEdit(e)} basic color='violet'>
-//     Edit Habit Name
-//     </Button> */}
-
-// </Card.Description>
-// </Card.Content>
-// <Card.Content extra>
-// {/* <Link to={`/tracker/${user.username}/${habit.id}`}>       
-//     <Button onClick={(e) => handleEdit(e)} basic color='violet'>
-//     Edit Habit Name
-//     </Button>
-//     </Link> */}
-
-//     {/* <Button onClick={(e) => handleDelete(e)} basic color='violet'>
-//     Delete Habit
-//     </Button> */}
-
-// </Card.Content>
-// </Card>
-
-
-
-// <Card>
-// <Item.Group relaxed>
-//     <Item>
-
-
-//     <Item.Content floated="right">
-//         <Item.Header  as='a'>{habit.name}</Item.Header>
-//    </Item.Content>
-//    <Item.Content>
-//         <Button floated="right" verticalAlign='bottom' as='a'>edit</Button>
-//     </Item.Content>
-//     </Item>
-// </Item.Group>
-
-// </Card>

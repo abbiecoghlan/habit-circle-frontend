@@ -206,21 +206,10 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
 
 
-
-
-
-
-
-  return (
-      
-
-
+  return (      
      loaded ? <>
     
-
-
 <div stretched style={{ marginLeft: '150px', height: '100vh', position: "relative", display: "flex" }} id="check1" class="ui center aligned middle aligned grid" >
-  
   
   
 <Grid style={{height: '100vh', width: "100%", paddingTop: '20px', position: "relative", display: "flex", overflow: "scroll" }} stretched stackable id="check2" divided='vertically' textAlign='center'   >
@@ -249,13 +238,12 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
               
            </Segment>
 
-
       </>
 
 
- <Card.Group itemsPerRow={3} >
+  <Card.Group itemsPerRow={3} >
 
- {habitStatCards}
+  {habitStatCards}
 
     </Card.Group>
     <Grid.Column stretched style={{ textAlign: 'center', width: '100%', marginLeft: '0', padding: "10px" }} > 
@@ -280,9 +268,6 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
      
      
-   
-
-
    
 
   );

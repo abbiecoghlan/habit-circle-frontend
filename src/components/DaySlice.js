@@ -32,14 +32,9 @@ const DaySlice = ({ pie }) => {
     
         }, [user, activeMonthProgress])
     
-    
-
-    
-
 
      
     const radiusStart = 50
-
     const ringDistance = 300/activeMonthHabits.length
    
 
