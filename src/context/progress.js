@@ -12,7 +12,6 @@ function reducer(state, action) {
                 loaded: true
             }
         case "UPDATE_PROGRESS":
-            debugger
             return { 
                 ...state,
                 activeMonthProgress: state.activeMonthProgress.map(progress => {
@@ -35,7 +34,6 @@ function reducer(state, action) {
                 activeMonthHabits: [],
                 loaded: false,
                 submitted: false
-
             }
         case "SET_ACTIVE_MONTH":
             return {

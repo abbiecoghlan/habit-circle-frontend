@@ -175,12 +175,7 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
         return prog.habit.name === habit.name
       }
     }).length
- 
-  
-  
-
-  // console.log(`the month is ${currentMonth} and the total days are ${totalDays}`)
-  
+   
 
   const totalCompleted = allProgress.filter((prog) => {
       if(prog.day.month === new Date().getMonth() + 1 ){
