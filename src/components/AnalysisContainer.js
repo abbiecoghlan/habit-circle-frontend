@@ -195,9 +195,7 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
       cardColor={colors[0][index]}
       totalDays={totalDays}
       totalCompleted={totalCompleted}
-
     /> 
-    
   )
 })
 
@@ -207,19 +205,13 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
 
   return (      
-     loaded ? <>
-    
-<div stretched style={{ marginLeft: '150px', height: '100vh', position: "relative", display: "flex" }} id="check1" class="ui center aligned middle aligned grid" >
-  
-  
-<Grid style={{height: '100vh', width: "100%", paddingTop: '20px', position: "relative", display: "flex", overflow: "scroll" }} stretched stackable id="check2" divided='vertically' textAlign='center'   >
-
-<Grid.Row id="check3" columns={1}>
-    <Grid.Column id="check4" style={{ marginLeft: '0px', height: '100vh', paddingTop: '20px'}} >
-
-    <ToggleMonthPanel style={{textAlign: "center", marginLeft: "0px"}}></ToggleMonthPanel>
- 
-        <>
+    loaded ? <>    
+      <div stretched style={{ marginLeft: '150px', height: '100vh', position: "relative", display: "flex" }} id="check1" class="ui center aligned middle aligned grid" >
+        <Grid style={{height: '100vh', width: "100%", paddingTop: '20px', position: "relative", display: "flex", overflow: "scroll" }} stretched stackable id="check2" divided='vertically' textAlign='center'>
+            <Grid.Row id="check3" columns={1}>
+              <Grid.Column id="check4" style={{ marginLeft: '0px', height: '100vh', paddingTop: '20px'}} >
+                <ToggleMonthPanel style={{textAlign: "center", marginLeft: "0px"}}></ToggleMonthPanel>
+                  <>
         <Header as='h2'  style={{
             color:"#264653"
           }} textAlign='center'>
@@ -267,8 +259,6 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 </> : <Logo></Logo>
 
      
-     
-   
 
   );
 }
