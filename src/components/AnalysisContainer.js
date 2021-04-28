@@ -212,16 +212,10 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
               <Grid.Column id="check4" style={{ marginLeft: '0px', height: '100vh', paddingTop: '20px'}} >
                 <ToggleMonthPanel style={{textAlign: "center", marginLeft: "0px"}}></ToggleMonthPanel>
                   <>
-        <Header as='h2'  style={{
-            color:"#264653"
-          }} textAlign='center'>
-              Monthly Habit Completion Rates
-           </Header>
-
-
-           <Segment inverted style={{
-          color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center"
-        }}stacked>
+                  <Header as='h2'  style={{color:"#264653"}} textAlign='center'>
+                    Monthly Habit Completion Rates
+                  </Header>
+           <Segment inverted style={{color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center"}}stacked>
                        <> 
 
                        
