@@ -219,31 +219,27 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
                       <h4>In {new Date(currentYear, currentMonth- 1, 1).toLocaleString('default', { month: 'long' })}, you completed all {`${activeMonthHabits.length}`} of your tracked habits on {`${completedDays}`} of out {`${possibleDays}`} days.</h4>
                     </Segment>
                   </>
-
           <Card.Group itemsPerRow={3} >
             {habitStatCards}
           </Card.Group>
 
-    <Grid.Column stretched style={{ textAlign: 'center', width: '100%', marginLeft: '0', padding: "10px" }} > 
-  
-    <HabitAllTimeStatCards> </HabitAllTimeStatCards>
+          <Grid.Column stretched style={{ textAlign: 'center', width: '100%', marginLeft: '0', padding: "10px" }} > 
 
-    <Card.Group itemsPerRow={3} >
-      {allTimeHabitStatCards}
-   </Card.Group>
-</Grid.Column>
+          <HabitAllTimeStatCards> </HabitAllTimeStatCards>
+            <Card.Group itemsPerRow={3} >
+              {allTimeHabitStatCards}
+          </Card.Group>
 
-</Grid.Column>
+        </Grid.Column>
 
-</Grid.Row>
+        </Grid.Column>
 
+      </Grid.Row>
 
-</Grid>
-
+    </Grid>
 
 </div>
 </> : <Logo></Logo>
-
      
 
   );
