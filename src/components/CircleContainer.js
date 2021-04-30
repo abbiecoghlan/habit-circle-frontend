@@ -23,8 +23,7 @@ const CircleContainer = () => {
     const history = useHistory()
 
     useEffect(() => {
-
-        
+    
         if (user && loaded && activeMonthProgress.length < 1 && !signUpSuccess ) {
             history.push(`/tracker/${user.username}/create`)
         }
@@ -32,29 +31,26 @@ const CircleContainer = () => {
         if (activeMonthProgress.length > 1 && signUpSuccess) {
             setSignUpSuccess(false)
         }
-        
 
     }, [loaded, activeMonthProgress, currentMonth])
 
-    useEffect(() => {
-        console.log("from circle container")   
-        console.log("the progress length is: ", allProgress.length)
-        console.log("the active progress length is: ", activeMonthProgress.length)
-        console.log("the habit length is: ", activeMonthHabits.length)
-        console.log("the current month is: ", currentMonth)
+    // useEffect(() => {
+    //     console.log("from circle container")   
+    //     console.log("the progress length is: ", allProgress.length)
+    //     console.log("the active progress length is: ", activeMonthProgress.length)
+    //     console.log("the habit length is: ", activeMonthHabits.length)
+    //     console.log("the current month is: ", currentMonth)
 
 
-    }, [loaded, currentMonth, activeMonthProgress, allProgress, activeMonthHabits])
+    // }, [loaded, currentMonth, activeMonthProgress, allProgress, activeMonthHabits])
 
 
   return (
-      <>
-
-    <div class="ui center aligned middle aligned grid" style={{height: "100vh"}}>
-    {/* {loaded && activeMonthHabits.length === 0 ? <Redirect to='/tracker/createhabits' /> : null} */}
-    
-    {loaded ? <><ToggleMonthPanel></ToggleMonthPanel><Circle></Circle></> : <Logo></Logo> }
-    </div>
+    <>
+        <div class="ui center aligned middle aligned grid" style={{height: "100vh"}}>
+            {/* {loaded && activeMonthHabits.length === 0 ? <Redirect to='/tracker/createhabits' /> : null} */}
+            {loaded ? <><ToggleMonthPanel></ToggleMonthPanel><Circle></Circle></> : <Logo></Logo> }
+        </div>
     </>
   );
 }
