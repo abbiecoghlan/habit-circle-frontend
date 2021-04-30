@@ -179,7 +179,6 @@ const DaySlice = ({ pie }) => {
     }
 
 
-
     const paths = !loaded? null : pie.map((slice, index) => {
  
         return <>
@@ -196,22 +195,15 @@ const DaySlice = ({ pie }) => {
         })
         
 
-
-
-
         return ( 
             <>    
                 {paths}
                 <TextPaths></TextPaths>
             </>
-)
-
+        )
 
  
-
 }
-
-
 
 
 
