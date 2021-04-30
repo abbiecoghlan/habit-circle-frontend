@@ -31,7 +31,6 @@ import Logo from './Logo'
       
         }, [allProgress, currentMonth])
 
-   
 
         
     useEffect(() => {
@@ -41,7 +40,6 @@ import Logo from './Logo'
             }
             setDaysArray(array)        
         }, [currentMonth])
-
 
 
     
@@ -81,25 +79,6 @@ import Logo from './Logo'
 
 
     
-
-    // return (
-    //     <>
-    // {user && loaded && activeMonthProgress.length < 1 ? !signUpSuccess ? <>  <div><Redirect to={`/tracker/${user.username}/create`} /></div>
-    //     </> : <LoadWheel></LoadWheel>
-    //     :        
-    //     <div>
-    //     <div style={{ textAlign: "center"}} >
-    //     <svg height={height} width={width} style={{ display: "block", margin: "auto" }}>
-    //         <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
-    //             <DaySlice pie={pie}/>
-    
-    //         </g>
-    //     </svg> 
-
-    //     </div>
-    //     </div>}
-    //     </>
-    // )
     
 }
 
