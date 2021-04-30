@@ -212,26 +212,18 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
               <Grid.Column id="check4" style={{ marginLeft: '0px', height: '100vh', paddingTop: '20px'}} >
                 <ToggleMonthPanel style={{textAlign: "center", marginLeft: "0px"}}></ToggleMonthPanel>
                   <>
-                  <Header as='h2'  style={{color:"#264653"}} textAlign='center'>
-                    Monthly Habit Completion Rates
-                  </Header>
-           <Segment inverted style={{color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center"}}stacked>
-                       <> 
+                    <Header as='h2'  style={{color:"#264653"}} textAlign='center'>
+                      Monthly Habit Completion Rates
+                    </Header>
+                    <Segment inverted style={{color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center"}}stacked>            
+                      <h4>In {new Date(currentYear, currentMonth- 1, 1).toLocaleString('default', { month: 'long' })}, you completed all {`${activeMonthHabits.length}`} of your tracked habits on {`${completedDays}`} of out {`${possibleDays}`} days.</h4>
+                    </Segment>
+                  </>
 
-                       
-                </>
-            <h4>In {new Date(currentYear, currentMonth- 1, 1).toLocaleString('default', { month: 'long' })}, you completed all {`${activeMonthHabits.length}`} of your tracked habits on {`${completedDays}`} of out {`${possibleDays}`} days.</h4>
-              
-           </Segment>
+          <Card.Group itemsPerRow={3} >
+            {habitStatCards}
+          </Card.Group>
 
-      </>
-
-
-  <Card.Group itemsPerRow={3} >
-
-  {habitStatCards}
-
-    </Card.Group>
     <Grid.Column stretched style={{ textAlign: 'center', width: '100%', marginLeft: '0', padding: "10px" }} > 
   
     <HabitAllTimeStatCards> </HabitAllTimeStatCards>
