@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useEffect, useState, useRef, useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { ProgressContext } from '../context/progress'
 import { UserContext } from '../context/user'
 import { DateContext } from '../context/date';
-import { Button, Icon } from 'semantic-ui-react';
-
+import { Icon } from 'semantic-ui-react';
 
 
 
@@ -18,8 +17,8 @@ import { Button, Icon } from 'semantic-ui-react';
     useEffect(() => {       
         if (loaded) {
             setActiveMonth(currentMonth)
-            }
-        }, [currentMonth])
+        }
+    }, [currentMonth])
 
         
     useEffect(() => {
@@ -27,18 +26,18 @@ import { Button, Icon } from 'semantic-ui-react';
         const array = [10]
         while (array.length <= daysOfMonth){
             array.push(1)        
-            }
-            setDaysArray(array)        
-        }, [currentMonth])
+        }
+        setDaysArray(array)        
+    }, [currentMonth])
 
 
     const handleForwardClick = () => {
         incrementMonth()   
-        }
+    }
 
     const handleBackWardClick = () => {
         decrementMonth()      
-        }
+    }
     
     const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
     

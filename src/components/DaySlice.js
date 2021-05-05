@@ -25,14 +25,7 @@ const DaySlice = ({ pie }) => {
     
         }, [user])
     
-    // useEffect(() => {
-    //     if (!user) {
-    //         history.push("/login")
-    //         }
     
-    //     }, [user, activeMonthProgress])
-    
-
      
     const radiusStart = 50
     const ringDistance = 300/activeMonthHabits.length
@@ -129,26 +122,7 @@ const DaySlice = ({ pie }) => {
     }
 
     
-    // const checkDay = (day, habNam) => {
-    //     if (!activeMonthProgress || day == 0 ) {
-    //         return 
-    //         }
 
-    //     const day = activeMonthProgress.filter((progress) => {
-    //         return progress.day.day == day && progress.day.month === currentMonth            
-    //     })
-        
-    //     if (prog[0]) {
-    //     if (prog[0].completed){
-    //         return "completed"
-    //     } else 
-    //      {
-    //         return "incomplete"
-    //     }
-    //     }
-
-
-    // }
 
 
     const getStatus = (day, habName) => {
