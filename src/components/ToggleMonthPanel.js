@@ -41,14 +41,12 @@ import { Icon } from 'semantic-ui-react';
     
     const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
     
-
    
     return (
         <div style={{textAlign: "center", display: "inline", width: '100%', marginTop:"30px"}} >
-        {currentMonth === user.created - 2  ? null : <Icon size="big" style={{ color:"#264653", display: "inline"}} name='angle left' onClick={()=> handleBackWardClick()}/>}
-         <h1 style={{color:"#264653", textAlign: "center", display: "inline", verticalAlign: 'middle'}} className="center" >   {monthName}   </h1>      
-         {currentMonth === month ? null : <Icon size="big" style={{ color:"#264653", display: "inline", verticalAlign: 'middle'}}  name='angle right' onClick={()=> handleForwardClick()}/>}
-        
+            {currentMonth === user.created - 2  ? null : <Icon size="big" style={{ color:"#264653", display: "inline"}} name='angle left' onClick={()=> handleBackWardClick()}/>}
+            <h1 style={{color:"#264653", textAlign: "center", display: "inline", verticalAlign: 'middle'}} className="center" >   {monthName}   </h1>      
+            {currentMonth === month ? null : <Icon size="big" style={{ color:"#264653", display: "inline", verticalAlign: 'middle'}}  name='angle right' onClick={()=> handleForwardClick()}/>}
         </div>
     )    
 }
