@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Segment, Grid, Card, Header} from 'semantic-ui-react';
-import LoadWheel from './LoadWheel';
 import { ProgressContext } from '../context/progress'
 import { UserContext } from '../context/user'
 import { DateContext } from '../context/date'
@@ -12,7 +11,7 @@ import Logo from "./Logo"
 
 const AnalysisContainer = () => {
 
-    const { activeMonthHabits, activeMonthProgress, allProgress, loaded, fetchProgress} = useContext(ProgressContext)
+    const { activeMonthHabits, activeMonthProgress, allProgress, loaded} = useContext(ProgressContext)
     const { user, signUpSuccess, setSignUpSuccess } = useContext(UserContext)
     const { currentMonth, daysOfMonth, currentYear } = useContext(DateContext)
 
@@ -24,43 +23,32 @@ const AnalysisContainer = () => {
     const [allHabits, setAllHabits] = useState([])
 
 
-    
-
-
-
-
     useEffect(() => {
-    
-
       if (activeMonthProgress.length > 1 && signUpSuccess) {
           setSignUpSuccess(false)
       }
-
-
     }, [loaded, activeMonthProgress, currentMonth])
 
 
     useEffect(() => {
       if (user && currentMonth && loaded) {
-
+        // if the month has not finished yet, determine how many days have happened so far in the current month, else use daysOfMonth
         const totalDays = (currentMonth === new Date().getMonth() + 1) ? new Date().getDate() : daysOfMonth
-
-      const days = []
-      let i = 0;
-        do {
-          i += 1;
-          let day = activeMonthProgress.filter((prog) => {
+        const days = []
+        let i = 0;
+          do {
+            i += 1;
+            let day = activeMonthProgress.filter((prog) => {
             return prog.day.day === i
-        })
-
-        const dayHabitsCompleted = day.filter((d) => {
-          return d.completed == true 
-        })
+            })
         
-        if (dayHabitsCompleted.length === activeMonthHabits.length){
-          days.push(day)
-        }
-
+            const dayHabitsCompleted = day.filter((d) => {
+            return d.completed == true 
+            })
+        
+            if (dayHabitsCompleted.length === activeMonthHabits.length){
+              days.push(day)
+            }
         
           } while (i < totalDays);
 

@@ -218,6 +218,7 @@ const TextPaths = props => {
                     </tspan>   
                     </textPath>
             </text> 
+        
             <text style={{fontSize: "20px"}}>
                     <textPath startOffset="9%" href="#day31number"> 
                     <tspan startOffset="" dy="-5" fill="#264653" > 31

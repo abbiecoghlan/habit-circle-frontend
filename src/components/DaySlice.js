@@ -25,12 +25,12 @@ const DaySlice = ({ pie }) => {
     
         }, [user])
     
-    useEffect(() => {
-        if (!user) {
-            history.push("/login")
-            }
+    // useEffect(() => {
+    //     if (!user) {
+    //         history.push("/login")
+    //         }
     
-        }, [user, activeMonthProgress])
+    //     }, [user, activeMonthProgress])
     
 
      
