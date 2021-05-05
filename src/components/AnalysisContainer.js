@@ -11,109 +11,90 @@ import Logo from "./Logo"
 
 const AnalysisContainer = () => {
 
-    const { activeMonthHabits, activeMonthProgress, allProgress, loaded} = useContext(ProgressContext)
-    const { user, signUpSuccess, setSignUpSuccess } = useContext(UserContext)
-    const { currentMonth, daysOfMonth, currentYear } = useContext(DateContext)
+  const { activeMonthHabits, activeMonthProgress, allProgress, loaded} = useContext(ProgressContext)
+  const { user, signUpSuccess, setSignUpSuccess } = useContext(UserContext)
+  const { currentMonth, daysOfMonth, currentYear } = useContext(DateContext)
 
-    const colors = useState(['#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
+  const colors = useState(['#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
     
 
-    const [possibleDays, setPossibleDays] = useState(0)
-    const [completedDays, setCompletedDays] = useState(0)
-    const [allHabits, setAllHabits] = useState([])
+  const [possibleDays, setPossibleDays] = useState(0)
+  const [completedDays, setCompletedDays] = useState(0)
+  const [allHabits, setAllHabits] = useState([])
 
 
-    useEffect(() => {
-      if (activeMonthProgress.length > 1 && signUpSuccess) {
-          setSignUpSuccess(false)
-      }
-    }, [loaded, activeMonthProgress, currentMonth])
-
-
-    useEffect(() => {
-      if (user && currentMonth && loaded) {
-        // if the month has not finished yet, determine how many days have happened so far in the current month, else use daysOfMonth
-        const totalDays = (currentMonth === new Date().getMonth() + 1) ? new Date().getDate() : daysOfMonth
-        const days = []
-        let i = 0;
-          do {
-            i += 1;
-            let day = activeMonthProgress.filter((prog) => {
-            return prog.day.day === i
-            })
-        
-            const dayHabitsCompleted = day.filter((d) => {
-            return d.completed == true 
-            })
-        
-            if (dayHabitsCompleted.length === activeMonthHabits.length){
-              days.push(day)
-            }
-        
-          } while (i < totalDays);
-
-          setCompletedDays(days.length)
-          setPossibleDays(totalDays)
-
+  useEffect(() => {
+     if (activeMonthProgress.length > 1 && signUpSuccess) {
+        setSignUpSuccess(false)
     }
-    }, [loaded, activeMonthProgress, currentMonth])
-
-
-    useEffect(() => {
-      console.log("from analysis container")   
-      console.log("the progress length is: ", allProgress.length)
-      console.log("the active progress length is: ", activeMonthProgress.length)
-      console.log("the habit length is: ", activeMonthHabits.length)
-      console.log("the current month is: ", currentMonth)
-
-
-  }, [loaded, currentMonth, activeMonthProgress, allProgress, activeMonthHabits])
+  }, [loaded, activeMonthProgress, currentMonth])
 
 
 
+    // determine how many days of the month so far that the user completed 100 percent of tracked habits for that day
+  useEffect(() => {
+    if (user && currentMonth && loaded) {
+      // if the month has not finished yet, determine how many days have happened so far in the current month, else use daysOfMonth
+      const totalDays = (currentMonth === new Date().getMonth() + 1) ? new Date().getDate() : daysOfMonth
+      const days = []
+      let i = 0;
+        do {
+          i += 1;
+          let day = activeMonthProgress.filter((prog) => {
+          return prog.day.day === i
+          })
+      
+          const dayHabitsCompleted = day.filter((d) => {
+          return d.completed == true 
+          })
+      
+          if (dayHabitsCompleted.length === activeMonthHabits.length){
+            days.push(day)
+          }
+      
+        } while (i < totalDays);
+
+        setCompletedDays(days.length)
+        setPossibleDays(totalDays)
+    }
+  }, [loaded, activeMonthProgress, currentMonth])
 
 
-
-
-    const habits = activeMonthHabits.map((habitName) =>{
-      const matching = activeMonthProgress.find((prog) => {
-          return prog.habit.name === habitName
-      })
+ 
+    // access the user's current month habit data
+  const habits = activeMonthHabits.map((habitName) =>{
+    const matching = activeMonthProgress.find((prog) => {
+        return prog.habit.name === habitName
+    })
       return matching.habit
-  })
+    })
 
-  
-
-
+  // use those habits to create stat cards for each habit for the month
   const habitStatCards = habits.reverse().map((habit, index) => {
-    
+  
+    // if the month is not yet complete, find out the total days, else use daysOfMonth
     const totalDays = (currentMonth === new Date().getMonth() + 1) ? new Date().getDate() : daysOfMonth
-    // console.log(`the month is ${currentMonth} and the total days are ${totalDays}`)
+  
 
     const totalCompleted = activeMonthProgress.filter((prog) => {
       return prog.completed === true && prog.habit.name === habit.name 
     }).length
 
     return (
-
       <HabitMonthStatCard
         key={habit.id}
         habit={habit}
         cardColor={colors[0][index]}
         totalDays={totalDays}
         totalCompleted={totalCompleted}
-
-      /> 
-      
+      />       
     )
   })
 
 
+  // access the users all time habits
   useEffect(() => {
     if (user && currentMonth && loaded) {
-
-
-
       const allHabitNames =  allProgress.map(progress => {
         return progress.habit.name
       })
@@ -121,76 +102,60 @@ const AnalysisContainer = () => {
       const nameArr = [...new Set(allHabitNames)]
 
       const allHabits = nameArr.map((habitName) =>{
-      const matching = allProgress.find((prog) => {
-          return prog.habit.name === habitName
-      })
-      return matching.habit
+        const matching = allProgress.find((prog) => {
+            return prog.habit.name === habitName
+        })
+        return matching.habit
       })
       
       setAllHabits(allHabits)
-
     }
-        
   }, [loaded, activeMonthProgress, currentMonth])
 
 
+  // use those habits to create stat cards for each habit for the all time
+  const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
-
-
-
-const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
-
-
-        const removeDuplicates = (array) => {
-          const flag = {}
-          const uniqueDays = []
-          array.forEach(progress => {
-              if (!flag[progress.day.id]){
-                  flag[progress.day.id] = true
-                  uniqueDays.push(progress.day)
-              }
-          })
-          
-          return uniqueDays
-      }
+    const removeDuplicates = (array) => {
+      const flag = {}
+      const uniqueDays = []
+      array.forEach(progress => {
+          if (!flag[progress.day.id]){
+              flag[progress.day.id] = true
+              uniqueDays.push(progress.day)
+          }
+      })   
+      return uniqueDays
+    }
       
-  const days = removeDuplicates(allProgress)
+    const days = removeDuplicates(allProgress)
 
-  const totalDays = allProgress.filter((prog) => {
-    if(prog.day.month === new Date().getMonth() + 1 ){
-      return prog.day.day <= new Date().getDate() && prog.habit.name === habit.name
+    const totalDays = allProgress.filter((prog) => {
+      if(prog.day.month === new Date().getMonth() + 1 ){
+        return prog.day.day <= new Date().getDate() && prog.habit.name === habit.name
       } else {
         return prog.habit.name === habit.name
       }
     }).length
    
-
-  const totalCompleted = allProgress.filter((prog) => {
+    const totalCompleted = allProgress.filter((prog) => {
       if(prog.day.month === new Date().getMonth() + 1 ){
-      return prog.day.day <= new Date().getDate() && prog.habit.name === habit.name && prog.completed === true
+        return prog.day.day <= new Date().getDate() && prog.habit.name === habit.name && prog.completed === true
       } else {
         return prog.habit.name === habit.name && prog.completed === true 
       }
     }).length
-
   
-
-  return (
-
-    <HabitMonthStatCard
-      key={habit.id}
-      habit={habit}
-      cardColor={colors[0][index]}
-      totalDays={totalDays}
-      totalCompleted={totalCompleted}
-    /> 
-  )
-})
-
-
-
-
-
+    return (
+      <HabitMonthStatCard
+        key={habit.id}
+        habit={habit}
+        cardColor={colors[0][index]}
+        totalDays={totalDays}
+        totalCompleted={totalCompleted}
+      /> 
+    )
+  })
 
   return (      
     loaded ? <>    
@@ -226,8 +191,8 @@ const allTimeHabitStatCards = allHabits.reverse().map((habit, index) => {
 
     </Grid>
 
-</div>
-</> : <Logo></Logo>
+  </div>
+  </> : <Logo></Logo>
      
 
   );
