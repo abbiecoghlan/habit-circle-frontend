@@ -34,15 +34,6 @@ const CircleContainer = () => {
 
     }, [loaded, activeMonthProgress, currentMonth])
 
-    // useEffect(() => {
-    //     console.log("from circle container")   
-    //     console.log("the progress length is: ", allProgress.length)
-    //     console.log("the active progress length is: ", activeMonthProgress.length)
-    //     console.log("the habit length is: ", activeMonthHabits.length)
-    //     console.log("the current month is: ", currentMonth)
-
-
-    // }, [loaded, currentMonth, activeMonthProgress, allProgress, activeMonthHabits])
 
 
   return (

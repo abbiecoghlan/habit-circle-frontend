@@ -16,22 +16,17 @@ import Logo from './Logo'
 
 
 
- const Circle = () => {
+const Circle = () => {
     const { activeMonthProgress, allProgress, loaded, setActiveMonth } = useContext(ProgressContext)
     const { habits, user, signUpSuccess } = useContext(UserContext)
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
     const [month] = useState(new Date().getMonth() + 1)
 
-
-    useEffect(() => {
-      
+    useEffect(() => {      
         if (loaded) {
             setActiveMonth(currentMonth)
-            }   
-      
-        }, [allProgress, currentMonth])
-
-
+        }     
+    }, [allProgress, currentMonth])
         
     useEffect(() => {
         const array = [10]
@@ -41,14 +36,11 @@ import Logo from './Logo'
             setDaysArray(array)        
         }, [currentMonth])
 
-
     
     const height = 800
     const width = 800
     
-
     let pie = d3.pie()(daysArray)
-
 
     
     // const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
@@ -57,7 +49,7 @@ import Logo from './Logo'
 
     return (
         <>
-    {user && loaded && activeMonthProgress.length < 1 ? !signUpSuccess && currentMonth !== month ? <>  <div><Redirect to={`/tracker/${user.username}/create`} /></div>
+            {user && loaded && activeMonthProgress.length < 1 ? !signUpSuccess && currentMonth !== month ? <>  <div><Redirect to={`/tracker/${user.username}/create`} /></div>
         </> : <Logo></Logo>
         :        
         <div>
