@@ -63,23 +63,8 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
 
 
     useEffect(() => {
-        console.log(totalChecks)
-
-                    
-        }, [totalChecks])
-
-
-
-
-
-
-
-
-      
-
-    // const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
-
-
+        console.log(totalChecks)                    
+    }, [totalChecks])
     
      
     const handleChecked = (e, { ["data-tag"] : tag, checked, name, value }) => {
@@ -107,7 +92,6 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
 
 
     const checkBoxes = recentHabits.map((habit, index) => {
-
         const name = habit.name 
         return <> 
         <Form.Field >             
@@ -143,7 +127,6 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
 
     return (
         <> 
-
         <Grid  textAlign='center' style={{ height: '100vh', padding: '10px' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
          <Header as='h2'  style={{
@@ -180,8 +163,6 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
 
        </Grid.Column>
      </Grid>
-
-
     
     </>
 
