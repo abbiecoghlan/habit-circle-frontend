@@ -14,7 +14,6 @@ import { useHistory } from "react-router-dom"
 import HomeContainer from './HomeContainer'
 
 
-
 const NavBar = (props) => {
 
   const { resetProgress, setActiveMonth } = useContext(ProgressContext)
@@ -32,7 +31,6 @@ const NavBar = (props) => {
     resetProgress()
     logout()        
   }
-
 
 
   return (
