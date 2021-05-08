@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Button, Form, Segment, Grid, Header, Message } from 'semantic-ui-react'
-import {Redirect, useHistory} from "react-router-dom"
+import React, { useContext } from 'react';
+import { Segment, Header } from 'semantic-ui-react'
 import { UserContext } from '../context/user'
 import { ProgressContext } from '../context/progress'
 import { DateContext } from '../context/date'
@@ -10,18 +9,10 @@ import { DateContext } from '../context/date'
 const HabitAllTimeStatCards = (props) => {
 
     const {user} = useContext(UserContext)
-    const { activeMonthHabits, addHabitToMonth} = useContext(ProgressContext)
-    const { currentMonth, currentYear } = useContext(DateContext)
-    const history = useHistory()
-
-
-
+    const { currentYear } = useContext(DateContext)
 
 
    
-
-
-
     return ( 
         <>
         <Header as='h2'  style={{
