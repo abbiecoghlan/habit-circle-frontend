@@ -42,10 +42,6 @@ const Circle = () => {
     
     let pie = d3.pie()(daysArray)
 
-    
-    // const monthName = new Date(currentYear, currentMonth - 1, 1).toLocaleString('default', { month: 'long' })
-    
-       
 
     return (
         <>
@@ -53,24 +49,16 @@ const Circle = () => {
         </> : <Logo></Logo>
         :        
         <div>
-        <div style={{ textAlign: "center"}} >
-        <svg id="circle" height={height} width={width} style={{ display: "block", margin: "auto" }}>
-       
-            <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
-                
-                <DaySlice pie={pie}/>
-
-            </g>
-
-        </svg> 
-
-        </div>
+            <div style={{ textAlign: "center"}} >
+                <svg id="circle" height={height} width={width} style={{ display: "block", margin: "auto" }}>
+                    <g transform={`translate(${width / 2},${height / 2}) rotate(245 0 0)`}>
+                        <DaySlice pie={pie}/>
+                    </g>
+                </svg> 
+            </div>
         </div>}
         </>
-    )
-
-
-    
+    )    
     
 }
 
