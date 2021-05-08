@@ -19,7 +19,6 @@ function reducer(state, action) {
             error: false
             }
         case "LOGOUT_USER":
-            console.log("LOGOUT USER")
             return {
                 ...state,
                 user: false,
@@ -106,7 +105,7 @@ function UserProvider({ children }) {
         const logout = () => {
             const token = localStorage.getItem("token")
             window.localStorage.removeItem("token")
-            const deleted = localStorage.getItem("token")
+            // const deleted = localStorage.getItem("token")
             dispatch({type:"LOGOUT_USER"})
         }
 
