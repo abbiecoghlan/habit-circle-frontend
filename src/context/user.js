@@ -84,8 +84,7 @@ function UserProvider({ children }) {
                 .then(data => {
                     if (!data.user) {
                         // alert("Login from token did not work")
-                        console.log("redirect? token login did not retreive user.")
-                
+                        console.log("redirect? token login did not retreive user.")                
                     } else {
                         const user = data.user
                         dispatch({type:"LOGIN_USER", user })                       
@@ -94,11 +93,9 @@ function UserProvider({ children }) {
             }
         
     const history = useHistory()
-
         const logout = () => {
             const token = localStorage.getItem("token")
             window.localStorage.removeItem("token")
-            // const deleted = localStorage.getItem("token")
             dispatch({type:"LOGOUT_USER"})
         }
 
