@@ -29,12 +29,6 @@ function reducer(state, action) {
                 ...state,
                 signUpSuccess: action.payload
             }
-        // case "LOGIN_ERROR":
-        //     return {
-        //         user: false,
-        //         error: action.error        
-        //         }
-
         default:
             return state;
     }
@@ -42,7 +36,6 @@ function reducer(state, action) {
 
 // create the context object
 const UserContext = createContext()
-
 
 // create the context provider component
 function UserProvider({ children }) {
