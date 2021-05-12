@@ -9,8 +9,8 @@ import { Icon } from 'semantic-ui-react';
 
 
  const ToggleMonthPanel = () => {
-    const { activeMonthProgress, loaded, setActiveMonth } = useContext(ProgressContext)
-    const { habits, user, signUpSuccess } = useContext(UserContext)
+    const { loaded, setActiveMonth } = useContext(ProgressContext)
+    const { user } = useContext(UserContext)
     const { currentMonth, currentYear, daysOfMonth, daysArray, setDaysArray, incrementMonth, decrementMonth} = useContext(DateContext)
     const [month] = useState(new Date().getMonth() + 1)
 
