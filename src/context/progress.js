@@ -252,10 +252,7 @@ function ProgressProvider({ children }) {
                     return progress.habit
                    })
                    
-                
                 dispatch({type:"CREATE_NEW_MONTH", payload: {newProgress: progressArray, activeHabitNames: sortedHabits}})
-                   
-
             })
 
     }
@@ -333,16 +330,6 @@ function ProgressProvider({ children }) {
                 })
             }
 
-
-            // const setSubmitted = () => {
-            //     dispatch({ type:"TOGGLE_SUBMITTED" })
-            // }
-    
-
- 
-
-
-
     const value = { loaded, submitted, addHabitToMonth, deleteHabit, editHabit, resetProgress, fetchProgress, updateProgress, allProgress, activeMonthProgress, activeMonthHabits, createHabits, setActiveMonth}
 
 
@@ -352,8 +339,6 @@ function ProgressProvider({ children }) {
     </ProgressContext.Provider>
     )
 }
-
-
 
 
 
