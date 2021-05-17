@@ -1,4 +1,4 @@
-# *Habit Circle*
+# Habit Circle
 
 Habit Circle is a habit tracker that provides an appealing data visualization of monthly progress to motivate the completion of daily tasks. Rendering a circle with a ring for each habit you are a tracking and a slice for each day of that month, users can click on squares to color in habits and record completion, allowing user to playfully engage, track success, and visualize outcomes. 
 
