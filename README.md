@@ -7,7 +7,6 @@ Habit Circle is a habit tracker that provides an appealing data visualization of
 <img width="1583" alt="screenshot of habit circle app with side nav bar and large circular data visualization" src="https://user-images.githubusercontent.com/66394682/118742835-c511c700-b816-11eb-9f53-908bbdc985c0.png">
 
 ## 🚀 Technology
-Single Page Web Application built with:
 - React frontend
 - Rails API backend
 - Semantic UI for styling
