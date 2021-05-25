@@ -6,23 +6,20 @@ import '../App.css'
 import CircleContainer from './CircleContainer'
 import { DateContext } from '../context/date'
 import NewMonthContainer from './NewMonthContainer'
-import { NavLink, Switch, Route, Redirect } from 'react-router-dom';
+import { NavLink, Switch, Route } from 'react-router-dom';
 import HabitForm from './HabitForm'
 import HabitsContainer from './HabitsContainer'
 import AnalysisContainer from './AnalysisContainer'
-import { useHistory } from "react-router-dom"
 import HomeContainer from './HomeContainer'
 
 
-const NavBar = (props) => {
+const NavBar = () => {
 
   const { resetProgress, setActiveMonth } = useContext(ProgressContext)
-  const { logout, user, loaded} = useContext(UserContext)
-  const { currentMonth, setCurrentMonth } = useContext(DateContext)
+  const { logout, user} = useContext(UserContext)
+  const { setCurrentMonth } = useContext(DateContext)
 
-  const history = useHistory()
-
-  const handleClick = (e, { name }) => {     
+  const handleClick = () => {     
     setCurrentMonth()
     setActiveMonth(new Date().getMonth() + 1)       
   }
