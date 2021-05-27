@@ -27,7 +27,11 @@ const Circle = () => {
             setActiveMonth(currentMonth)
         }     
     }, [allProgress, currentMonth])
-        
+    
+    // d3 requires you to pass it an array of data, and it divides the ring proportionally. 
+    // First value in array will be the biggest part of the ring where habbit is written in 
+    // then a value of one gets pushed into the array for each day of the current month in view
+
     useEffect(() => {
         const array = [10]
         while (array.length <= daysOfMonth){

@@ -96,7 +96,6 @@ const DaySlice = ({ pie }) => {
     .cornerRadius(0); 
 
     
-    //add code to deal with diff number of habits 
    
     const habitNames = !loaded ? null : activeMonthHabits.map(habitName => {
         return habitName.toUpperCase()
