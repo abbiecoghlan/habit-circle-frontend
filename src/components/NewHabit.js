@@ -53,7 +53,7 @@ const NewHabit = (props) => {
 
         <Form style={{ color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center" }} onSubmit={(e) => handleSubmit(e)} size='large'>
           <Segment inverted style={{ color: "#A8DADC", background: "#264653", width: '100%', textAlign: "center" }} stacked>
-            {activeMonthHabits.length <7 ?  
+            {activeMonthHabits.length < 8 ?  
               <> 
               <Form.Input fluid 
                 icon='bullseye' 

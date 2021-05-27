@@ -15,7 +15,7 @@ const AnalysisContainer = () => {
   const { user, signUpSuccess, setSignUpSuccess } = useContext(UserContext)
   const { currentMonth, daysOfMonth, currentYear } = useContext(DateContext)
 
-  const colors = useState(['#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
+  const colors = useState(['#264653', '#2a9d8f', "#359E6A", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#359E6A", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#359E6A", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC", '#264653', '#2a9d8f', "#359E6A", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
     
 
   const [possibleDays, setPossibleDays] = useState(0)

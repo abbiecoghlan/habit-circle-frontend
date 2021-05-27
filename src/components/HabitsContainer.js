@@ -23,7 +23,7 @@ const HabitsContainer = () => {
 
     const history = useHistory()
 
-    const colors = useState(["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
+    const colors = useState(["#264653", "#2a9d8f", "#359E6A", "#e9c46a", "#f4a261", "#e76f51", "#F18C8E", "#A8DADC"])
 
     const habits = activeMonthHabits.map((habitName) =>{
         const matching = activeMonthProgress.find((prog) => {

@@ -31,7 +31,8 @@ const HabitForm = (props) => {
         habit4: false,
         habit5: false,
         habit6: false,
-        habit7: false
+        habit7: false,
+        habit8: false
     })
     const [form, setForm] = useState({
         habit1: "",
@@ -40,7 +41,8 @@ const HabitForm = (props) => {
         habit4: "",
         habit5: "",
         habit6: "",
-        habit7: ""
+        habit7: "",
+        habit8: ""
     })
 
     
@@ -66,7 +68,7 @@ const HabitForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const habits = [form.habit1, form.habit2, form.habit3, form.habit4, form.habit5, form.habit6, form.habit7].filter((habit) => !!habit)
+        const habits = [form.habit1, form.habit2, form.habit3, form.habit4, form.habit5, form.habit6, form.habit7, form.habit8].filter((habit) => !!habit)
         const sortedHabits = habits.sort(function(a,b ){
             return a.length - b.length
         })
@@ -82,7 +84,8 @@ const HabitForm = (props) => {
             habit4: "",
             habit5: "",
             habit6: "",
-            habit7: ""
+            habit7: "",
+            habit8: ""
         })
         history.push(`/tracker/${user.username}/home`)
         
@@ -101,7 +104,7 @@ const HabitForm = (props) => {
          </Header>
          <p style={{
           color:"#264653"
-        }}  >Create up 7 habits to track this {monthName}.</p>
+        }}  >Create up 8 habits to track this {monthName}.</p>
          <Form onSubmit={(e) => handleSubmit(e)} size='large'>
            <Segment inverted style={{
           color: "#A8DADC", background: "#264653"
@@ -173,6 +176,16 @@ const HabitForm = (props) => {
                 placeholder='Habit 7'                 
                 name="habit7"
                 value={form.habit7}
+                onChange={(e) => handleChange(e)}
+                maxLength="13"
+                />}
+
+            {progressiveDisplay.habit7 === false ? null : <Form.Input fluid 
+                icon='bullseye' 
+                iconPosition='left' 
+                placeholder='Habit 8'                 
+                name="habit8"
+                value={form.habit8}
                 onChange={(e) => handleChange(e)}
                 maxLength="13"
                 />}

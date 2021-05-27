@@ -23,7 +23,8 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
         habit4: "",
         habit5: "",
         habit6: "",
-        habit7: ""
+        habit7: "",
+        habit8: ""
     })
 
 
@@ -104,14 +105,14 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
 
 
     const handleStepTwo = (e) => {
-        const selected = [checkForm.habit1, checkForm.habit2, checkForm.habit3, checkForm.habit4, checkForm.habit5, checkForm.habit6, checkForm.habit7].filter((habit) => !!habit)
+        const selected = [checkForm.habit1, checkForm.habit2, checkForm.habit3, checkForm.habit4, checkForm.habit5, checkForm.habit6, checkForm.habit7, checkForm.habit8].filter((habit) => !!habit)
         setSelectedHabits(selected)
         setStepTwo(true)
     }
     
     //need to debug
     const handleSkipStepTwo = (e) => {
-        const selected = [checkForm.habit1, checkForm.habit2, checkForm.habit3, checkForm.habit4, checkForm.habit5, checkForm.habit6, checkForm.habit7].filter((habit) => !!habit)
+        const selected = [checkForm.habit1, checkForm.habit2, checkForm.habit3, checkForm.habit4, checkForm.habit5, checkForm.habit6, checkForm.habit7, checkForm.habit8].filter((habit) => !!habit)
         setSelectedHabits(selected)
         setStepThree(true)
         handleSubmit()
@@ -145,8 +146,8 @@ const PreviousHabitSelector = ({totalChecks, setTotalChecks, checks, setChecks, 
             {checkBoxes}          
           
 
-             {totalChecks.total < 7 ? false : <Message> Maximum habits selected. Select fewer habits if you'd like to create additional habits, or press submit if you'd like to continue without creating new habits. </Message>}  
-             {totalChecks.total < 7 ?
+             {totalChecks.total < 8 ? false : <Message> Maximum habits selected. Select fewer habits if you'd like to create additional habits, or press submit if you'd like to continue without creating new habits. </Message>}  
+             {totalChecks.total < 8 ?
              <Button onClick={(e) => handleStepTwo(e)} style={{ background: "#2a9d8f", color: "#FFFFFF" }} id={"continue"}  fluid size='large'>
                Continue
              </Button> : <Button onClick={(e) => handleSkipStepTwo(e)}  id={"submit"} style={{ background: "#2a9d8f", color: "#FFFFFF" }}  fluid size='large'>

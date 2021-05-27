@@ -37,6 +37,12 @@ const TextPaths = props => {
                 <text style={{fontSize: "20px"}} >
                     <textPath textLength="165" startOffset="16%" side="right" x="40" href="#day0habit6"> {habitNames[6]} </textPath>
                 </text>
+
+                <text style={{fontSize: "20px"}} >
+                    <textPath textLength="165" startOffset="16%" side="right" x="40" href="#day0habit7"> {habitNames[7]} </textPath>
+                </text>
+
+
                 
                 <text style={{fontSize: "18px"}} >
                     <textPath startOffset="9%" href="#day1number"> 

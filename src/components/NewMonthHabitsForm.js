@@ -21,7 +21,8 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
         newHabit4: "",
         newHabit5: "",
         newHabit6: "",
-        newHabit7: ""
+        newHabit7: "",
+        newHabit8: ""
     })
 
 
@@ -43,7 +44,8 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
             newHabit4: "",
             newHabit5: "",
             newHabit6: "",
-            newHabit7: ""
+            newHabit7: "",
+            newHabit8: ""
         })
         setStepTwo(false)
         setTotalChecks({total: 0})
@@ -53,7 +55,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
 
     const handleCreateHabits = (e) => {
         e.preventDefault()
-        const habits = [form.newHabit1, form.newHabit2, form.newHabit3, form.newHabit4, form.newHabit5, form.newHabit6, form.newHabit7].filter((habit) => !!habit)
+        const habits = [form.newHabit1, form.newHabit2, form.newHabit3, form.newHabit4, form.newHabit5, form.newHabit6, form.newHabit7, form.newHabit8].filter((habit) => !!habit)
         setStepThree(true)        
         handleSubmit(habits)
 
@@ -88,7 +90,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
         
 
           
-        {totalChecks.total <= 6 ? 
+        {totalChecks.total <= 7 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -100,7 +102,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 /> : <p>Maximum monthly habits reached!</p>}
 
                 
-                {totalChecks.total <= 5 ? 
+                {totalChecks.total <= 6 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -111,7 +113,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 maxLength="12"
                 /> : null }
 
-            {totalChecks.total <= 4 ? 
+            {totalChecks.total <= 5 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -122,7 +124,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 maxLength="12"
                 /> : null }
                 
-                {totalChecks.total <= 3 ? 
+                {totalChecks.total <= 4 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -133,7 +135,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 maxLength="12"
                 /> : null }
                 
-                {totalChecks.total <= 2 ? 
+                {totalChecks.total <= 3 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -144,7 +146,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 maxLength="12"
                 /> : null }
 
-            {totalChecks.total <= 1 ? 
+            {totalChecks.total <= 2 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -155,7 +157,7 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 maxLength="12"
                 /> : null }
 
-            {totalChecks.total <= 0 ? 
+            {totalChecks.total <= 1 ? 
                 <Form.Input fluid 
                 icon='bullseye' 
                 iconPosition='left' 
@@ -165,6 +167,18 @@ const NewMonthHabitsForm = ({totalChecks, setTotalChecks, checks, setStepTwo, ha
                 onChange={(e) => handleChange(e)}
                 maxLength="12"
                 /> : null }
+
+            {totalChecks.total <= 0 ? 
+                <Form.Input fluid 
+                icon='bullseye' 
+                iconPosition='left' 
+                placeholder='Add a new habit'                 
+                name="newHabit8"
+                value={form.newHabit8}
+                onChange={(e) => handleChange(e)}
+                maxLength="12"
+                /> : null }
+
                 
                            
 

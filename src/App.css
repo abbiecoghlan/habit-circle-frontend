@@ -58,15 +58,20 @@
 [id$="5" ][data-status="completed"] {
   fill: #e9c46a
 }
-
-[id$="6" ][data-status="completed"] {
-  fill: #2a9d8f
+ [id$="6" ][data-status="completed"] {
+  fill: #359E6A
 }
 
 
 [id$="7" ][data-status="completed"] {
+  fill: #2a9d8f
+}
+
+[id$="8" ][data-status="completed"] {
   fill: #264653
 }
+
+
 
 [data-status="incomplete"] {
   fill: white 
