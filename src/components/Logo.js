@@ -86,8 +86,8 @@ import { Loader, Header } from 'semantic-ui-react';
             <path className="habbitOne" data-status={"completed"} id="habit3" d={arc2(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
             <path className="habbitOne" data-status={"completed"} id="habit4" d={arc3(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
             <path className="habbitOne" data-status={"completed"} id="habit5" d={arc4(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
-            <path className="habbitOne" data-status={"completed"} id="habit6" d={arc5(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
-            <path className="habbitOne" data-status={"completed"} id="habit7" d={arc6(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
+            <path className="habbitOne" data-status={"completed"} id="habit7" d={arc5(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
+            <path className="habbitOne" data-status={"completed"} id="habit8" d={arc6(slice)} style={{strokeWidth: 2}} stroke={'black'} fill={"#e76f51"} />
             </>
     })
 
