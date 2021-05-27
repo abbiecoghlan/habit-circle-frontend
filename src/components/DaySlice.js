@@ -106,45 +106,36 @@ const DaySlice = ({ pie }) => {
         if (e.target.dataset.day == 0) {
             return
         } 
-            const id = getProgressId(e.target.dataset.day, e.target.dataset.name)
-            if (e.target.dataset.status === "completed") {
+        const id = getProgressId(e.target.dataset.day, e.target.dataset.name)
+        if (e.target.dataset.status === "completed") {
             e.target.dataset.status = "incomplete"
             updateProgress(id, false, e)         
-            }
-        else {
+        } else {
             e.target.dataset.status = "completed" 
             updateProgress(id, true, e)
-            }
-
-            
-            
+        }     
     }
 
     
-
-
-
     const getStatus = (day, habName) => {
         if (!activeMonthProgress || day == 0 ) {
             return 
-            }
+        }
 
         const prog = activeMonthProgress.filter((progress) => {
             return progress.day.day == day && progress.day.month === currentMonth && progress.habit.name.toUpperCase() === habName.toUpperCase()            
         })
         
         if (prog[0]) {
-        if (prog[0].completed){
-            return "completed"
-        } else 
-         {
-            return "incomplete"
-        }
+            if (prog[0].completed){
+                return "completed"
+            } else {
+                return "incomplete"
+            }
         }
     }
 
     const getProgressId = (day, habName) => {
-      
         const prog = activeMonthProgress.filter((progress) => {
             return progress.day.day  == day && progress.day.month === currentMonth && progress.habit.name.toUpperCase() === habName.toUpperCase()
             })
