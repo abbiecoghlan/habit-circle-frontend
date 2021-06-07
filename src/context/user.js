@@ -1,7 +1,5 @@
-import { createContext, useReducer, useState } from "react"
+import { createContext, useReducer } from "react"
 import { useHistory } from "react-router-dom"
-
-
 
 
 function reducer(state, action) {
@@ -9,20 +7,17 @@ function reducer(state, action) {
         case "TOKEN_LOGIN":
             return {
                 ...state,
-                user: { username: action.user.username, id: action.user.id, created: action.user.created },
-                error: false
+                user: { username: action.user.username, id: action.user.id, created: action.user.created }
             }
         case "LOGIN_USER":
             return {
             ...state,
-            user: {username: action.user.username, id: action.user.id, name: action.user.name, created: action.user.created},
-            error: false
+            user: {username: action.user.username, id: action.user.id, name: action.user.name, created: action.user.created}
             }
         case "LOGOUT_USER":
             return {
                 ...state,
-                user: false,
-                error: false
+                user: false
                 }
         case "SIGN_UP_SUCCESS":
             return {
