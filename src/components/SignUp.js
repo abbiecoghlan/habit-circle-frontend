@@ -4,7 +4,7 @@ import {Redirect} from "react-router-dom"
 import { UserContext } from '../context/user'
 
 
-const SignUp = ({history}) => {
+const SignUp = () => {
 
   const {signUp, signUpSuccess} = useContext(UserContext)
   const [form, setForm] = useState({username:"", password:"", password_confirmation: "", name: ""})
