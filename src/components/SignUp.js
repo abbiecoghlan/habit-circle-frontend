@@ -19,7 +19,6 @@ const SignUp = ({history}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-      // {form.password_confirmation !== form.password_confirmation ? <p style={{ textAlign: "left" }} >Passwords do not match</p> : <p style={{ textAlign: "left" }} ></p>}
       if (form.password_confirmation !== form.password){
           alert("Passwords do not match. Please try again.")
       } else {
@@ -77,7 +76,9 @@ const SignUp = ({history}) => {
               name="password_confirmation"
               value={form.password_confirmation}
               onChange={(e) => handleChange(e)} />
-            
+
+            {form.password !== form.password_confirmation ?  <p style={{ textAlign: "left" }}>Passwords do not match</p> : null}
+
             <Button style={{ color: "#FFFFFF", background: "#264653"}} fluid size='large'>
               Create account
             </Button>
