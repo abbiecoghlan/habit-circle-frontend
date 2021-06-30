@@ -265,7 +265,6 @@ function ProgressProvider({ children }) {
             .then(r => r.json())
             .then(habit => 
                 {
-                console.log(habit)
                 dispatch({type:"UPDATE_HABIT", habit: habit, previousName: previousName})
             })
             .catch(() => {
