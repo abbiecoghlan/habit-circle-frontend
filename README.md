@@ -2,6 +2,7 @@
 
 Habit Circle is a habit tracker that provides an appealing data visualization of monthly progress to motivate the completion of daily tasks. Rendering a circle with a ring for each habit you are a tracking and a slice for each day of that month, users can click on squares to color in habits and record completion, allowing user to playfully engage, track success, and visualize outcomes. This simple click to mark a habit complete is fun and simple. 
 
+This is Habit Circle's frontend. You can find the [backend repository here](https://github.com/abbiecoghlan/habit-circle-backend).
 ## ✨ [Watch Demo](https://www.youtube.com/watch?v=GRaE4yxGVP0).
 
 <img width="1583" alt="screenshot of habit circle app with side nav bar and large circular data visualization" src="https://user-images.githubusercontent.com/66394682/118742835-c511c700-b816-11eb-9f53-908bbdc985c0.png">
