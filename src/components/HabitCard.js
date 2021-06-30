@@ -23,8 +23,6 @@ const HabitCard = ({habit, cardColor}) => {
 
 
     const handleEdit = (e) => {
-        // console.log(habit.id)
-        // console.log(habit.name)
         editHabit(habit.id, form.name, habit.name)
         setEditMode(false)
     }
@@ -42,7 +40,6 @@ const HabitCard = ({habit, cardColor}) => {
         setForm({
             name: e.target.value
         })
-        console.log(form)
     }
 
 

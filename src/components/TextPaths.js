@@ -20,7 +20,7 @@ const TextPaths = props => {
                     <textPath  textLength="55" startOffset="7%" href="#day0habit0">  {habitNames[0]} </textPath>
                 </text>
                 <text style={{fontSize: "20px"}} >
-                    <textPath textLength="65" startOffset="11%" href="#day0habit1"> {habitNames[1]} </textPath>
+                    <textPath textLength="80" startOffset="11%" href="#day0habit1"> {habitNames[1]} </textPath>
                 </text>
                 <text style={{fontSize: "20px"}} >
                     <textPath textLength="105" startOffset="12%" side="right" x="40" href="#day0habit2"> {habitNames[2]} </textPath>

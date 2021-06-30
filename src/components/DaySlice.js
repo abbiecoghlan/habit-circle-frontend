@@ -110,7 +110,6 @@ const DaySlice = ({ pie }) => {
 
 
     const habitRingClick = (e) => {
-        console.log("hi")
         if (e.target.dataset.day == 0) {
             return
         } 
