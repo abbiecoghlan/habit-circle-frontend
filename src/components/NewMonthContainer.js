@@ -46,7 +46,6 @@ const NewMonthContainer = (props) => {
 
         createHabits(sortedHabits, user.id, currentMonth)
 
-
     }
 
 
@@ -54,12 +53,9 @@ const NewMonthContainer = (props) => {
 
 return (
     <> 
-    {/* {allProgress.length === 0 ? <h1 style={{textAlign: "center"}}>hi</h1> : <h2 style={{textAlign: "center"}} >bye</h2>} */}
-    {stepThree ? <Logo></Logo> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setStepThree={setStepThree} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} setStepThree={setStepThree} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
-
+        {stepThree ? <Logo></Logo> : stepTwo ? <NewMonthHabitsForm handleSubmit={handleSubmit} setStepThree={setStepThree} setSelectedHabits={setSelectedHabits} totalChecks={totalChecks} setTotalChecks={setTotalChecks} setStepTwo={setStepTwo} ></NewMonthHabitsForm> : <PreviousHabitSelector  setSelectedHabits={setSelectedHabits} handleSubmit={handleSubmit} setStepTwo={setStepTwo} setStepThree={setStepThree} checks={checks} setChecks={setChecks} totalChecks={totalChecks} setTotalChecks={setTotalChecks} ></PreviousHabitSelector>}
     </>
     )
-
 
 
 }
