@@ -39,20 +39,13 @@ const NewMonthContainer = (props) => {
     const handleSubmit = (array = []) => {
         
         setStepThree(true)
-        console.log("you want to submit")
-        console.log(selectedHabits)
-
-        console.log(array)
         const habits = [...array, ...selectedHabits]
-        console.log("all the habits are: ", habits)
         const sortedHabits = habits.sort(function(a,b ){
             return a.length - b.length
         })
-        debugger
-        console.log("sorted habits are", sortedHabits)
+
         createHabits(sortedHabits, user.id, currentMonth)
-        // history.push(`/tracker/${user.username}/month`)
-        // setSubmitted(true)
+
 
     }
 
