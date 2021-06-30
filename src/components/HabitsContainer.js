@@ -45,24 +45,13 @@ const HabitsContainer = () => {
     }, [currentMonth])
 
 
-    useEffect(() => {
-      console.log("from habits container")   
-      console.log("the progress length is: ", allProgress.length)
-      console.log("the active progress length is: ", activeMonthProgress.length)
-      console.log("the habit length is: ", activeMonthHabits.length)
-      console.log("the current month is: ", currentMonth)
-
-
-  }, [loaded, currentMonth, activeMonthProgress, allProgress, activeMonthHabits])
 
     const habitCards = habits.reverse().map((habit, index) => {
-      
         return (
           <HabitCard
             key={habit.id}
             habit={habit}
             cardColor={colors[0][index]}
- 
           /> 
         )
       })
