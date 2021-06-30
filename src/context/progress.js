@@ -130,7 +130,6 @@ function ProgressProvider({ children }) {
     const history = useHistory()
 
     const fetchProgress = (userId, month) => {
-        console.log("fetching progress")
         fetch('http://localhost:3000/user_info', {
         method: 'POST',
         headers: {
@@ -166,9 +165,6 @@ function ProgressProvider({ children }) {
 
 
 
-    // const fetchAllProgress = (userId) => {
-    //     console.log("time to fetch all the progress")
-    // }            
     
     const updateProgress = (progressId, status, e) => {
         fetch(`http://localhost:3000/progresses/${progressId}`, {
@@ -184,8 +180,6 @@ function ProgressProvider({ children }) {
             .then(r => r.json())
             .then(progress => 
                 {
-                console.log(progress)
-                console.log("status is", progress.completed)
                 dispatch({type:"UPDATE_PROGRESS", progress})
             })
             .catch(() => {
