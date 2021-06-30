@@ -27,21 +27,10 @@ const NewMonthContainer = (props) => {
     const [checks, setChecks] = useState({})
     const [totalChecks, setTotalChecks] = useState({total: 0})
 
-        useEffect(() => {
-           
-
+    useEffect(() => {       
         if (loaded && activeMonthProgress.length > 0){
             history.push(`/tracker/${user.username}/month`)
-        }
-
-
-        console.log("from new month container")   
-        console.log("the progress length is: ", allProgress.length)
-        console.log("the active progress length is: ", activeMonthProgress.length)
-        console.log("the habit length is: ", activeMonthHabits.length)
-        console.log("the current month is: ", currentMonth)
-
-    
+        }    
     
     }, [loaded, activeMonthProgress, submitted])
 
