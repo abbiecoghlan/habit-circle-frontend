@@ -288,11 +288,8 @@ function ProgressProvider({ children }) {
             })
           })
             .then(r => r.json())
-            .then(habit => 
-                {
-                console.log(habit)
-                
-                dispatch({type:"DELETE_HABIT", id: habit_id, month: currentMonth, name: name})
+            .then(habit => {
+                    dispatch({type:"DELETE_HABIT", id: habit_id, month: currentMonth, name: name})
             })
             .catch(() => {
                 alert("Error updating habit.")
